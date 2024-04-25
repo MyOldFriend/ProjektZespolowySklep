@@ -24,6 +24,14 @@ public class PracownikController {
 
 
 
+//    @GetMapping("/lista")
+//    public String listPracownicy(Model model) {
+//        List<PracownikDto> pracownicy = pracownikService.findAllPracownicy();
+//        model.addAttribute("header", "Lista wszystkich Pracowników");
+//        model.addAttribute("pracownikList", pracownicy);
+//        return "Pracownicy";
+//    }
+
     @GetMapping("/lista")
     public String listPracownicy(Model model) {
         List<PracownikDto> pracownicy = pracownikService.findAllPracownicy();
@@ -52,10 +60,12 @@ public class PracownikController {
         return "EdytujPracownika";
     }
 
+
     @PostMapping("/edytuj/{pracownikId}")
     public String updatePracownik(@PathVariable("pracownikId") int pracownikId, @ModelAttribute("pracownik") PracownikDto pracownikDto) {
         pracownikDto.setIdPracownika(pracownikId);
         pracownikService.updatePracownik(pracownikDto);
         return "redirect:/Pracownik/lista";
     }
+
 }
