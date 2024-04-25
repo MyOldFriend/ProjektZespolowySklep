@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-mappings xmlns="https://jakarta.ee/xml/ns/persistence/orm"
+                 version="3.0">
+
+    <entity class="com.example.sklep2xd.Models.ZamowienieEntity">
+        <table name="zamowienie" schema="public" catalog="Sklep"/>
+        <attributes>
+            <id name="idZamowienia">
+                <column name="id_zamowienia" precision="-1"/>
+            </id>
+            <basic name="dataZlozenia">
+                <column name="data_zlozenia" nullable="false" precision="-1"/>
+            </basic>
+            <basic name="wartoscZamowienia">
+                <column name="wartosc_zamowienia" nullable="false" precision="-1"/>
+            </basic>
+            <basic name="czyZaplacone">
+                <column name="czy_zaplacone" nullable="false" precision="-1"/>
+            </basic>
+            <basic name="status">
+                <column name="status" nullable="false" length="100"/>
+            </basic>
+<!--            <basic name="adresId">-->
+<!--                <column name="adres_id" nullable="false" precision="-1"/>-->
+<!--            </basic>-->
+<!--            <basic name="klientId">-->
+<!--                <column name="klient_id" nullable="false" precision="-1"/>-->
+<!--            </basic>-->
+<!--            <basic name="pracownikId">-->
+<!--                <column name="pracownik_id" nullable="false" precision="-1"/>-->
+<!--            </basic>-->
+            <many-to-one name="adresByAdresId" optional="true" target-entity="com.example.sklep2xd.Models.AdresEntity">
+                <join-column name="adres_id" nullable="false" referenced-column-name="id_adresu"/>
+            </many-to-one>
+            <many-to-one name="klientByKlientId" optional="true"
+                         target-entity="com.example.sklep2xd.Models.KlientEntity">
+                <join-column name="klient_id" nullable="false" referenced-column-name="id_klienta"/>
+            </many-to-one>
+            <many-to-one name="pracownikByPracownikId" optional="true"
+                         target-entity="com.example.sklep2xd.Models.PracownikEntity">
+                <join-column name="pracownik_id" nullable="false" referenced-column-name="id_pracownika"/>
+            </many-to-one>
+        </attributes>
+    </entity>
+</entity-mappings>

@@ -1,0 +1,42 @@
+<!-- klienci-lista.html -->
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista Klientów</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<h1>Lista Klientów</h1>
+
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Login</th>
+        <th>Email</th>
+        <th>Imię</th>
+        <th>Nazwisko</th>
+        <th>Telefon</th>
+        <th>Adres</th>
+    </tr>
+    </thead>
+    <tbody>
+    <!-- Iteracja po liście klientów -->
+    <tr th:each="klient : ${klienci}">
+        <td th:text="${klient.idKlienta}"></td>
+        <td th:text="${klient.login}"></td>
+        <td th:text="${klient.email}"></td>
+        <td th:text="${klient.imie}"></td>
+        <td th:text="${klient.nazwisko}"></td>
+        <td th:text="${klient.telefon}"></td>
+<!--        <td th:text="${klient.adresId.ulica}, ${klient.adresId.miasto}"></td>-->
+<!-- Do wyświetlania adresu trzeba będzie dodać jakiś podwidok        -->
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>

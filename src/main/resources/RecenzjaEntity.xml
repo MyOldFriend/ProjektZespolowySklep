@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-mappings xmlns="https://jakarta.ee/xml/ns/persistence/orm"
+                 version="3.0">
+
+    <entity class="com.example.sklep2xd.Models.RecenzjaEntity">
+        <table name="recenzja" schema="public" catalog="Sklep"/>
+        <attributes>
+            <id name="idRecenzji">
+                <column name="id_recenzji" precision="-1"/>
+            </id>
+            <basic name="ocena">
+                <column name="ocena" precision="-1"/>
+            </basic>
+            <basic name="tresc">
+                <column name="tresc" nullable="false" length="200"/>
+            </basic>
+<!--            <basic name="produktId">-->
+<!--                <column name="produkt_id" nullable="false" precision="-1"/>-->
+<!--            </basic>-->
+<!--            <basic name="klientId">-->
+<!--                <column name="klient_id" nullable="false" precision="-1"/>-->
+<!--            </basic>-->
+            <many-to-one name="produktByProduktId" optional="true"
+                         target-entity="com.example.sklep2xd.Models.ProduktEntity">
+                <join-column name="produkt_id" nullable="false" referenced-column-name="id_produktu"/>
+            </many-to-one>
+            <many-to-one name="klientByKlientId" optional="true"
+                         target-entity="com.example.sklep2xd.Models.KlientEntity">
+                <join-column name="klient_id" nullable="false" referenced-column-name="id_klienta"/>
+            </many-to-one>
+        </attributes>
+    </entity>
+</entity-mappings>

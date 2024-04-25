@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-mappings xmlns="https://jakarta.ee/xml/ns/persistence/orm"
+                 version="3.0">
+
+    <entity class="com.example.sklep2xd.Models.PracownikEntity">
+        <table name="pracownik" schema="public" catalog="Sklep"/>
+        <attributes>
+            <id name="idPracownika">
+                <column name="id_pracownika" precision="-1"/>
+            </id>
+            <basic name="login">
+                <column name="login" nullable="false" length="30"/>
+            </basic>
+            <basic name="haslo">
+                <column name="haslo" length="100"/>
+            </basic>
+            <basic name="dzial">
+                <column name="dzial" nullable="false" length="50"/>
+            </basic>
+            <basic name="imie">
+                <column name="imie" nullable="false" length="50"/>
+            </basic>
+            <basic name="nazwisko">
+                <column name="nazwisko" nullable="false" length="50"/>
+            </basic>
+        </attributes>
+    </entity>
+</entity-mappings>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista Adresów</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+    <h2 th:text="${header}"></h2>
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Kraj</th>
+            <th>Miejscowość</th>
+            <th>Kod Pocztowy</th>
+            <th>Ulica</th>
+            <th>Nr Domu</th>
+            <th>Nr Mieszkania</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="adres : ${adresList}">
+            <td th:text="${adres.idAdresu}"></td>
+            <td th:text="${adres.kraj}"></td>
+            <td th:text="${adres.miejscowosc}"></td>
+            <td th:text="${adres.kodPocztowy}"></td>
+            <td th:text="${adres.ulica}"></td>
+            <td th:text="${adres.nrDomu}"></td>
+            <td th:text="${adres.nrMieszkania}"></td>
+            <td><a th:href="@{edytuj/{adresId}(adresId=${adres.idAdresu})}">Edytuj</a></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

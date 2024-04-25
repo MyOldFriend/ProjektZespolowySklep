@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-mappings xmlns="https://jakarta.ee/xml/ns/persistence/orm"
+                 version="3.0">
+
+    <entity class="com.example.sklep2xd.Models.ProduktEntity">
+        <table name="produkt" schema="public" catalog="Sklep"/>
+        <attributes>
+            <id name="idProduktu">
+                <column name="id_produktu" precision="-1"/>
+            </id>
+            <basic name="nazwa">
+                <column name="nazwa" nullable="false" length="100"/>
+            </basic>
+            <basic name="cena">
+                <column name="cena" nullable="false" precision="-1"/>
+            </basic>
+            <basic name="rozmiar">
+                <column name="rozmiar" nullable="false" precision="-1"/>
+            </basic>
+<!--            <basic name="kategoriaId">-->
+<!--                <column name="kategoria_id" nullable="false" precision="-1"/>-->
+<!--            </basic>-->
+            <basic name="urlzdjecia">
+                <column name="urlzdjecia" nullable="false"/>
+            </basic>
+            <many-to-one name="kategoriaByKategoriaId" optional="true"
+                         target-entity="com.example.sklep2xd.Models.KategoriaEntity">
+                <join-column name="kategoria_id" nullable="false" referenced-column-name="id_kategorii"/>
+            </many-to-one>
+        </attributes>
+    </entity>
+</entity-mappings>

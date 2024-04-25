@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-mappings xmlns="https://jakarta.ee/xml/ns/persistence/orm"
+                 version="3.0">
+
+    <entity class="com.example.sklep2xd.Models.AdresEntity">
+        <table name="adres" schema="public" catalog="Sklep"/>
+        <attributes>
+            <id name="idAdresu">
+                <column name="id_adresu" precision="-1"/>
+            </id>
+            <basic name="kraj">
+                <column name="kraj" length="100"/>
+            </basic>
+            <basic name="miejscowosc">
+                <column name="miejscowosc" length="100"/>
+            </basic>
+            <basic name="kodPocztowy">
+                <column name="kod_pocztowy" nullable="false" length="6"/>
+            </basic>
+            <basic name="ulica">
+                <column name="ulica" nullable="false" length="100"/>
+            </basic>
+            <basic name="nrDomu">
+                <column name="nr_domu" nullable="false" length="4"/>
+            </basic>
+            <basic name="nrMieszkania">
+                <column name="nr_mieszkania" nullable="false" length="4"/>
+            </basic>
+        </attributes>
+    </entity>
+</entity-mappings>
