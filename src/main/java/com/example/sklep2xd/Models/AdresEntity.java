@@ -91,4 +91,5 @@ public class AdresEntity {
         this.nrMieszkania = nrMieszkania;
     }
 
+
 }
