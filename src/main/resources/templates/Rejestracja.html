@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/rejestracja.css">
+    <link rel="icon" th:href="@{/Grafiki/ff.ico}" type="image/png" size="32">
+    <title>Strona Rejestracji</title>
+</head>
+<body>
+
+<div class="container">
+    <div class="registration-form" th:each="klient : ${klientNowy}">
+        <h2>Rejestracja</h2>
+        <form action="#">
+            <input type="text" placeholder="Imię">
+            <input type="text" placeholder="Nazwisko">
+            <input type="text" placeholder="Adres 1">
+            <input type="text" placeholder="Adres 2 (opcjonalnie)">
+            <input type="email" placeholder="E-mail">
+            <input type="text" placeholder="Login">
+            <input type="password" placeholder="Hasło">
+            <input type="password" placeholder="Powtórz hasło">
+        </form>
+        <button type="submit">Zarejestruj się</button>
+    </div>
+    <div class="circle-area">
+        <div class="circle">
+            <div class="circle-text">Stwórz konto</div>
+            <div class="circle-text2">Tutaj znajdziesz formularz rejestracyjny.</div>
+            <button type="button">Przycisk</button>
+        </div>
+
+    </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,109 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: 100vh;
+    background: linear-gradient(to right, #e2e2e2, #ee7b4a); /* Gradient tła */
+}
+
+.container {
+    background-color: #fff;
+    border-radius: 30px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.35);
+    position: relative;
+    overflow: hidden;
+    width: 80vw;
+    height: 80vh;
+}
+
+.registration-form {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: calc(40% - 5px); /* Połowa szerokości kontenera */
+    height: 100%;
+    box-sizing: border-box;
+    background-color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 70px;
+    margin: auto 40px;
+}
+
+.registration-form h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.registration-form input {
+    width: 100%;
+    padding: 10px 10px 10px 20px;
+    margin-bottom: 20px;
+    border-radius: 50px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    background-color: #e3e3e3;
+}
+
+.registration-form button {
+    width: 50%;
+    padding: 10px;
+    border: none;
+    border-radius: 50px;
+    background-color: #ee4702;
+    color: #fff;
+    cursor: pointer;
+}
+
+.circle-area {
+    position: absolute;
+    top: 0%;
+    right: 0;
+    width: 140%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background-color: #ee4702;
+    border-radius: 0 10px 10px 0;
+    color: #fff;
+    clip-path: circle(50% at 100% 50%); /* Tworzenie okręgu za pomocą clip-path */
+}
+
+.circle {
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+    padding: 20px;
+    box-sizing: border-box;
+    margin-left: 75vw;
+}
+
+.circle-text {
+    margin-bottom: 40px;
+    font-size: 40px; /* Dodana właściwość font-size */
+    font-weight: 1000;
+}
+
+.circle-text2 {
+    margin-bottom: 30px;
+    font-size: 20px; /* Dodana właściwość font-size */
+    font-weight: 200;
+}
+
+
+.circle button {
+    width: 50%;
+    padding: 10px;
+    border: none;
+    border-radius: 50px;
+    background-color: #ffffff;
+    color: #ee4702;
+    cursor: pointer;
+}

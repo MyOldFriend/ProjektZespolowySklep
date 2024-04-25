@@ -1,0 +1,186 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #fff9f2;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 20px 10px;
+}
+
+.icon-container-left {
+    width: 20vw;
+    padding-left: 1vw;
+}
+
+.icon-container-right {
+    width: 20vw;
+    padding-right: 1vw;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.logo-container {
+    flex-grow: 1;
+    text-align: center;
+}
+
+.logo {
+    max-width: 200px;
+    height: 7vh;
+    margin: 0 auto;
+}
+
+.icon {
+    width: 30px;
+    height: 30px;
+    margin: 0 10px;
+}
+
+.navbar {
+    text-align: center;
+    padding-top: 10px;
+}
+
+.navbar-line {
+    width: 90vw;
+    margin: 0 auto;
+    border-top: 1px solid #000;
+    margin-bottom: 30px;
+}
+
+.navbar a {
+    margin: 0 10px;
+    text-decoration: none;
+    color: #333;
+}
+
+
+.account-text{
+    margin: 40px auto 15px;
+    text-align: center;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+form {
+    display: flex;
+    justify-content: space-between;
+    width: 80%;
+    max-width: 500px;
+}
+
+input, select {
+    width: 100%;
+    padding: 10px 10px 10px 20px;
+    margin-bottom: 20px;
+    border-radius: 50px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    background-color: #e3e3e3;
+}
+
+button:first-child{
+    margin-right: 50px;
+}
+
+select {
+    width: 100%;
+    padding: 10px 30px 10px 20px; /* Dodaj większy padding po prawej stronie */
+    margin-bottom: 20px;
+    border-radius: 50px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    background-color: #e3e3e3;
+    -webkit-appearance: none; /* Usunięcie domyślnego wyglądu select */
+    -moz-appearance: none;
+    appearance: none;
+    background-image: url("../Grafiki/arrow-down.png");
+    background-repeat: no-repeat;
+    background-position: right 15px center;
+    background-size: 20px; /* Ustawienie wielkości strzałki */
+}
+
+
+
+
+
+input::placeholder {
+    color: #000; /* Kolor tekstu w placeholderze */
+}
+
+.column {
+    flex: 1;
+    margin: 15px;
+}
+
+.row {
+    display: flex;
+    justify-content: space-between;
+}
+
+.row input:first-child {
+    margin-right: 10px;
+}
+
+.buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+button {
+    margin-right: 10px;
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: none;
+    background-color: #007bff;
+    color: #fff;
+    cursor: pointer;
+    width: 200px;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+#save-button {
+    background-color: #ee4702;
+    color: #fff;
+    border: 2px solid #ee4702;
+    border-radius: 50px;
+}
+
+#cancel-button, #change-password {
+    background-color: transparent;
+    color: #000;
+    border: 2px solid #ee4702;
+    border-radius: 50px;
+}
+
+footer {
+    margin-top: auto;
+    text-align: center;
+    padding: 20px 0;
+    background-color: #f2f2f2;
+    width: 100%;
+    font-size: 10px;
+}
+
+.logo-footer {
+    max-width: 200px;
+    height: 5vh;
+    margin: 0 auto;
+}

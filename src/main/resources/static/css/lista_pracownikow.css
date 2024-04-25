@@ -1,0 +1,156 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #fff9f2;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Minimalna wysokość całego widoku */
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 20px 10px;
+}
+
+.icon-container-left {
+    width: 20vw;
+    padding-left: 1vw;
+}
+
+.icon-container-right {
+    width: 20vw;
+    padding-right: 1vw;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.logo-container {
+    flex-grow: 1;
+    text-align: center;
+}
+
+.logo {
+    max-width: 200px;
+    height: 7vh;
+    margin: 0 auto;
+}
+
+.icon {
+    width: 30px;
+    height: 30px;
+    margin: 0 10px;
+}
+
+.navbar {
+    text-align: center;
+    padding-top: 10px;
+}
+
+.navbar-line {
+    width: 90vw;
+    margin: 0 auto;
+    border-top: 1px solid #000;
+    margin-bottom: 30px;
+}
+
+.navbar a {
+    margin: 0 10px;
+    text-decoration: none;
+    color: #333;
+}
+
+
+.employee-text{
+    margin: 40px auto 15px;
+    text-align: center;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.container {
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin: 15px auto;
+    width: 80%; /* Zwiększamy szerokość kontenera */
+}
+
+.employee-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 90%; /* Zmniejszamy szerokość panelu pracownika */
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #fff;
+    padding: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.left-info {
+    flex-grow: 1;
+    text-align: left;
+}
+
+.left-info p {
+    margin: 5px;
+}
+
+.right-info {
+    display: flex;
+    align-items: flex-end; /* Przesunięcie zawartości do prawej strony */
+    height: 100%; /* Zwiększenie wysokości kontenera */
+}
+
+.employee-info p:first-child {
+    font-size: 28px; /* Zwiększamy rozmiar napisu "Jan Kowalski" */
+    font-weight: bold; /* Dodajemy pogrubienie dla napisu "Lista pracowników" */
+    margin-bottom: 15px;
+}
+
+.employee-info .right-info {
+    position: relative;
+}
+
+.employee-info .right-info p {
+    font-weight: bold;
+    color: #007bff;
+    margin: 0;
+    font-size: 20px;
+}
+
+.edit-button {
+    padding: 10px;
+
+}
+
+.edit-button a{
+    text-decoration: none;
+    background-color: transparent;
+    border: none;
+    color: #007bff;
+    cursor: pointer;
+}
+
+
+
+
+footer {
+    margin-top: 20px;
+    text-align: center;
+    padding: 20px 0;
+    background-color: #f2f2f2;
+    width: 100%;
+    font-size: 10px;
+}
+
+.logo-footer {
+    max-width: 200px;
+    height: 5vh;
+    margin: 0 auto;
+}
