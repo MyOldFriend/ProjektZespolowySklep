@@ -29,7 +29,7 @@ public class PracownikController {
         List<PracownikDto> pracownicy = pracownikService.findAllPracownicy();
         model.addAttribute("header", "Lista wszystkich Pracowników");
         model.addAttribute("pracownikList", pracownicy);
-        return "Pracownicy";
+        return "ListaPracownikow";
     }
 
     @GetMapping("/dodajform")
@@ -48,8 +48,8 @@ public class PracownikController {
     @GetMapping("/edytuj/{pracownikId}")
     public String editPracownikForm(@PathVariable("pracownikId") int pracownikId, Model model) {
         PracownikDto pracownik = pracownikService.findPracownikById(pracownikId);
-        model.addAttribute("pracownik", pracownik);
-        return "EdytujPracownika";
+        model.addAttribute("pracownikEdit", pracownik);
+        return "EdytujDanePracownika";
     }
 
     @PostMapping("/edytuj/{pracownikId}")
