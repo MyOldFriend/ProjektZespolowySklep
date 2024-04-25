@@ -56,4 +56,5 @@ public class RecenzjaController {
             recenzjaService.updateRecenzja(recenzjaDto);
             return "redirect:/Recenzja/lista";
         }
+        // elo dziwko
     }
