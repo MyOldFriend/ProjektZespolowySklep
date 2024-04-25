@@ -18,7 +18,7 @@ public class PracownikServiceimpl implements PracownikService {
         this.pracownikRep = pracownikRep;
     }
 
-    private  PracownikDto mapToPracownikDto(PracownikEntity pracownik){
+    private PracownikDto mapToPracownikDto(PracownikEntity pracownik) {
         PracownikDto pracownikDto = PracownikDto.builder()
                 .idPracownika(pracownik.getIdPracownika())
                 .login(pracownik.getLogin())
@@ -30,6 +30,7 @@ public class PracownikServiceimpl implements PracownikService {
         return  pracownikDto;
     }
 
+
     @Override
     public List<PracownikDto> findAllPracownicy() {
         List<PracownikEntity> pracownicy = pracownikRep.findAll();
@@ -38,8 +39,13 @@ public class PracownikServiceimpl implements PracownikService {
 
     @Override
     public PracownikDto findPracownikById(int id) {
+        PracownikEntity pracownik = pracownikRep.findById(id).orElse(null);
+        if (pracownik != null) {
+            return mapToPracownikDto(pracownik);
+        }
         return null;
     }
+
 
     @Override
     public PracownikEntity savePracownik(PracownikEntity pracownik) {
@@ -48,6 +54,15 @@ public class PracownikServiceimpl implements PracownikService {
 
     @Override
     public void updatePracownik(PracownikDto pracownikDto) {
-
+        PracownikEntity pracownik = pracownikRep.findById(pracownikDto.getIdPracownika()).orElse(null);
+        if (pracownik != null) {
+            pracownik.setImie(pracownikDto.getImie());
+            pracownik.setNazwisko(pracownikDto.getNazwisko());
+            pracownik.setLogin(pracownikDto.getLogin());
+            pracownik.setHaslo(pracownikDto.getHaslo());
+            pracownik.setDzial(pracownikDto.getDzial());
+            pracownikRep.save(pracownik);
+        }
     }
+
 }
