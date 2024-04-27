@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 public class KoszykServiceimpl implements KoszykService{
@@ -20,7 +21,7 @@ public class KoszykServiceimpl implements KoszykService{
         KoszykDto koszykDto = KoszykDto.builder()
                 .ilosc(koszykEntity.getIlosc())
                 .produkt(koszykEntity.getProdukt())
-                .klient(koszykEntity.getKlient())
+                //.klient(koszykEntity.getKlient())
                 .build();
         return koszykDto;
     }
@@ -35,9 +36,10 @@ public class KoszykServiceimpl implements KoszykService{
 
     @Override
     public List<KoszykDto> findKoszykByKlientId(int idKlienta) {
-        return null;
-    } //trzeba przerobić aby zwrócić listę rekordów jakoś zamiast jednego rekordu bo
-    // tabela dla jednego zamówienia ma wiele rekordów
+        List<KoszykEntity> koszyk = koszykRep.findByKlient_IdKlienta(idKlienta);
+        return koszyk.stream().map((koszykk) -> mapToDto(koszykk)).collect(Collectors.toList());
+    } //zwraca produkty i ilość dla danego klienta (ale jak zrobić żeby zwracało nazwy? Może na warstwie widoku?)
+    //JSON powinien zawierać też info o całych obiektach produktów, ale jak pozyskać z nich nazwę?
 
     @Override
     public KoszykEntity saveKoszyk(KoszykEntity koszykEntity) {

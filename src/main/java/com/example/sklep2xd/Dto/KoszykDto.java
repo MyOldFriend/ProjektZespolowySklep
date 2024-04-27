@@ -12,7 +12,7 @@ import lombok.*;
 @Builder
 public class KoszykDto {
     private Integer ilosc;
-    private KlientEntity klient;
+    //private KlientEntity klient;
     private ProduktEntity produkt;
-    private KoszykPK kpk;
+    //private KoszykPK kpk;
 }
