@@ -1,13 +1,11 @@
 package com.example.sklep2xd.Controllers;
 
-import com.example.sklep2xd.Dto.KlientDto;
 import com.example.sklep2xd.Dto.RecenzjaDto;
 import com.example.sklep2xd.Models.KlientEntity;
 import com.example.sklep2xd.Models.ProduktEntity;
 import com.example.sklep2xd.Models.RecenzjaEntity;
 import com.example.sklep2xd.Repositories.KlientRep;
 import com.example.sklep2xd.Repositories.ProduktRep;
-import com.example.sklep2xd.Service.KlientService;
 import com.example.sklep2xd.Service.RecenzjaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
