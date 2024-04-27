@@ -2,18 +2,15 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Edycja Adresu</title>
+    <title>Edycja Kategorie</title>
 </head>
 <body>
-<h2>Edytuj adres</h2>
-<form th:action="@{/Kategorie/edytuj/{idKategorii}(idKategorii=${Kategorie.idKategorii})}" th:object="${adres}" method="post">
-    <input type="hidden" th:field="*{idAdresu}">
+<h2>Edytuj kategorie</h2>
+<form th:action="@{/Kategorie/edytuj/{idKategorii}(idKategorii=${Kategorie.idKategorii})}" th:object="${kategorie}" method="post">
+    <input type="hidden" th:field="*{idKategorii}">
     <!--ukryte pole na id adresu-->
-    <label for="kraj">Kraj:</label>
-    <input type="text" id="kraj" name="kraj" th:field="*{kraj}"><br>
-
-    <label for="miejscowosc">Miejscowość:</label>
-    <input type="text" id="miejscowosc" name="miejscowosc" th:field="*{miejscowosc}"><br>
+    <label for="nazwaKategorii">Kraj:</label>
+    <input type="text" id="nazwaKategorii" name="nazwaKategorii" th:field="*{nazwaKategorii}"><br>
 
     <input type="submit" value="Zapisz zmiany">
 </form>
