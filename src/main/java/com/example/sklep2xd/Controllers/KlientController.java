@@ -28,6 +28,14 @@ public class KlientController {
         return "Klienci";
     }
 
+
+    @GetMapping("/{klientId}")
+    public String singleKlient(@PathVariable("klientId") int klientId, Model model) {
+        KlientDto klient = klientService.findKlientById(klientId);
+        model.addAttribute("klient", klient);
+        return "/Klient/single";
+    }
+
     @GetMapping("/dodajform")
     public String createKlientForm(Model model) {
         KlientEntity klient = new KlientEntity();

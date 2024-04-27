@@ -45,6 +45,13 @@ public class AdresController {
         return "Adresy/NowyAdres"; //zrobiłem nowy katalog na strony do edycji i dodawania adresów żeby templates nie zaśmiecać
     }
 
+    @GetMapping("/{adresId}")
+    public String singleAdres(@PathVariable("adresId") int adresId, Model model){
+        AdresDto adres = adresService.findAdresByIdAdresu(adresId); //w tutorialu tu daje jeszcze .get() ale to chyba nie ma znaczenia
+        model.addAttribute("adres", adres);
+        return "Adresy/Adres";
+    }
+
     @GetMapping("/edytuj/{adresId}")
     public String editAdresForm(@PathVariable("adresId") int adresId, Model model){
         AdresDto adres = adresService.findAdresByIdAdresu(adresId); //w tutorialu tu daje jeszcze .get() ale to chyba nie ma znaczenia

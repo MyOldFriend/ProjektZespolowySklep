@@ -56,5 +56,9 @@ public class RecenzjaController {
             recenzjaService.updateRecenzja(recenzjaDto);
             return "redirect:/Recenzja/lista";
         }
-        // elo dziwko
+        @DeleteMapping("/usun/{recenzjaId}")
+        public String deleteRecenzja(@PathVariable("recenzjaId") int recenzjaId) {
+            recenzjaService.removeRecenzja(recenzjaId);
+            return "redirect:/Recenzja/lista";
+        }
     }
