@@ -56,7 +56,7 @@ public class KoszykController {
         koszykService.deleteKoszyk(idKlienta, idProduktu);
         return "Widok koszyka tutaj";
     }
-    @GetMapping("/{idKlienta}")
+    @DeleteMapping("/{idKlienta}")
     public String wyczyscKosszykKlienta(@PathVariable("idKlienta") int idKlienta){
         koszykService.deleteKoszykKlienta(idKlienta);
         return "koszyk";
