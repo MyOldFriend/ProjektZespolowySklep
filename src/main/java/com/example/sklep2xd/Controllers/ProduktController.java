@@ -28,7 +28,7 @@ public class ProduktController {
         List<ProduktDto> produkty = produktService.findAllProdukty();
         model.addAttribute("header", "Lista wszystkich Produktów");
         model.addAttribute("produktList", produkty);
-        return "Produkty";
+        return "Produktylista";
     }
 
     @GetMapping("/lista/{idKat}")

@@ -10,10 +10,7 @@ import com.example.sklep2xd.Service.KoszykService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -40,10 +37,11 @@ public class KoszykController {
         model.addAttribute("Koszyk", koszyk);
         return "Koszyk";
     }
-    @GetMapping("/do wymyslenia bo nwm") //ma być wywoływane na stronach z produktami
-    public String dodajDoKoszyka(int idKlienta, int idProduktu, int ilosc){
+    @PostMapping("/do wymyslenia bo nwm") //ma być wywoływane na stronach z produktami
+    public String dodajDoKoszyka(int idKlienta, int idProduktu, int ilosc, Model model){
         KlientEntity klient = klientRep.findByIdKlienta(idKlienta);
         ProduktEntity produkt = produktRep.findByIdProduktu(idProduktu);
+        model.addAttribute("Koszyk1",produkt);
         KoszykEntity koszykEntity = new KoszykEntity();
         koszykEntity.setIlosc(ilosc);
         koszykEntity.setKlient(klient);
@@ -54,7 +52,7 @@ public class KoszykController {
     @DeleteMapping("/{idk}/{idp}")
     public String usunZKoszyka(@PathVariable("idk") int idKlienta, @PathVariable("idp") int idProduktu){
         koszykService.deleteKoszyk(idKlienta, idProduktu);
-        return "Widok koszyka tutaj";
+        return "Produktylista";
     }
     @DeleteMapping("/{idKlienta}")
     public String wyczyscKosszykKlienta(@PathVariable("idKlienta") int idKlienta){
