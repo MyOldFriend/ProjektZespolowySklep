@@ -31,6 +31,15 @@ public class ProduktController {
         return "Produkty";
     }
 
+    @GetMapping("/lista/{idKat}")
+    public String listProdukty(@PathVariable("idKat") int idKat, Model model) {
+        List<ProduktDto> produkty = produktService.findProdukyByKategoria_KategoriaId(idKat);
+        model.addAttribute("header", "Lista Produktów");
+        model.addAttribute("produktList", produkty);
+        return "Produkty";
+    }
+
+
     @GetMapping("/dodajform")
     public String createProduktForm(Model model) {
         ProduktEntity produkt = new ProduktEntity();

@@ -1,8 +1,6 @@
 package com.example.sklep2xd.Service.impl;
 
-import com.example.sklep2xd.Dto.KlientDto;
 import com.example.sklep2xd.Dto.ProduktDto;
-import com.example.sklep2xd.Models.KlientEntity;
 import com.example.sklep2xd.Models.ProduktEntity;
 import com.example.sklep2xd.Repositories.ProduktRep;
 import com.example.sklep2xd.Service.ProduktService;
@@ -37,6 +35,12 @@ public class ProduktServiceimpl implements ProduktService {
     @Override
     public List<ProduktDto> findAllProdukty() {
         List<ProduktEntity> produkty = produktRep.findAll();
+        return produkty.stream().map((produkt) -> mapToProduktDto(produkt)).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<ProduktDto> findProdukyByKategoria_KategoriaId(int idKat) {
+        List<ProduktEntity> produkty = produktRep.findByKategoria_IdKategorii(idKat);
         return produkty.stream().map((produkt) -> mapToProduktDto(produkt)).collect(Collectors.toList());
     }
 
