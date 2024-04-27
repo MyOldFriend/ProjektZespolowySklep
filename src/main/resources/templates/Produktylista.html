@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/kat.css">
+    <link rel="icon" th:href="@{/Grafiki/ff.ico}" type="image/png" size="32">
+    <title>Lista produktów</title>
+</head>
+<body>
+
+<div class="header">
+    <div class="icon-container-left">
+        <img src="" th:src="@{/Grafiki/search.png}" alt="Ikona lewa" class="icon">
+    </div>
+    <div class="logo-container">
+        <img src="" th:src="@{/Grafiki/ff.png}" alt="Logo" class="logo">
+    </div>
+    <div class="icon-container-right">
+        <img src="" th:src="@{/Grafiki/shopping-bag.png}" alt="Ikona prawa" class="icon">
+        <img src="" th:src="@{/Grafiki/user.png}" alt="Ikona prawa" class="icon">
+    </div>
+</div>
+
+
+    <div class="navbar">
+        <div class="navbar-line"></div>
+        <a href="#">Bluzy</a>
+        <a href="#">Kurtki</a>
+        <a href="#">Koszulki</a>
+        <a href="#">Spodnie</a>
+        <a href="#">Przeglądaj wszystko</a>
+    </div>
+
+</div>
+<div class="kolcek">
+    <div class="klocek2">
+        <div class="form-group">
+            <label asp-for="#" class="control-label"></label>
+            <select asp-for="#" class="form-control"  asp-items="#">
+                <option value="" disabled selected>Kategoria</option>
+            </select>
+            <span asp-validation-for="#" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="#" class="control-label"></label>
+            <select asp-for="#" class="form-control" asp-items="#">
+                <option value="" disabled selected>Marka</option>
+            </select>
+            <span asp-validation-for="#" class="text-danger"></span>
+        </div>
+
+        <div class="klocek2">
+            <div class="form-group">
+                <label asp-for="#" class="control-label"></label>
+                <input asp-for="#" placeholder="Cena min." class="form-control2" />
+                <span asp-validation-for="#" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DataSwiecen" class="control-label"></label>
+                <input asp-for="DataSwiecen" placeholder="Cena max." class="form-control2" />
+                <span asp-validation-for="DataSwiecen" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="klocek2">
+            <div class="form-group">
+                <label asp-for="DataSwiecen" class="control-label"></label>
+                <input asp-for="DataSwiecen" class="form-control3" />
+                <span asp-validation-for="DataSwiecen" class="text-danger"></span>
+            </div>
+        </div>
+
+</div>
+
+    <div class="our-products">
+        <!-- Iteracja przez listę produktów -->
+        <div th:each="produkty : ${produktList}" class="ocena">
+            <div class="ocenaproduktu">
+                <img th:src="@{${produkty.urlzdjecia}}" class="obrazek">
+                <div class="produkttekst">
+                    <!-- Wyświetlenie nazwy i ceny produktu -->
+                    <p th:text="${produkty.nazwa}" class="tytulproduktu"></p>
+                    <p th:text="${produkty.cena} + 'zł'" class="cenaproduktu"></p>
+
+                </div>
+
+
+                </div>
+
+            <div class="gwiazdki">
+                <p>Ocena kupujących<br></p>
+                <div class="stars-container">
+                    <img src="" th:src="@{/Grafiki/star.png}" class="obrazgwiazdka">
+                    <img src="" th:src="@{/Grafiki/star.png}" class="obrazgwiazdka">
+                    <img src="" th:src="@{/Grafiki/star.png}" class="obrazgwiazdka">
+                    <img src="" th:src="@{/Grafiki/star.png}" class="obrazgwiazdka">
+                    <img src="" th:src="@{/Grafiki/star.png}" class="obrazgwiazdka">
+                </div>
+            </div>
+            <div class="right-info">
+                <p class="add-button">
+                    <a th:href="@{/DodajDoKoszyka/{produktId}(produktId=${produkty.idProduktu})}" class="add-to-cart-button">Dodaj do koszyka</a>
+                </p>
+        </div>
+    </div>
+
+    <footer>
+        <p>Zawartość tej strony</p>
+        <img src="" th:src="@{/Grafiki/ff.png}" alt="Logo" class="logo-footer">
+    </footer>
+</div>
+</div>
+
+</body>
+</html>

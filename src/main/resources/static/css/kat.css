@@ -1,0 +1,394 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 20px 10px;
+}
+
+.icon-container-left {
+    width: 20vw;
+    padding-left: 1vw;
+}
+
+.icon-container-right {
+    width: 20vw;
+    padding-right: 1vw;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.logo-container {
+    flex-grow: 1;
+    text-align: center;
+}
+
+.logo {
+    max-width: 200px;
+    height: 7vh;
+    margin: 0 auto;
+}
+
+.icon {
+    width: 30px;
+    height: 30px;
+    margin: 0 10px;
+}
+
+.navbar {
+    text-align: center;
+    padding-top: 10px;
+    font-family:"Segoe UI", sans-serif;
+    font-weight: 625;
+    font-size: 16px;
+
+}
+
+.navbar-line {
+    width: 90vw;
+    margin: 0 auto;
+    border-top: 1px solid #000;
+    margin-bottom: 30px;
+}
+
+.navbar a {
+    margin: 0 10px;
+    text-decoration: none;
+    color: #333;
+}
+
+.advert-section {
+    background-image: url('aaaa.png');
+    background-size: cover;
+    background-position: center;
+    background-color: antiquewhite;
+    height: 45vh;
+    color: white;
+    padding: 50px 20px;
+    margin-top: 30px;
+    text-align: left;
+    position: relative;
+    background-color: #ba1d1d;
+}
+
+.tlo1 {
+    max-width: 1980px;
+    height: 200px;
+    background-color: #fdf7f0;
+}
+
+.ocena{
+    background-color: white;
+    width: 1100px;
+    height: 120px;
+    justify-content: space-between;
+    margin: 10px 10px 10px 25px;
+    display: flex;
+
+}
+
+.obrazek{
+    width: 90px;
+    height: 90px;
+    margin: 15px;
+}
+
+.produkttekst{
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-direction: column;
+}
+
+.tytulproduktu{
+    display: flex;
+    margin-top: 15px;
+    font-weight: 600;
+}
+
+.cenaproduktu{
+    display: flex;
+    margin-top: 5px;
+    font-size: 18px;
+}
+
+.ocenaproduktu{
+    display: flex;
+    justify-content: space-between;
+
+}
+
+.gwiazdki{
+    display: flex;
+    justify-content: center;
+    align-items:center;
+
+    flex-direction: column;
+    font-weight: 600;
+}
+
+.obrazkoszyk{
+    width: 20px;
+    height: 20px;
+}
+
+.obrazgwiazdka{
+    width: 30px;
+    height: 30px;
+}
+
+.klockoszyk{
+    display: flex;
+    margin:20px;
+}
+
+.koszykdodaj{
+    color: #fdfdfd;
+    margin-left: 10px;
+    font-weight: 500;
+    font-size: 14px;
+}
+.dodajdokoszyka{
+    border: 0px;
+    border-radius: 50px;
+    background-color: #F96F36;
+    width: 180px;
+    height: 40px;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    margin: auto;
+}
+
+.stars-container {
+    display: flex;
+    justify-content: space-between; /* Rozłożenie gwiazdek równomiernie wzdłuż osi pionowej */
+    width: 100px; /* Szerokość kontenera gwiazdek */
+}
+
+
+
+
+.obrazgwiazdka{
+    width: 30px;
+    height: 30px;
+}
+
+.klocek {
+    
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.klocek2 {
+
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-right: 10px;
+}
+
+.klocek3 {
+
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-right: 400px;
+    maring-left: 0px;
+    padding-left: 0px;
+}
+
+.klocek4 {
+
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+
+}
+
+.klocek5 {
+
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-left: 250px;
+}
+
+.form-control {
+    width: 175px;
+    height: 50px;
+    margin-right: 50px;
+    margin-top: 10px;
+    border: 0;
+    background-color: #f76e36;
+    text-align: center;
+    font-family:"Segoe UI", sans-serif;
+    font-weight: 625;
+    font-size: 16px;
+}
+
+
+.form-control2 {
+    width: 175px;
+    height: 45px;
+    margin-right: 50px;
+    margin-top: 10px;
+    border-radius: 0;
+    border: 3px;
+    border-color: #f76e36;
+    border-style: solid;
+    background-color: #eeeeee;
+    text-align: center;
+    font-family:"Segoe UI", sans-serif;
+    font-weight: 625;
+    font-size: 16px;
+}
+
+.form-control3 {
+    width: 550px;
+    height: 45px;
+    margin-right: 50px;
+    margin-top: 10px;
+    border-radius: 0;
+    border: 3px;
+    border-color: #f76e36;
+    border-style: solid;
+    text-align: center;
+    font-family:"Segoe UI", sans-serif;
+    font-weight: 625;
+    font-size: 16px;
+
+    background: url('search.png') no-repeat scroll 7px 7px;
+    background-size: 6% 70%;
+}
+
+.right-info {
+    display: flex;
+    align-items: center; /* Wyśrodkowanie w pionie */
+}
+
+.add-button {
+    margin-left: auto; /* Przesunięcie przycisku na prawą stronę */
+}
+
+.add-to-cart-button {
+    display: inline-block;
+    background-color: #f76e36;
+    color: white;
+    text-align: center;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 20px; /* Dodanie zaokrąglonych kątów */
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.add-to-cart-button:hover {
+    background-color: #f76e36;
+}
+
+
+
+.caption-big {
+    font-size: 70px;
+    margin-bottom: 20px;
+    font-weight: 1000;
+    margin: 10vh 10vh 5vh 10vh;
+}
+
+.caption-big p {
+    margin: -40px 0px;
+  }
+
+.caption-small {
+    font-size: 24px;
+    margin-bottom: 20px;
+    margin-left: 10vh;
+}
+
+.button {
+
+    padding: 10px 15px 5px 40px;
+    text-align: center;
+    background-color: #f76e36;
+    width: 150px;
+    height: 25px;
+    color: #fdfdfd;
+    border-radius:50px;
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+.lewytekst{
+    text-align: left;
+    margin: 10px;
+}
+
+.our-products {
+    width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+    padding: 50px 20px;
+}
+
+.large-caption {
+    font-size: 36px;
+    margin-bottom: 20px;
+    font-weight: 1000;
+}
+
+.small-caption {
+    font-size: 24px;
+    text-align: left;
+    margin-bottom: -20px;
+}
+
+.more-info {
+    text-align: right;
+    margin-bottom: 20px;
+}
+.more-info a {
+    text-decoration: none;
+    color: #000;
+}
+.images-container {
+    display: flex;
+    justify-content: center;
+    height: 75px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding: 20px 0;
+    background-color: #fdfdfd;
+    flex-wrap: wrap;
+
+}
+.image {
+    margin: 0 20px;
+}
+.image img {
+    max-width: 100px;
+}
+.image-caption {
+    text-align: center;
+    margin-top: 10px;
+}
+footer {
+    text-align: center;
+    padding: 20px 0;
+    background-color: #f2f2f2;
+    width: 100%;
+    font-size: 10px;
+}
+
+.logo-footer {
+    max-width: 200px;
+    height: 5vh;
+    margin: 0 auto;
+}
