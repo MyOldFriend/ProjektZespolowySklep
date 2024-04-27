@@ -53,6 +53,13 @@ public class ProduktController {
         return "redirect:/Produkt/lista";
     }
 
+    @GetMapping("/{id}")
+    public String singleProdukt(@PathVariable("id") int produktId, Model model){
+        ProduktDto produkt = produktService.findProduktById(produktId);
+        model.addAttribute("produkt", produkt);
+        return "produkt";
+    }
+
     @GetMapping("/edytuj/{produktId}")
     public String editProduktForm(@PathVariable("produktId") int produktId, Model model) {
         ProduktDto produkt = produktService.findProduktById(produktId);

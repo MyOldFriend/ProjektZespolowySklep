@@ -12,6 +12,5 @@ public interface KategoriaService {
     KategoriaDto findKategoriaByIdKategori(int id);
     KategoriaEntity saveKategoria(KategoriaEntity kategoria);
     void updateKategoria(KategoriaDto kategoriaDto);
-    //AdresEntity editAdres(AdresEntity adres);
 }
 
