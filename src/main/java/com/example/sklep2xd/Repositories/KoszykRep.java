@@ -9,4 +9,6 @@ import java.util.List;
 public interface KoszykRep extends JpaRepository<KoszykEntity, Integer> {
     List<KoszykEntity> findByProdukt_IdProduktu(int id); //raczej nie potrzebne ale pies
     List<KoszykEntity> findByKlient_IdKlienta(int id); //to interesuje nas barddziej do wyświetlania koszyka klienta wedle mnie - Pawel
+
+    KoszykEntity findByKlient_IdKlientaAndProdukt_IdProduktu(int idk, int idp); //do usuwania potrzebne
 }

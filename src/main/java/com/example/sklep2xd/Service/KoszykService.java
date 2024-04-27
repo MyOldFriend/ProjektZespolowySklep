@@ -9,5 +9,7 @@ public interface KoszykService {
     List<KoszykDto> findAllKoszyki();
     List<KoszykDto> findKoszykByKlientId(int idKlienta);
     KoszykEntity saveKoszyk(KoszykEntity koszykEntity);
+    void deleteKoszykKlienta(int klienta); //do wywołania po złożeniu zamówienia
+    void deleteKoszyk(int idKlienta, int idProduktu);
     void updateKoszyk(KoszykEntity koszykEntity);
 }
