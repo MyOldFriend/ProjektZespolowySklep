@@ -10,5 +10,7 @@ public interface RecenzjaService {
     List<RecenzjaDto> findAllRecenzje();
     RecenzjaDto findRecenzjaById(int id);
     RecenzjaEntity saveRecenzja(RecenzjaEntity recenzja);
+
+    void removeRecenzja(int idRec);
     void updateRecenzja(RecenzjaDto recenzjaDto);
 }

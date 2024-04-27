@@ -9,7 +9,11 @@ import java.util.List;
 public interface ProduktService {
 
     List<ProduktDto> findAllProdukty();
+
+    List<ProduktDto> findProdukyByKategoria_KategoriaId(int idKat);
+
     ProduktDto findProduktById(int id);
+
     ProduktEntity saveProdukt(ProduktEntity produkt);
     void updateProdukt(ProduktDto produktDto);
 }

@@ -31,6 +31,15 @@ public class ProduktController {
         return "Produkty";
     }
 
+    @GetMapping("/lista/{idKat}")
+    public String listProdukty(@PathVariable("idKat") int idKat, Model model) {
+        List<ProduktDto> produkty = produktService.findProdukyByKategoria_KategoriaId(idKat);
+        model.addAttribute("header", "Lista Produktów");
+        model.addAttribute("produktList", produkty);
+        return "Produkty";
+    }
+
+
     @GetMapping("/dodajform")
     public String createProduktForm(Model model) {
         ProduktEntity produkt = new ProduktEntity();
@@ -42,6 +51,13 @@ public class ProduktController {
     public String saveProdukt(@ModelAttribute("produkt") ProduktEntity produkt) {
         produktService.saveProdukt(produkt);
         return "redirect:/Produkt/lista";
+    }
+
+    @GetMapping("/{id}")
+    public String singleProdukt(@PathVariable("id") int produktId, Model model){
+        ProduktDto produkt = produktService.findProduktById(produktId);
+        model.addAttribute("produkt", produkt);
+        return "produkt";
     }
 
     @GetMapping("/edytuj/{produktId}")

@@ -40,12 +40,18 @@ public class RecenzjaServiceimpl implements RecenzjaService {
 
     @Override
     public RecenzjaDto findRecenzjaById(int id) {
+
         return null;
     }
 
     @Override
     public RecenzjaEntity saveRecenzja(RecenzjaEntity recenzja) {
         return null;
+    }
+
+    @Override
+    public void removeRecenzja(int idR) {
+
     }
 
     @Override
