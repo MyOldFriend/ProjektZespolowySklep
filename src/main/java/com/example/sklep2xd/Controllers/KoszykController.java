@@ -1,7 +1,11 @@
 package com.example.sklep2xd.Controllers;
 
 import com.example.sklep2xd.Dto.KoszykDto;
+import com.example.sklep2xd.Models.KlientEntity;
 import com.example.sklep2xd.Models.KoszykEntity;
+import com.example.sklep2xd.Models.ProduktEntity;
+import com.example.sklep2xd.Repositories.KlientRep;
+import com.example.sklep2xd.Repositories.ProduktRep;
 import com.example.sklep2xd.Service.KoszykService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,6 +22,12 @@ import java.util.List;
 public class KoszykController {
     private final KoszykService koszykService;
     @Autowired
+    private KlientRep klientRep; // Inject KlientRep repository
+
+    @Autowired
+    private ProduktRep produktRep; // Inject ProduktRep repository
+
+    @Autowired
     public KoszykController(KoszykService koszykService){
         this.koszykService = koszykService;
     }
@@ -30,9 +40,15 @@ public class KoszykController {
         model.addAttribute("Koszyk", koszyk);
         return "koszyk";
     }
-    @GetMapping("/do wymyslenia bo nwm")
+    @GetMapping("/do wymyslenia bo nwm") //ma być wywoływane na stronach z produktami
     public String dodajDoKoszyka(int idKlienta, int idProduktu, int ilosc){
-        //nwm jak to jeszcze zrobic
+        KlientEntity klient = klientRep.findByIdKlienta(idKlienta);
+        ProduktEntity produkt = produktRep.findByIdProduktu(idProduktu);
+        KoszykEntity koszykEntity = new KoszykEntity();
+        koszykEntity.setIlosc(ilosc);
+        koszykEntity.setKlient(klient);
+        koszykEntity.setProdukt(produkt);
+        koszykService.saveKoszyk(koszykEntity);
         return "nwm co chyba listę zakupów albo widok koszyka";
     }
     @DeleteMapping("/{idk}/{idp}")
