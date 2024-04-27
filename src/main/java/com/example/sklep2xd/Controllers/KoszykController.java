@@ -38,7 +38,7 @@ public class KoszykController {
         List<KoszykDto> koszyk = koszykService.findKoszykByKlientId(idKlienta);
         model.addAttribute("header", "Twój koszyk");
         model.addAttribute("Koszyk", koszyk);
-        return "koszyk";
+        return "Koszyk";
     }
     @GetMapping("/do wymyslenia bo nwm") //ma być wywoływane na stronach z produktami
     public String dodajDoKoszyka(int idKlienta, int idProduktu, int ilosc){
