@@ -2,7 +2,11 @@ package com.example.sklep2xd.Controllers;
 
 import com.example.sklep2xd.Dto.KlientDto;
 import com.example.sklep2xd.Dto.RecenzjaDto;
+import com.example.sklep2xd.Models.KlientEntity;
+import com.example.sklep2xd.Models.ProduktEntity;
 import com.example.sklep2xd.Models.RecenzjaEntity;
+import com.example.sklep2xd.Repositories.KlientRep;
+import com.example.sklep2xd.Repositories.ProduktRep;
 import com.example.sklep2xd.Service.KlientService;
 import com.example.sklep2xd.Service.RecenzjaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +20,11 @@ import java.util.List;
 public class RecenzjaController {
 
         private final RecenzjaService recenzjaService;
+        @Autowired
+        private KlientRep klientRep; // Inject KlientRep repository
+
+        @Autowired
+        private ProduktRep produktRep; // Inject ProduktRep repository
 
         @Autowired
         public RecenzjaController(RecenzjaService recenzjaService) {
@@ -38,7 +47,11 @@ public class RecenzjaController {
         }
 
         @PostMapping("/dodajform")
-        public String saveRecenzja(@ModelAttribute("recenzja") RecenzjaEntity recenzja) {
+        public String saveRecenzja(@ModelAttribute("recenzja") RecenzjaEntity recenzja, int idKlienta, int idProd) {
+            KlientEntity klient = klientRep.findByIdKlienta(idKlienta);
+            ProduktEntity produkt = produktRep.findByIdProduktu(idProd);
+            recenzja.setKlientByKlientId(klient);
+            recenzja.setProduktByProduktId(produkt);
             recenzjaService.saveRecenzja(recenzja);
             return "redirect:/Recenzja/lista";
         }
@@ -56,5 +69,9 @@ public class RecenzjaController {
             recenzjaService.updateRecenzja(recenzjaDto);
             return "redirect:/Recenzja/lista";
         }
-        // elo dziwko
+        @DeleteMapping("/usun/{recenzjaId}")
+        public String deleteRecenzja(@PathVariable("recenzjaId") int recenzjaId) {
+            recenzjaService.removeRecenzja(recenzjaId);
+            return "redirect:/Recenzja/lista";
+        }
     }

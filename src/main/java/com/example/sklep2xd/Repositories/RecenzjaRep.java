@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface RecenzjaRep extends JpaRepository<RecenzjaEntity, Integer> {
-    Optional<RecenzjaEntity> findByIdRecenzji( int id);
+    RecenzjaEntity findByIdRecenzji( int id);
     List<RecenzjaEntity> findByKlient_IdKlienta(int id);
     List<RecenzjaEntity> findByProdukt_IdProduktu(int id);
 }

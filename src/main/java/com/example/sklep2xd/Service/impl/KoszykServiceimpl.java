@@ -47,6 +47,18 @@ public class KoszykServiceimpl implements KoszykService{
     } //
 
     @Override
+    public void deleteKoszykKlienta(int idKlienta) {
+        List<KoszykEntity> koszyk = koszykRep.findByKlient_IdKlienta(idKlienta);
+        koszykRep.deleteAll(koszyk);
+    }
+
+    @Override
+    public void deleteKoszyk(int idKlienta, int idProduktu) {
+        KoszykEntity koszykEntity = koszykRep.findByKlient_IdKlientaAndProdukt_IdProduktu(idKlienta, idProduktu);
+        koszykRep.delete(koszykEntity);
+    }
+
+    @Override
     public void updateKoszyk(KoszykEntity koszykEntity) {
 
     }

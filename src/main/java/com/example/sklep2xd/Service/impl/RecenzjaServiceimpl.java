@@ -51,7 +51,8 @@ public class RecenzjaServiceimpl implements RecenzjaService {
 
     @Override
     public void removeRecenzja(int idR) {
-
+        RecenzjaEntity recenzja = recenzjaRep.findByIdRecenzji(idR);
+        recenzjaRep.delete(recenzja);
     }
 
     @Override
