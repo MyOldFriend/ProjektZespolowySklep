@@ -15,4 +15,5 @@ public class KoszykDto {
     //private KlientEntity klient;
     private ProduktEntity produkt;
     //private KoszykPK kpk;
+
 }
