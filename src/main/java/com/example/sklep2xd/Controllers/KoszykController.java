@@ -30,13 +30,23 @@ public class KoszykController {
     }
     //odnieść się do *komentarza* pod konstruktorem ProduktZamowienieController
 
-    @GetMapping("/{idKlienta}")
-    public String koszykKlienta(@PathVariable("idKlienta") int idKlienta, Model model){
-        List<KoszykDto> koszyk = koszykService.findKoszykByKlientId(idKlienta);
-        model.addAttribute("header", "Twój koszyk");
-        model.addAttribute("Koszyk", koszyk);
-        return "Koszyk";
-    }
+//    @GetMapping("/{idKlienta}")
+//    public String koszykKlienta(@PathVariable("idKlienta") int idKlienta, Model model){
+//        List<KoszykDto> koszyk = koszykService.findKoszykByKlientId(idKlienta);
+//        model.addAttribute("header", "Twój koszyk");
+//        model.addAttribute("Koszyk", koszyk);
+//        return "Koszyk";
+//    }
+        @GetMapping("/{idKlienta}")
+        public String koszykKlienta(@PathVariable("idKlienta") int idKlienta, Model model){
+            List<KoszykDto> koszyk = koszykService.findKoszykByKlientId(idKlienta);
+            double sumaCen = KoszykService.obliczCeneKoszyka(koszyk);
+            model.addAttribute("header", "Twój koszyk");
+            model.addAttribute("Koszyk", koszyk);
+            model.addAttribute("sumaCen", sumaCen);
+            return "Koszyk";
+        }
+
     @PostMapping("/do wymyslenia bo nwm") //ma być wywoływane na stronach z produktami
     public String dodajDoKoszyka(int idKlienta, int idProduktu, int ilosc, Model model){
         KlientEntity klient = klientRep.findByIdKlienta(idKlienta);
@@ -59,4 +69,5 @@ public class KoszykController {
         koszykService.deleteKoszykKlienta(idKlienta);
         return "koszyk";
     }
+
 }
