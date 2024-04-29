@@ -22,7 +22,7 @@ public class RecenzjaServiceimpl implements RecenzjaService {
 
     }
 
-    private RecenzjaDto mapToAdresDto(RecenzjaEntity recenzja){
+    private RecenzjaDto mapToRecenzjaDto(RecenzjaEntity recenzja){
         RecenzjaDto recenzjaDto = RecenzjaDto.builder()
                 .idRecenzji(recenzja.getIdRecenzji())
                 .ocena(recenzja.getOcena())
@@ -36,7 +36,7 @@ public class RecenzjaServiceimpl implements RecenzjaService {
     @Override
     public List<RecenzjaDto> findAllRecenzje() {
         List<RecenzjaEntity> recenzje = recenzjaRep.findAll();
-        return recenzje.stream().map((recenzja) -> mapToAdresDto(recenzja)).collect(Collectors.toList());
+        return recenzje.stream().map((recenzja) -> mapToRecenzjaDto(recenzja)).collect(Collectors.toList());
     }
 
     @Override
@@ -48,6 +48,12 @@ public class RecenzjaServiceimpl implements RecenzjaService {
     @Override
     public RecenzjaEntity saveRecenzja(RecenzjaEntity recenzja) {
         return null;
+    }
+
+    @Override
+    public List<RecenzjaDto> findRecenzjeByProductId(int id) {
+        List<RecenzjaEntity> recenzje = recenzjaRep.findByProdukt_IdProduktu(id);
+        return recenzje.stream().map(this::mapToRecenzjaDto).collect(Collectors.toList());
     }
 
     @Override

@@ -61,7 +61,16 @@ public class RecenzjaController {
             return "EdytujRecenzje";
         }
 
-        @PostMapping("/edytuj/{recenzjaId}")
+    @GetMapping("/lista/{idProduktu}")
+    public String listRecenzjeForProduct(@PathVariable("idProduktu") int idProduktu, Model model) {
+        List<RecenzjaDto> recenzje = recenzjaService.findRecenzjeByProductId(idProduktu);
+        model.addAttribute("header", "Lista recenzji dla produktu");
+        model.addAttribute("recenzjaList", recenzje);
+        return "Recenzje";
+    }
+
+
+    @PostMapping("/edytuj/{recenzjaId}")
         public String updateRecenzja(@PathVariable("recenzjaId") int recenzjaId, @ModelAttribute("recenzja") RecenzjaDto recenzjaDto) {
             recenzjaDto.setIdRecenzji(recenzjaId);
             recenzjaService.updateRecenzja(recenzjaDto);

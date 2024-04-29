@@ -7,4 +7,6 @@ import java.util.Optional;
 
 public interface KlientRep  extends JpaRepository<KlientEntity, Integer> {
     KlientEntity findByIdKlienta(int id);
+    KlientEntity findByEmail(String email); // Dodane
+    KlientEntity findByLogin(String login); // Dodane
 }
