@@ -40,14 +40,30 @@ public class KlientController {
     public String createKlientForm(Model model) {
         KlientEntity klient = new KlientEntity();
         model.addAttribute("klient", klient);
-        return "NowyKlient";
+        return "Rejestracja";
     }
 
     @PostMapping("/dodajform")
-    public String saveKlient(@ModelAttribute("klient") KlientEntity klient) {
+    public String saveKlient(@ModelAttribute("klient") KlientEntity klient, Model model) {
+        // Sprawdzenie czy istnieje użytkownik o podanym e-mailu
+        KlientEntity existingEmailUser = klientService.findKlientByEmail(klient.getEmail());
+        if (existingEmailUser != null) {
+            model.addAttribute("errorMessage", "Użytkownik z podanym adresem e-mail już istnieje.");
+            return "Rejestracja";
+        }
+
+        // Sprawdzenie czy istnieje użytkownik o podanym loginie
+        KlientEntity existingLoginUser = klientService.findKlientByLogin(klient.getLogin());
+        if (existingLoginUser != null) {
+            model.addAttribute("errorMessage", "Użytkownik z podanym loginem już istnieje.");
+            return "Rejestracja";
+        }
+
+        // Jeśli nie istnieje, zapisujemy nowego użytkownika
         klientService.saveKlient(klient);
-        return "redirect:/Klient/lista";
+        return "redirect:/klienci/lista";
     }
+
 
     @GetMapping("/edytuj/{klientId}")
     public String editKlientForm(@PathVariable("klientId") int klientId, Model model) {

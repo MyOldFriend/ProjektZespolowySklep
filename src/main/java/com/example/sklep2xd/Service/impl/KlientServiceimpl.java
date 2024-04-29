@@ -53,8 +53,34 @@ public class KlientServiceimpl implements KlientService {
 
     @Override
     public KlientEntity saveKlient(KlientEntity klient) {
-        return null;
+        // Sprawdzenie czy użytkownik o podanym e-mailu już istnieje
+        KlientEntity existingEmailUser = klientRep.findByEmail(klient.getEmail());
+        if (existingEmailUser != null) {
+            throw new RuntimeException("Użytkownik o podanym e-mailu już istnieje");
+        }
+
+        // Sprawdzenie czy użytkownik o podanym loginie już istnieje
+        KlientEntity existingLoginUser = klientRep.findByLogin(klient.getLogin());
+        if (existingLoginUser != null) {
+            throw new RuntimeException("Użytkownik o podanym loginie już istnieje");
+        }
+
+        // Zapis nowego użytkownika do bazy danych
+        return klientRep.save(klient);
     }
+
+    @Override
+    public KlientEntity findKlientByEmail(String email) {
+        return klientRep.findByEmail(email);
+    }
+
+    @Override
+    public KlientEntity findKlientByLogin(String login) {
+        return klientRep.findByLogin(login);
+    }
+
+
+
 
     @Override
     public void updateKlient(KlientDto klientDto) {

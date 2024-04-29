@@ -10,19 +10,23 @@
 <body>
 
 <div class="container">
-    <div class="registration-form" th:each="klient : ${klientNowy}">
+    <div class="registration-form">
         <h2>Rejestracja</h2>
-        <form action="#">
-            <input type="text" placeholder="Imię">
-            <input type="text" placeholder="Nazwisko">
-            <input type="text" placeholder="Adres 1">
-            <input type="text" placeholder="Adres 2 (opcjonalnie)">
-            <input type="email" placeholder="E-mail">
-            <input type="text" placeholder="Login">
-            <input type="password" placeholder="Hasło">
+        <form action="#" th:action="@{/klienci/dodajform}" th:object="${klient}" method="post">
+            <input type="text" th:field="*{imie}" placeholder="Imię">
+            <input type="text" th:field="*{nazwisko}" placeholder="Nazwisko">
+<!--            <input type="text" th:field="*{adresId.ulica}" placeholder="Adres 1">-->
+<!--            <input type="text" th:field="*{adresId.kodPocztowy}" placeholder="Adres 2 (opcjonalnie)">-->
+            <input type="email" th:field="*{email}" placeholder="E-mail">
+            <input type="text" th:field="*{login}" placeholder="Login">
+            <input type="password" th:field="*{haslo}" placeholder="Hasło">
             <input type="password" placeholder="Powtórz hasło">
+            <button type="submit">Zarejestruj się</button>
+
+            <div th:if="${errorMessage}" class="error-message">
+                <p th:text="${errorMessage}"></p>
+            </div>
         </form>
-        <button type="submit">Zarejestruj się</button>
     </div>
     <div class="circle-area">
         <div class="circle">

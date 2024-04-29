@@ -35,8 +35,8 @@
 <div th:object="${produkt}" class="product">
     <div class="product-details">
         <!--<img src="model-girl2.png" alt="Produkt" class="product-image">-->
-        <!--<iframe src="https://drive.google.com/file/d/138AhcA2w7-mBhMp0Rdsqp0XtdX-5X19d/preview" alt="Produkt" class="product-image"></iframe>-->
-        <!--<img  crossorigin="anonymous"src="https://drive.lienuc.com/uc?id=13L8s3HfqP2x06cmDJGM6QCD2jR9WvkXO" alt="">-->
+<!--        <iframe src="https://drive.google.com/file/d/138AhcA2w7-mBhMp0Rdsqp0XtdX-5X19d/preview" alt="Produkt" class="product-image"></iframe>-->
+        <img  crossorigin="anonymous"src="https://drive.lienuc.com/uc?id=13L8s3HfqP2x06cmDJGM6QCD2jR9WvkXO" alt="">
         <!--<img src="pobierz (1).jpg" alt="Produkt" class="product-image">-->
 
     </div>
@@ -59,46 +59,54 @@
             <img src="" th:src="@{/Grafiki/shopping-bag.png}" alt="">
             <p>Dodaj do koszyka</p>
         </button>
-        <a href=""><div class="product-info">
-            <img src="" th:src="@{/Grafiki/location.png}" alt="Ikonka" class="info-icon">
-            <p>Sprawdź dostępność</p>
-            <img src="" th:src="@{/Grafiki/arrow-right.png}" alt="Ikonka" class="info-icon">
-        </div></a>
-        <p>Opis produktu</p>
-        <p>Tekst na dole strony</p>
+<!--        <a href=""><div class="product-info">-->
+<!--            <img src="" th:src="@{/Grafiki/location.png}" alt="Ikonka" class="info-icon">-->
+<!--            <p>Sprawdź dostępność</p>-->
+<!--            <img src="" th:src="@{/Grafiki/arrow-right.png}" alt="Ikonka" class="info-icon">-->
+<!--        </div></a>-->
     </div>
 
 </div>
 
-<div th:each="recenzja : ${recenzja}" class="reviews">
+
+<div th:each="recenzja : ${recenzjaList}" class="reviews">
     <h2>Recenzje</h2>
     <div class="rating">
-        <img src="star.png" alt="Gwiazdka" class="star">
-        <img src="star.png" alt="Gwiazdka" class="star">
-        <img src="star.png" alt="Gwiazdka" class="star">
-        <img src="star.png" alt="Gwiazdka" class="star">
-        <img src="star.png" alt="Gwiazdka" class="star">
+        <img th:each="star : ${#numbers.sequence(1, recenzja.ocena)}" src="" th:src="@{/Grafiki/star.png}" alt="Gwiazdka" class="star">
     </div>
-    <p>Opis oceny</p>
-
-    <div class="rating">
-        <img src="star.png" alt="Gwiazdka" class="star">
-        <img src="star.png" alt="Gwiazdka" class="star">
-        <img src="star.png" alt="Gwiazdka" class="star">
-        <img src="star.png" alt="Gwiazdka" class="star">
-        <img src="star.png" alt="Gwiazdka" class="star">
-    </div>
-    <p>Opis oceny</p>
-
-    <div class="rating">
-        <img src="star.png" alt="Gwiazdka" class="star">
-        <img src="star.png" alt="Gwiazdka" class="star">
-        <img src="star.png" alt="Gwiazdka" class="star">
-        <img src="star.png" alt="Gwiazdka" class="star">
-        <img src="star.png" alt="Gwiazdka" class="star">
-    </div>
-    <p>Opis oceny</p>
+    <p th:text="${recenzja.tresc}"></p>
 </div>
+
+
+<!--<div th:each="recenzja : ${recenzjaList}" class="reviews">-->
+<!--    <h2>Recenzje</h2>-->
+<!--    <div class="rating">-->
+<!--        <img src="star.png" alt="Gwiazdka" class="star">-->
+<!--        <img src="star.png" alt="Gwiazdka" class="star">-->
+<!--        <img src="star.png" alt="Gwiazdka" class="star">-->
+<!--        <img src="star.png" alt="Gwiazdka" class="star">-->
+<!--        <img src="star.png" alt="Gwiazdka" class="star">-->
+<!--    </div>-->
+<!--    <p>Opis oceny</p>-->
+
+<!--    <div class="rating">-->
+<!--        <img src="star.png" alt="Gwiazdka" class="star">-->
+<!--        <img src="star.png" alt="Gwiazdka" class="star">-->
+<!--        <img src="star.png" alt="Gwiazdka" class="star">-->
+<!--        <img src="star.png" alt="Gwiazdka" class="star">-->
+<!--        <img src="star.png" alt="Gwiazdka" class="star">-->
+<!--    </div>-->
+<!--    <p>Opis oceny</p>-->
+
+<!--    <div class="rating">-->
+<!--        <img src="star.png" alt="Gwiazdka" class="star">-->
+<!--        <img src="star.png" alt="Gwiazdka" class="star">-->
+<!--        <img src="star.png" alt="Gwiazdka" class="star">-->
+<!--        <img src="star.png" alt="Gwiazdka" class="star">-->
+<!--        <img src="star.png" alt="Gwiazdka" class="star">-->
+<!--    </div>-->
+<!--    <p>Opis oceny</p>-->
+<!--</div>-->
 
 <footer>
     <p>Zawartość tej strony</p>
