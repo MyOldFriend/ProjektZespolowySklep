@@ -1,0 +1,195 @@
+/*body {*/
+/*    margin: 0;*/
+/*    font-family: Arial, sans-serif;*/
+/*}*/
+
+/*.header {*/
+/*    display: flex;*/
+/*    align-items: center;*/
+/*    justify-content: space-between;*/
+/*    padding: 20px 20px 10px;*/
+/*}*/
+
+/*.icon-container-left {*/
+/*    width: 20vw;*/
+/*    padding-left: 1vw;*/
+/*}*/
+
+/*.icon-container-right {*/
+/*    width: 20vw;*/
+/*    padding-right: 1vw;*/
+/*    display: flex;*/
+/*    justify-content: flex-end;*/
+/*    align-items: center;*/
+/*}*/
+
+/*.logo-container {*/
+/*    flex-grow: 1;*/
+/*    text-align: center;*/
+/*}*/
+
+/*.logo {*/
+/*    max-width: 200px;*/
+/*    height: 7vh;*/
+/*    margin: 0 auto;*/
+/*}*/
+
+/*.icon {*/
+/*    width: 30px;*/
+/*    height: 30px;*/
+/*    margin: 0 10px;*/
+/*}*/
+
+/*.navbar {*/
+/*    text-align: center;*/
+/*    padding-top: 10px;*/
+/*}*/
+
+/*.navbar-line {*/
+/*    width: 90vw;*/
+/*    margin: 0 auto;*/
+/*    border-top: 1px solid #000;*/
+/*    margin-bottom: 30px;*/
+/*}*/
+
+/*.navbar a {*/
+/*    margin: 0 10px;*/
+/*    text-decoration: none;*/
+/*    color: #333;*/
+/*}*/
+
+.product {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+    background-color: #ceedff;
+}
+
+.product a {
+    text-decoration: none;
+    color: #333;
+}
+
+.product-image {
+    max-width: 100%;
+    max-height: 50vh;
+    display: block;
+    margin: auto auto; /* Centrowanie obrazka */
+    border: 1px solid #ccc;
+    padding: 20px;
+}
+
+
+.product-details {
+    width: 25vw;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+
+    border-radius: 10px;
+    margin: 20px;
+}
+
+.product-description {
+    text-align: left;
+    margin-bottom: 10px;
+}
+
+.sizes {
+    display: flex;
+    flex-wrap: wrap; /* Elementy będą przechodzić do nowej linii, jeśli zabraknie miejsca */
+    justify-content: center; /* Wyśrodkowanie elementów na osi poziomej */
+    margin-bottom: 10px;
+}
+
+.size {
+    border: 1px solid #ccc;
+    padding: 20px 10px;
+    margin: 0 20px 10px 0; /* Dodanie odstępu między elementami */
+    cursor: pointer;
+    white-space: nowrap; /* Zapobieganie zawijaniu tekstu */
+    width: 50px;
+    text-align: center;
+}
+
+.orange-button {
+    background-color: rgb(255, 110, 25);
+    color: white;
+    border: none;
+    padding: 2px 30px;
+    border-radius: 50px;
+    cursor: pointer;
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin: 20px auto; /* Wyśrodkowanie */
+    width: auto;
+}
+
+.orange-button img {
+    max-width: 25px;
+    margin-right: 10px;
+    color: #fff;
+}
+
+.orange-button p {
+    text-align: center;
+}
+
+.product-info {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+.info-icon {
+    width: 30px;
+    height: auto;
+    padding: 0 30px;
+}
+
+
+.reviews {
+    margin: 20px;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.reviews h2 {
+    text-align: center;
+}
+
+.rating {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 50px 0 10px;
+}
+
+.star {
+    width: 30px; /* Dostosuj szerokość obrazka gwiazdki */
+    height: auto;
+    margin-right: 5px;
+}
+
+
+
+/*
+footer {
+    text-align: center;
+    padding: 20px 0;
+    background-color: #f2f2f2;
+    width: 100%;
+    font-size: 10px;
+}
+
+.logo-footer {
+    max-width: 200px;
+    height: 5vh;
+    margin: 0 auto;
+}*/

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/produkt.css">
+    <link rel="icon" th:href="@{/Grafiki/ff.ico}" type="image/png" size="32">
+    <title>Produkt</title>
+</head>
+<body>
+
+<div class="header">
+    <div class="icon-container-left">
+        <img src="" th:src="@{/Grafiki/search.png}" alt="Ikona lewa" class="icon">
+    </div>
+    <div class="logo-container">
+        <img src="" th:src="@{/Grafiki/ff.png}" alt="Logo" class="logo">
+    </div>
+    <div class="icon-container-right">
+        <img src="" th:src="@{/Grafiki/shopping-bag.png}" alt="Ikona prawa" class="icon">
+        <img src="" th:src="@{/Grafiki/user.png}" alt="Ikona prawa" class="icon">
+    </div>
+</div>
+
+<div class="navbar">
+    <div class="navbar-line"></div>
+    <a href="#">Odnośnik 1</a>
+    <a href="#">Odnośnik 2</a>
+    <a href="#">Odnośnik 3</a>
+    <a href="#">Odnośnik 4</a>
+    <a href="#">Odnośnik 5</a>
+</div>
+
+<div th:object="${produkt}" class="product">
+    <div class="product-details">
+        <!--<img src="model-girl2.png" alt="Produkt" class="product-image">-->
+        <!--<iframe src="https://drive.google.com/file/d/138AhcA2w7-mBhMp0Rdsqp0XtdX-5X19d/preview" alt="Produkt" class="product-image"></iframe>-->
+        <!--<img  crossorigin="anonymous"src="https://drive.lienuc.com/uc?id=13L8s3HfqP2x06cmDJGM6QCD2jR9WvkXO" alt="">-->
+        <!--<img src="pobierz (1).jpg" alt="Produkt" class="product-image">-->
+
+    </div>
+    <div class="product-details">
+        <div class="product-description">
+            <p th:text="'Nazwa: ' + ${produkt.nazwa}"></p>
+            <p th:text="'Cena: ' + ${#numbers.formatDecimal(produkt.cena, 2, 'COMMA', 2, 'POINT')} + ' PLN'"></p>
+        </div>
+        <p>Wybierz rozmiar:</p>
+        <div class="sizes">
+            <div class="size">XXS</div>
+            <div class="size">XS</div>
+            <div class="size">S</div>
+            <div class="size">M</div>
+            <div class="size">L</div>
+            <div class="size">XL</div>
+            <div class="size">XXL</div>
+        </div>
+        <button class="orange-button">
+            <img src="" th:src="@{/Grafiki/shopping-bag.png}" alt="">
+            <p>Dodaj do koszyka</p>
+        </button>
+        <a href=""><div class="product-info">
+            <img src="" th:src="@{/Grafiki/location.png}" alt="Ikonka" class="info-icon">
+            <p>Sprawdź dostępność</p>
+            <img src="" th:src="@{/Grafiki/arrow-right.png}" alt="Ikonka" class="info-icon">
+        </div></a>
+        <p>Opis produktu</p>
+        <p>Tekst na dole strony</p>
+    </div>
+
+</div>
+
+<div th:each="recenzja : ${recenzja}" class="reviews">
+    <h2>Recenzje</h2>
+    <div class="rating">
+        <img src="star.png" alt="Gwiazdka" class="star">
+        <img src="star.png" alt="Gwiazdka" class="star">
+        <img src="star.png" alt="Gwiazdka" class="star">
+        <img src="star.png" alt="Gwiazdka" class="star">
+        <img src="star.png" alt="Gwiazdka" class="star">
+    </div>
+    <p>Opis oceny</p>
+
+    <div class="rating">
+        <img src="star.png" alt="Gwiazdka" class="star">
+        <img src="star.png" alt="Gwiazdka" class="star">
+        <img src="star.png" alt="Gwiazdka" class="star">
+        <img src="star.png" alt="Gwiazdka" class="star">
+        <img src="star.png" alt="Gwiazdka" class="star">
+    </div>
+    <p>Opis oceny</p>
+
+    <div class="rating">
+        <img src="star.png" alt="Gwiazdka" class="star">
+        <img src="star.png" alt="Gwiazdka" class="star">
+        <img src="star.png" alt="Gwiazdka" class="star">
+        <img src="star.png" alt="Gwiazdka" class="star">
+        <img src="star.png" alt="Gwiazdka" class="star">
+    </div>
+    <p>Opis oceny</p>
+</div>
+
+<footer>
+    <p>Zawartość tej strony</p>
+    <img src="" th:src="@{/Grafiki/ff.png}" alt="Logo" class="logo-footer">
+</footer>
+
+<script>
+    window.onload = function() {
+        var footer = document.querySelector("footer");
+        var bodyHeight = document.body.offsetHeight;
+        var windowHeight = window.innerHeight;
+
+        if (bodyHeight < windowHeight) {
+            footer.style.position = "fixed";
+            footer.style.bottom = "0";
+            footer.style.width = "100%";
+        }
+    };
+</script>
+
+</body>
+</html>

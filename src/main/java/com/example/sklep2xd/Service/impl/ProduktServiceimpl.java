@@ -1,6 +1,7 @@
 package com.example.sklep2xd.Service.impl;
 
 import com.example.sklep2xd.Dto.ProduktDto;
+import com.example.sklep2xd.Models.PracownikEntity;
 import com.example.sklep2xd.Models.ProduktEntity;
 import com.example.sklep2xd.Repositories.ProduktRep;
 import com.example.sklep2xd.Service.ProduktService;
@@ -46,6 +47,10 @@ public class ProduktServiceimpl implements ProduktService {
 
     @Override
     public ProduktDto findProduktById(int id) {
+        ProduktEntity produkt = produktRep.findById(id).orElse(null);
+        if (produkt != null) {
+            return mapToProduktDto(produkt);
+        }
         return null;
     }
 

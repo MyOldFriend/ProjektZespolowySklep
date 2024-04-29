@@ -1,4 +1,4 @@
-body {
+/*body {
     margin: 0;
     font-family: Arial, sans-serif;
     background-color: #f9f9f9;
@@ -57,7 +57,7 @@ body {
     margin: 0 10px;
     text-decoration: none;
     color: #333;
-}
+}*/
 
 
 
@@ -188,7 +188,7 @@ body {
 }
 
 
-
+/*
 footer {
     text-align: center;
     padding: 20px 0;
@@ -201,4 +201,4 @@ footer {
     max-width: 200px;
     height: 5vh;
     margin: 0 auto;
-}
+}*/
