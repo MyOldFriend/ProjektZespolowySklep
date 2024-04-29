@@ -2,10 +2,12 @@ package com.example.sklep2xd.Controllers;
 
 import com.example.sklep2xd.Dto.KlientDto;
 import com.example.sklep2xd.Dto.ProduktDto;
+import com.example.sklep2xd.Dto.RozmiaryDto;
 import com.example.sklep2xd.Models.ProduktEntity;
 import com.example.sklep2xd.Service.KlientService;
 import com.example.sklep2xd.Service.PracownikService;
 import com.example.sklep2xd.Service.ProduktService;
+import com.example.sklep2xd.Service.RozmiaryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,7 +18,14 @@ import java.util.List;
 @RequestMapping("/Produkt")
 public class ProduktController {
 
-    private final ProduktService produktService;
+
+
+    @Autowired
+    private ProduktService produktService;
+
+    @Autowired
+    private RozmiaryService rozmiaryService;
+
 
     @Autowired
     public ProduktController(ProduktService produktService) {
@@ -54,9 +63,11 @@ public class ProduktController {
     }
 
     @GetMapping("/{id}")
-    public String singleProdukt(@PathVariable("id") int produktId, Model model){
+    public String singleProdukt(@PathVariable("id") int produktId,Model model){
         ProduktDto produkt = produktService.findProduktById(produktId);
+        List<RozmiaryDto> rozmiary = rozmiaryService.findByProduktuId(produktId);
         model.addAttribute("produkt", produkt);
+        model.addAttribute("rozmiary", rozmiary);
         return "Produkt";
     }
 

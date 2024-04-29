@@ -1,6 +1,7 @@
 package com.example.sklep2xd.Dto;
 
 import com.example.sklep2xd.Models.KategoriaEntity;
+import com.example.sklep2xd.Models.RozmiaryEntity;
 import lombok.*;
 
 @Getter
@@ -13,7 +14,7 @@ public class ProduktDto {
     private int idProduktu;
     private String nazwa;
     private Double cena;
-    private Integer rozmiar;
     private String urlzdjecia;
     private KategoriaEntity kategoria;
+
 }

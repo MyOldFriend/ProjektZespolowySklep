@@ -47,13 +47,13 @@
         </div>
         <p>Wybierz rozmiar:</p>
         <div class="sizes">
-            <div class="size">XXS</div>
-            <div class="size">XS</div>
-            <div class="size">S</div>
-            <div class="size">M</div>
-            <div class="size">L</div>
-            <div class="size">XL</div>
-            <div class="size">XXL</div>
+            <!-- Wyświetl rozmiary na podstawie wartości z bazy danych -->
+            <div class="size" th:each="rozmiar : ${rozmiary}" th:text="${rozmiar.rozmiar}"></div>
+<!--            <div class="size" th:if="${produkt.rozmiar == 'S'}">S</div>-->
+<!--            <div class="size" th:if="${produkt.rozmiar== 'M' }">M</div>-->
+<!--            <div class="size" th:if="${produkt.rozmiar == 'L'}">L</div>-->
+<!--            <div class="size" th:if="${produkt.rozmiar == 'XL'}">XL</div>-->
+<!--            <div class="size" th:if="${produkt.rozmiar == 'XXL'}">XXL</div>-->
         </div>
         <button class="orange-button">
             <img src="" th:src="@{/Grafiki/shopping-bag.png}" alt="">

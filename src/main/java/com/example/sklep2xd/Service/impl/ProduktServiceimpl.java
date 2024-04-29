@@ -3,7 +3,9 @@ package com.example.sklep2xd.Service.impl;
 import com.example.sklep2xd.Dto.ProduktDto;
 import com.example.sklep2xd.Models.PracownikEntity;
 import com.example.sklep2xd.Models.ProduktEntity;
+import com.example.sklep2xd.Models.RozmiaryEntity;
 import com.example.sklep2xd.Repositories.ProduktRep;
+import com.example.sklep2xd.Repositories.RozmiaryRep;
 import com.example.sklep2xd.Service.ProduktService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,6 +17,7 @@ import java.util.stream.Collectors;
 public class ProduktServiceimpl implements ProduktService {
 
     private ProduktRep produktRep;
+    private RozmiaryRep rozmiaryRep;
     @Autowired
     public ProduktServiceimpl(ProduktRep produktRep){
         this.produktRep = produktRep;
@@ -26,7 +29,6 @@ public class ProduktServiceimpl implements ProduktService {
                 .idProduktu(produkt.getIdProduktu())
                 .nazwa(produkt.getNazwa())
                 .cena(produkt.getCena())
-                .rozmiar(produkt.getRozmiar())
                 .urlzdjecia(produkt.getUrlzdjecia())
                 .kategoria(produkt.getKategoriaByKategoriaId())
                 .build();
