@@ -19,15 +19,31 @@
 <!--            <input type="text" th:field="*{adresId.kodPocztowy}" placeholder="Adres 2 (opcjonalnie)">-->
             <input type="email" th:field="*{email}" placeholder="E-mail">
             <input type="text" th:field="*{login}" placeholder="Login">
-            <input type="password" th:field="*{haslo}" placeholder="Hasło">
-            <input type="password" placeholder="Powtórz hasło">
-            <button type="submit">Zarejestruj się</button>
+            <input type="password" th:field="*{haslo}" placeholder="Hasło" id="haslo">
+            <input type="password" placeholder="Powtórz hasło" id="potwierdzHaslo">
+            <button type="submit" onclick="return sprawdzHasla()">Zarejestruj się</button>
 
             <div th:if="${errorMessage}" class="error-message">
                 <p th:text="${errorMessage}"></p>
             </div>
         </form>
     </div>
+
+    <script>
+        function sprawdzHasla() {
+            var haslo = document.getElementById("haslo").value;
+            var potwierdzHaslo = document.getElementById("potwierdzHaslo").value;
+            if (haslo !== potwierdzHaslo) {
+                var errorMessage = "Hasło i potwierdzenie hasła są różne!";
+                var errorDiv = document.querySelector(".error-message");
+                errorDiv.innerHTML = "<p>" + errorMessage + "</p>";
+                errorDiv.style.display = "block"; // Wyświetl div z komunikatem
+                return false; // Przerwij wysyłanie formularza
+            }
+            return true; // Kontynuuj wysyłanie formularza
+        }
+    </script>
+
     <div class="circle-area">
         <div class="circle">
             <div class="circle-text">Stwórz konto</div>
