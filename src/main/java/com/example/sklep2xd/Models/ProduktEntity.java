@@ -23,7 +23,7 @@ public class ProduktEntity {
     private Double cena;
     @Basic
     @Column(name = "rozmiar", nullable = true)
-    private Integer rozmiar;
+    private String rozmiar;
 //    @Basic
 //    @Column(name = "kategoria_id", nullable = true)
 //    private Integer kategoriaId;
@@ -61,11 +61,11 @@ public class ProduktEntity {
         this.cena = cena;
     }
 
-    public Integer getRozmiar() {
+    public String getRozmiar() {
         return rozmiar;
     }
 
-    public void setRozmiar(Integer rozmiar) {
+    public void setRozmiar(String rozmiar) {
         this.rozmiar = rozmiar;
     }
 

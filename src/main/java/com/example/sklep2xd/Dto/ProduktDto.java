@@ -13,7 +13,7 @@ public class ProduktDto {
     private int idProduktu;
     private String nazwa;
     private Double cena;
-    private Integer rozmiar;
+    private String rozmiar;
     private String urlzdjecia;
     private KategoriaEntity kategoria;
 }
