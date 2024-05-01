@@ -65,4 +65,19 @@ public class PracownikServiceimpl implements PracownikService {
         }
     }
 
+    @Override
+    public PracownikDto zalogujPracownika(String login, String haslo) {
+        PracownikEntity pracownik = pracownikRep.findByLogin(login);
+        if (pracownik != null && pracownik.getHaslo().equals(haslo)) {
+            return mapToPracownikDto(pracownik);
+        }
+        return null;
+    }
+
+    @Override
+    public boolean czyAdmin(PracownikDto pracownikDto) {
+        // Sprawdź czy pracownik ma rolę admina
+        return pracownikDto.getDzial().equals("admin");
+    }
+
 }

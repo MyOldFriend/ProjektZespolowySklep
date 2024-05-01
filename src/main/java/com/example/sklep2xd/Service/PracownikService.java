@@ -11,4 +11,8 @@ public interface PracownikService {
     PracownikDto findPracownikById(int id);
     PracownikEntity savePracownik(PracownikEntity pracownik);
     void updatePracownik(PracownikDto pracownikDto);
+
+
+    PracownikDto zalogujPracownika(String login, String haslo);
+    boolean czyAdmin(PracownikDto pracownikDto);
 }
