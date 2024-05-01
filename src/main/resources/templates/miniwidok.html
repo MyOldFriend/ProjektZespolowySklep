@@ -9,11 +9,11 @@
     <title></title>
 </head>
 <body>
-<div class="our-products">
-    <div th:each="produkty : ${produktList}">
+<div>
+    <div th:each="produkt : ${produktList}">
         <div class="images-container">
             <div class="image">
-                <img th:src="@{${produkty.urlzdjecia}}" alt="Zdjęcie 1">
+                <img th:src="@{${produkt.urlzdjecia}}" alt="Zdjęcie 1">
                 <div class="image-caption">
                     <a th:text="${produkt.nazwa}"></a><br>
                     <a th:text="${produkt.cena}"></a>

@@ -36,6 +36,6 @@ public class StronaGlownaController {
         List<ProduktDto> produkty = produktService.findProdukyByKategoria_KategoriaId(idKat);
         model.addAttribute("header", "Lista Produktów");
         model.addAttribute("produktList", produkty);
-        return "miniLista"; //trza dorobić mały widok html do wyświetlenia w iframe - taką tabelę małą
+        return "miniwidok"; //trza dorobić mały widok html do wyświetlenia w iframe - taką tabelę małą
     }
 }
