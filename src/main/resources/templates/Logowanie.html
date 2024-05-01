@@ -19,14 +19,21 @@
     </div>
     <div class="registration-form">
         <h2>Logowanie</h2>
-        <form action="#">
-            <input type="text" placeholder="Login">
-            <input type="password" placeholder="Hasło">
+        <form action="#" th:action="@{/logowanie}" th:object="${logowanieForm}" method="post">
+            <input type="text" th:field="*{login}" placeholder="Login">
+            <input type="password" th:field="*{haslo}" placeholder="Hasło">
+            <select th:field="*{rodzajUzytkownika}">
+                <option value="klient">Klient</option>
+                <option value="pracownik">Pracownik</option>
+            </select>
+            <button type="submit">Zaloguj się</button>
         </form>
-        <button type="submit">Zaloguj się</button>
+
+        <div th:if="${errorMessage}" class="error-message">
+            <p th:text="${errorMessage}"></p>
+        </div>
     </div>
 </div>
-
 
 </body>
 </html>

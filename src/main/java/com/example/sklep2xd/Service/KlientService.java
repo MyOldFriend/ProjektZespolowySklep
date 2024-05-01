@@ -13,5 +13,7 @@ public interface KlientService {
     void updateKlient(KlientDto klientDto);
     KlientEntity findKlientByEmail(String email);
     KlientEntity findKlientByLogin(String login);
+
+    boolean zalogujKlienta(String login, String haslo);
 }
 

@@ -7,4 +7,6 @@ import java.util.Optional;
 
 public interface PracownikRep extends JpaRepository<PracownikEntity, Integer> {
     PracownikEntity findByIdPracownika(int id);
+
+    PracownikEntity findByLogin(String login);
 }

@@ -79,7 +79,14 @@ public class KlientServiceimpl implements KlientService {
         return klientRep.findByLogin(login);
     }
 
-
+    @Override
+    public boolean zalogujKlienta(String login, String haslo) {
+        KlientEntity klient = klientRep.findByLogin(login);
+        if (klient != null && klient.getHaslo().equals(haslo)) {
+            return true;
+        }
+        return false;
+    }
 
 
     @Override
