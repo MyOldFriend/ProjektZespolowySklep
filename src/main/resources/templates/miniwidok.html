@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/strona_glowna.css">
+    <link rel="icon" th:href="@{/Grafiki/ff.ico}" type="image/png" size="32">
+    <title></title>
+</head>
+<body>
+<div class="our-products">
+    <div th:each="produkty : ${produktList}">
+        <div class="images-container">
+            <div class="image">
+                <img th:src="@{${produkty.urlzdjecia}}" alt="Zdjęcie 1">
+                <div class="image-caption">
+                    <a th:text="${produkt.nazwa}"></a><br>
+                    <a th:text="${produkt.cena}"></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
