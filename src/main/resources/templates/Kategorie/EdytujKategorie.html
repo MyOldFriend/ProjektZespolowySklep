@@ -1,18 +1,18 @@
-<!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>Edycja Kategorie</title>
-</head>
-<body>
-<h2>Edytuj kategorie</h2>
-<form th:action="@{/Kategorie/edytuj/{idKategorii}(idKategorii=${Kategorie.idKategorii})}" th:object="${kategorie}" method="post">
-    <input type="hidden" th:field="*{idKategorii}">
-    <!--ukryte pole na id adresu-->
-    <label for="nazwaKategorii">Kraj:</label>
-    <input type="text" id="nazwaKategorii" name="nazwaKategorii" th:field="*{nazwaKategorii}"><br>
+<!--<!DOCTYPE html>-->
+<!--<html lang="en" xmlns:th="http://www.thymeleaf.org">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <title>Edycja Kategorie</title>-->
+<!--</head>-->
+<!--<body>-->
+<!--<h2>Edytuj kategorie</h2>-->
+<!--<form th:action="@{/Kategorie/edytuj/{idKategorii}(idKategorii=${Kategorie.idKategorii})}" th:object="${kategorie}" method="post">-->
+<!--    <input type="hidden" th:field="*{idKategorii}">-->
+<!--    &lt;!&ndash;ukryte pole na id adresu&ndash;&gt;-->
+<!--    <label for="nazwaKategorii">Kraj:</label>-->
+<!--    <input type="text" id="nazwaKategorii" name="nazwaKategorii" th:field="*{nazwaKategorii}"><br>-->
 
-    <input type="submit" value="Zapisz zmiany">
-</form>
-</body>
-</html>
+<!--    <input type="submit" value="Zapisz zmiany">-->
+<!--</form>-->
+<!--</body>-->
+<!--</html>-->

@@ -32,7 +32,7 @@ public class LogowanieController {
 
         if (rodzajUzytkownika.equals("klient")) {
             if (klientService.zalogujKlienta(login, haslo)) {
-                return "redirect:/panelKlienta";
+                return "redirect:/home";
             } else {
                 model.addAttribute("errorMessage", "Niepoprawny login lub hasło dla klienta");
                 return "Logowanie";

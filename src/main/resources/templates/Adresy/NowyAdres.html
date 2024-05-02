@@ -1,32 +1,32 @@
-<!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>Formularz Adresu</title>
-</head>
-<body>
-<h2>Dodaj nowy adres</h2>
-<!--Odniesienie do mapowania w kontrolerze które ma zostać wywołane gdy się postuje-->
-<form th:action="@{/Adres/dodajform}" th:object="${adres}" method="post">
-    <label for="kraj">Kraj:</label>
-    <input type="text" id="kraj" name="kraj" th:field="*{kraj}"><br>
+<!--<!DOCTYPE html>-->
+<!--<html lang="en" xmlns:th="http://www.thymeleaf.org">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <title>Formularz Adresu</title>-->
+<!--</head>-->
+<!--<body>-->
+<!--<h2>Dodaj nowy adres</h2>-->
+<!--&lt;!&ndash;Odniesienie do mapowania w kontrolerze które ma zostać wywołane gdy się postuje&ndash;&gt;-->
+<!--<form th:action="@{/Adres/dodajform}" th:object="${adres}" method="post">-->
+<!--    <label for="kraj">Kraj:</label>-->
+<!--    <input type="text" id="kraj" name="kraj" th:field="*{kraj}"><br>-->
 
-    <label for="miejscowosc">Miejscowość:</label>
-    <input type="text" id="miejscowosc" name="miejscowosc" th:field="*{miejscowosc}"><br>
+<!--    <label for="miejscowosc">Miejscowość:</label>-->
+<!--    <input type="text" id="miejscowosc" name="miejscowosc" th:field="*{miejscowosc}"><br>-->
 
-    <label for="kodPocztowy">Kod pocztowy:</label>
-    <input type="text" id="kodPocztowy" name="kodPocztowy" th:field="*{kodPocztowy}"><br>
+<!--    <label for="kodPocztowy">Kod pocztowy:</label>-->
+<!--    <input type="text" id="kodPocztowy" name="kodPocztowy" th:field="*{kodPocztowy}"><br>-->
 
-    <label for="ulica">Ulica:</label>
-    <input type="text" id="ulica" name="ulica" th:field="*{ulica}"><br>
+<!--    <label for="ulica">Ulica:</label>-->
+<!--    <input type="text" id="ulica" name="ulica" th:field="*{ulica}"><br>-->
 
-    <label for="nrDomu">Nr domu:</label>
-    <input type="text" id="nrDomu" name="nrDomu" th:field="*{nrDomu}"><br>
+<!--    <label for="nrDomu">Nr domu:</label>-->
+<!--    <input type="text" id="nrDomu" name="nrDomu" th:field="*{nrDomu}"><br>-->
 
-    <label for="nrMieszkania">Nr mieszkania:</label>
-    <input type="text" id="nrMieszkania" name="nrMieszkania" th:field="*{nrMieszkania}"><br>
+<!--    <label for="nrMieszkania">Nr mieszkania:</label>-->
+<!--    <input type="text" id="nrMieszkania" name="nrMieszkania" th:field="*{nrMieszkania}"><br>-->
 
-    <input type="submit" value="Dodaj adres">
-</form>
-</body>
-</html>
+<!--    <input type="submit" value="Dodaj adres">-->
+<!--</form>-->
+<!--</body>-->
+<!--</html>-->

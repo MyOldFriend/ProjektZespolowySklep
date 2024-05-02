@@ -1,20 +1,20 @@
-<!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>Formularz Adresu</title>
-</head>
-<body>
-<h2>Dodaj nowy adres</h2>
-<!--Odniesienie do mapowania w kontrolerze które ma zostać wywołane gdy się postuje-->
-<form th:action="@{/Kategorie/dodajform}" th:object="${kategoria}" method="post">
-    <label for="idKategorii">id:</label>
-    <input type="text" id="idKategorii" name="Kategoria" th:field="*{idKategorii}"><br>
+<!--<!DOCTYPE html>-->
+<!--<html lang="en" xmlns:th="http://www.thymeleaf.org">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <title>Formularz Adresu</title>-->
+<!--</head>-->
+<!--<body>-->
+<!--<h2>Dodaj nowy adres</h2>-->
+<!--&lt;!&ndash;Odniesienie do mapowania w kontrolerze które ma zostać wywołane gdy się postuje&ndash;&gt;-->
+<!--<form th:action="@{/Kategorie/dodajform}" th:object="${kategoria}" method="post">-->
+<!--    <label for="idKategorii">id:</label>-->
+<!--    <input type="text" id="idKategorii" name="Kategoria" th:field="*{idKategorii}"><br>-->
 
-    <label for="nazwaKategorii">nazwaKategorii:</label>
-    <input type="text" id="nazwaKategorii" name="nazwaKategorii" th:field="*{nazwaKategorii}"><br>
+<!--    <label for="nazwaKategorii">nazwaKategorii:</label>-->
+<!--    <input type="text" id="nazwaKategorii" name="nazwaKategorii" th:field="*{nazwaKategorii}"><br>-->
 
-    <input type="submit" value="Dodaj adres">
-</form>
-</body>
-</html>
+<!--    <input type="submit" value="Dodaj adres">-->
+<!--</form>-->
+<!--</body>-->
+<!--</html>-->
