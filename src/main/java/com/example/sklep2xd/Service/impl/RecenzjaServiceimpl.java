@@ -55,6 +55,7 @@ public class RecenzjaServiceimpl implements RecenzjaService {
         return recenzje.stream().map(this::mapToRecenzjaDto).collect(Collectors.toList());
     }
 
+
     @Override
     public void removeRecenzja(int idR) {
         RecenzjaEntity recenzja = recenzjaRep.findByIdRecenzji(idR);

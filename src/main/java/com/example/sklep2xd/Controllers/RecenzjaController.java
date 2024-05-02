@@ -34,7 +34,8 @@ public class RecenzjaController {
             List<RecenzjaDto> recenzje = recenzjaService.findAllRecenzje();
             model.addAttribute("header", "Lista wszystkich Recenzji");
             model.addAttribute("recenzjaList", recenzje);
-            return "Recenzje";
+//            return "ZarzadzenieRecenzjami";
+            return "ZarzadzanieRecenzjami";
         }
 
         @GetMapping("/dodajform")
@@ -76,9 +77,17 @@ public class RecenzjaController {
             recenzjaService.updateRecenzja(recenzjaDto);
             return "redirect:/Recenzja/lista";
         }
-        @DeleteMapping("/usun/{recenzjaId}")
-        public String deleteRecenzja(@PathVariable("recenzjaId") int recenzjaId) {
-            recenzjaService.removeRecenzja(recenzjaId);
-            return "redirect:/Recenzja/lista";
-        }
+//        @DeleteMapping("/usun/{recenzjaId}")
+//        public String deleteRecenzja(@PathVariable("recenzjaId") int recenzjaId) {
+//            recenzjaService.removeRecenzja(recenzjaId);
+//            return "redirect:/Recenzja/lista";
+//        }
+
+    @DeleteMapping("/usun/{recenzjaId}")
+    @ResponseBody
+    public void deleteRecenzja(@PathVariable("recenzjaId") int recenzjaId) {
+        recenzjaService.removeRecenzja(recenzjaId);
     }
+
+
+}
