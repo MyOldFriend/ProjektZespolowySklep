@@ -81,6 +81,7 @@ public class KlientController {
     public String updateKlient(@PathVariable("klientId") int klientId, @ModelAttribute("klient") KlientDto klientDto) {
         klientDto.setIdKlienta(klientId);
         klientService.updateKlient(klientDto);
+        adresService.updateAdres(new AdresDto());
         return "redirect:/Pracownik/lista";
     }
 }

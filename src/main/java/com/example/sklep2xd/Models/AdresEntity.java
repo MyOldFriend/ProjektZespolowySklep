@@ -16,10 +16,10 @@ public class AdresEntity {
     @Column(name = "id_adresu", nullable = false)
     private int idAdresu;
     @Basic
-    @Column(name = "kraj", nullable = true, length = 100)
+    @Column(name = "kraj", nullable = false, length = 100)
     private String kraj;
     @Basic
-    @Column(name = "miejscowosc", nullable = true, length = 100)
+    @Column(name = "miejscowosc", nullable = false, length = 100)
     private String miejscowosc;
     @Basic
     @Column(name = "kod_pocztowy", nullable = true, length = 6)

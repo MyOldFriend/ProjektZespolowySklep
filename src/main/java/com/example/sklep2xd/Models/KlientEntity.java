@@ -21,10 +21,10 @@ public class KlientEntity {
     @Column(name = "login", nullable = true, length = 30)
     private String login;
     @Basic
-    @Column(name = "email", nullable = true, length = 100)
+    @Column(name = "email", nullable = false, length = 100)
     private String email;
     @Basic
-    @Column(name = "haslo", nullable = true, length = 100)
+    @Column(name = "haslo", nullable = false, length = 100)
     private String haslo;
     @Basic
     @Column(name = "telefon", nullable = true, length = 13)
