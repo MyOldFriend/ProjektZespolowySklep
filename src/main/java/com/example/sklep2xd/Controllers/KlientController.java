@@ -1,7 +1,9 @@
 package com.example.sklep2xd.Controllers;
 
+import com.example.sklep2xd.Dto.AdresDto;
 import com.example.sklep2xd.Dto.KlientDto;
 import com.example.sklep2xd.Models.KlientEntity;
+import com.example.sklep2xd.Service.AdresService;
 import com.example.sklep2xd.Service.KlientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,10 +16,12 @@ import java.util.List;
 @RequestMapping("/klienci")
 public class KlientController {
     private final KlientService klientService;
+    private final AdresService adresService;
 
     @Autowired
-    public KlientController(KlientService klientService) {
+    public KlientController(KlientService klientService, AdresService adresService) {
         this.klientService = klientService;
+        this.adresService = adresService;
     }
 
     @GetMapping("/lista")
@@ -69,13 +73,15 @@ public class KlientController {
     public String editKlientForm(@PathVariable("klientId") int klientId, Model model) {
         KlientDto klient = klientService.findKlientById(klientId);
         model.addAttribute("klient", klient);
-        return "EdytujKlienta";
+//        return "EdytujKlienta";
+        return "TwojeKonto";
     }
 
     @PostMapping("/edytuj/{klientId}")
     public String updateKlient(@PathVariable("klientId") int klientId, @ModelAttribute("klient") KlientDto klientDto) {
         klientDto.setIdKlienta(klientId);
         klientService.updateKlient(klientDto);
-        return "redirect:/Klient/lista";
+        adresService.updateAdres(new AdresDto());
+        return "redirect:/Pracownik/lista";
     }
 }
