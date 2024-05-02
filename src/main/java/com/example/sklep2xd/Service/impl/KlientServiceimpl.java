@@ -91,6 +91,14 @@ public class KlientServiceimpl implements KlientService {
 
     @Override
     public void updateKlient(KlientDto klientDto) {
-
+        KlientEntity klient = klientRep.findByIdKlienta(klientDto.getIdKlienta());
+        if (klient != null) {
+            klient.setImie(klientDto.getImie());
+            klient.setNazwisko(klientDto.getNazwisko());
+            klient.setEmail(klientDto.getEmail());
+            klient.setHaslo(klientDto.getHaslo());
+            klient.setTelefon(klientDto.getTelefon());
+            klient.setAdresByAdresId(klientDto.getAdresId());
+        }
     }
 }

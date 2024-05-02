@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/twoje_konto.css">
+    <link rel="icon" href="/Grafiki/ff.ico" type="image/png" sizes="32">
+    <title>Twoje konto</title>
+</head>
+<body>
+
+<div class="header">
+    <div class="icon-container-left">
+        <img src="/Grafiki/search.png" alt="Ikona lewa" class="icon">
+    </div>
+    <div class="logo-container">
+        <img src="/Grafiki/ff.png" alt="Logo" class="logo">
+    </div>
+    <div class="icon-container-right">
+        <img src="/Grafiki/shopping-bag.png" alt="Ikona prawa" class="icon">
+        <img src="/Grafiki/user.png" alt="Ikona prawa" class="icon">
+    </div>
+</div>
+
+<div class="navbar">
+    <div class="navbar-line"></div>
+    <a href="#">Odnośnik 1</a>
+    <a href="#">Odnośnik 2</a>
+    <a href="#">Odnośnik 3</a>
+    <a href="#">Odnośnik 4</a>
+    <a href="#">Odnośnik 5</a>
+</div>
+
+<p class="account-text">Twoje konto</p>
+
+<div class="container">
+    <form id="account-form" action="#" th:action="@{/klienci/edytuj/{klientId}(klientId=${klient.idKlienta})}" method="post">
+        <div class="column">
+            <input type="text" placeholder="Imię" th:value="${klient.imie}">
+            <input type="text" placeholder="Nazwisko" th:value="${klient.nazwisko}">
+            <input type="email" placeholder="E-mail" th:value="${klient.email}">
+            <input type="password" placeholder="Hasło" th:value="${klient.haslo}">
+            <input type="password" id="change-password" placeholder="Zmień hasło">
+        </div>
+        <div class="column">
+            <input type="text" placeholder="Kraj" th:value="${klient.adresId.kraj}">
+            <input type="text" placeholder="Ulica" th:value="${klient.adresId.ulica}">
+            <div class="row">
+                <input type="text" placeholder="Nr domu" th:value="${klient.adresId.nrDomu}">
+                <input type="text" placeholder="Nr mieszkania" th:value="${klient.adresId.nrMieszkania}">
+            </div>
+            <input type="text" placeholder="Kod pocztowy" th:value="${klient.adresId.kodPocztowy}">
+            <input type="text" placeholder="Miejscowość" th:value="${klient.adresId.miejscowosc}">
+        </div>
+    </form>
+</div>
+
+<div class="buttons">
+    <button id="save-button">Zapisz zmiany</button>
+    <button id="cancel-button">Anuluj</button>
+</div>
+
+<script>
+    document.getElementById("save-button").addEventListener("click", function() {
+        document.getElementById("account-form").submit();
+    });
+
+    document.getElementById("cancel-button").addEventListener("click", function() {
+        window.location.href = "@{/klienci/lista}";
+    });
+
+</script>
+
+<footer>
+    <p>Zawartość tej strony</p>
+    <img src="/Grafiki/ff.png" alt="Logo" class="logo-footer">
+</footer>
+
+<script>
+    window.onload = function() {
+        var footer = document.querySelector("footer");
+        var bodyHeight = document.body.offsetHeight;
+        var windowHeight = window.innerHeight;
+
+        if (bodyHeight < windowHeight) {
+            footer.style.position = "fixed";
+            footer.style.bottom = "0";
+            footer.style.width = "100%";
+        }
+    };
+</script>
+
+</body>
+</html>
