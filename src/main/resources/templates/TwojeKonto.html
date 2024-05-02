@@ -42,7 +42,9 @@
             <input type="email" placeholder="E-mail" name="email" th:value="${klient.email}">
             <input type="password" placeholder="Hasło" name="haslo" th:value="${klient.haslo}">
             <input type="password" id="change-password" placeholder="Zmień hasło">
-        </div>
+            <input type="submit" value="Zapisz zmiany">
+        </div></form>
+        <form th:action="@{/Adresy/edytuj/{adresId}(adresId=${klient.adresId.idAdresu})}" method="post">
         <div class="column">
             <input type="text" placeholder="Kraj" name="kraj" th:value="${klient.adresId.kraj}">
             <input type="text" placeholder="Ulica" name="ulica" th:value="${klient.adresId.ulica}">
@@ -52,6 +54,7 @@
             </div>
             <input type="text" placeholder="Kod pocztowy" name="kodPocztowy" th:value="${klient.adresId.kodPocztowy}">
             <input type="text" placeholder="Miejscowość" name="miejscowosc" th:value="${klient.adresId.miejscowosc}">
+            <input type="submit" value="Zapisz zmiany">
         </div>
     </form>
 </div>
