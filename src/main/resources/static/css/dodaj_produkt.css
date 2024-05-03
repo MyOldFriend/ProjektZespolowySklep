@@ -1,0 +1,236 @@
+/*body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+.naglowek {
+    max-width: 1980px;
+    height: 150px;
+    background-color: #fdf7f0;
+}
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 20px 10px;
+}
+
+.icon-container-left {
+    width: 20vw;
+    padding-left: 1vw;
+}
+
+.logo-container {
+    flex-grow: 1;
+    text-align: center;
+}
+
+.logo {
+    max-width: 162px;
+    max-height: 90px;
+    margin: 0 auto;
+}
+
+.icon-container-right {
+    width: 20vw;
+    padding-right: 1vw;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.icon {
+    width: 30px;
+    height: 30px;
+    margin: 0 10px;
+}*/
+
+.tytul {
+    /*text-align: center;*/
+    /*font-size: 36px;*/
+    /*font-weight: 800;*/
+    /*!*font-family:"Segoe UI", sans-serif;*!*/
+    /*margin-bottom: 45px;*/
+
+    margin: 40px auto 45px;
+    text-align: center;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.oknoproduktu{
+    width: 1300px;
+    height: 500px;
+    display: flex;
+    margin: auto;
+    justify-content: left;
+    background-color: #fdfdfd;
+    border: 1px solid #878686;
+
+}
+
+.dodajzdjecie {
+
+    background-color: #cdcdcd;
+    border: 1px solid #878686;
+    width: 425px;
+    height: 425px;
+    margin: 37px 50px 37px 37px;
+    display: flex;
+
+    justify-content: center;
+
+}
+
+.plus{
+    margin-top: 100px;
+    font-size: 120px;
+    font-weight: 1000;
+}
+
+.daneproduktu{
+    display: flex;
+    justify-content: flex-start;
+    padding-top: 27px;
+}
+
+.produkttekst{
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-direction: column;
+}
+
+.form-group:nth-child(5){
+    padding-top:40px;
+}
+
+.form-control {
+    width: 400px;
+    height: 40px;
+    margin-right: 50px;
+    margin-top: 10px;
+    border-radius: 0;
+    border: 1px solid #878686;
+    background-color: #fbfbfb;
+    text-align: left;
+    font-family:"Segoe UI", sans-serif;
+    font-weight: 625;
+    font-size: 16px;
+    padding-left: 10px;
+}
+
+
+
+.custom-select, .custom-input {
+    width: 400px;
+    height: 40px;
+    margin-right: 50px;
+    margin-top: 10px;
+    border-radius: 0;
+    border: 1px solid #878686;
+    background-color: #fbfbfb;
+    text-align: left;
+    font-family: "Segoe UI", sans-serif;
+    font-weight: 625;
+    font-size: 16px;
+    padding-left: 10px;
+}
+
+.custom-select {
+    width: 415px;
+    /*padding-right: 10px;*/
+}
+
+.tekst{
+    display: flex;
+    padding-top:40px;
+    font-weight: 600;
+    color: #878686;
+}
+
+.rozmiar{
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    text-align: center;
+}
+
+.rozmiar p{
+    border: 1px solid #878686;
+    background-color: #f0f0f0;
+    width:35px;
+    height: 15px;
+    margin-top: 0px;
+    font-size: 12px;
+    margin-right: 10px;
+    text-align: center;
+    padding: 6px 5px 6px 5px;
+    font-family:"Segoe UI", sans-serif;
+    font-weight: 700;
+
+}
+
+.control-label{
+    margin-right: 15px;
+}
+
+.rozmiarrozwijanie{
+    border: 1px solid #878686;
+    background-color: #ec4602;
+    /*width:47px;*/
+    /*height: 27px;*/
+    width: 150px;
+    font-size: 12px;
+    /*margin-right: 10px;*/
+    text-align: center;
+    padding: 10px;
+    font-weight: 600;
+    color: #fff;
+}
+
+.przyciski {
+
+    background-color: white;
+
+    margin: 35px 10px 10px 0px;
+    display: flex;
+    font-size: 18px ;
+    justify-content: left;
+    flex-direction: row;
+    text-align: left;
+
+}
+
+button {
+
+    padding: 10px 15px;
+    text-align: center;
+    background-color: #fbfbfb;
+    border: 3px solid #ea4502;
+    width: 150px;
+    /*height: 20px;*/
+    color: #ea4502;
+    border-radius: 50px;
+    cursor: pointer;
+    margin-right: 30px;
+    font-size: 14px;
+    /*font-family:"Segoe UI", sans-serif;*/
+    font-weight: 600;
+}
+
+button:hover {
+
+    padding: 7px 15px 7px 15px;
+    text-align: center;
+    background-color: #ea4502;
+    border: 3px solid #ea4502;
+    /*height: 20px;*/
+    color: #fbfbfb;
+    border-radius:50px;
+    cursor: pointer;
+    margin-right: 30px;
+    font-size: 14px;
+    /*font-family:"Segoe UI", sans-serif;*/
+    font-weight: 600;
+}

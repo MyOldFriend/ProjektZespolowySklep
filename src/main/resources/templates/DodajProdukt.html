@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/dodaj_produkt.css">
+    <link rel="icon" th:href="@{/Grafiki/ff.ico}" type="image/png" size="32">
+    <title>Dodaj produkt</title>
+</head>
+
+<body>
+
+<div class="header">
+    <div class="icon-container-left">
+        <img src="" th:src="@{/Grafiki/search.png}" alt="Ikona lewa" class="icon">
+    </div>
+    <div class="logo-container">
+        <img src="" th:src="@{/Grafiki/ff.png}" alt="Logo" class="logo">
+    </div>
+    <div class="icon-container-right">
+        <img src="" th:src="@{/Grafiki/shopping-bag.png}" alt="Ikona prawa" class="icon">
+        <img src="" th:src="@{/Grafiki/user.png}" alt="Ikona prawa" class="icon">
+    </div>
+</div>
+
+<div class="tytul">Dodaj produkt</div>
+
+
+<div class="oknoproduktu">
+
+    <div class="dodajzdjecie">
+<!--        <div class="plus">-->
+<!--            <span>&#8330;</span>-->
+<!--        </div>-->
+        <img crossorigin="anonymous" id="previewImage" src="" alt="Podgląd zdjęcia">
+    </div>
+
+    <div class="daneproduktu">
+
+        <form method="post" action="/Produkt/dodaj" th:object="${produkt}">
+
+        <div class="produkttekst">
+
+<!--            <div class="form-group">-->
+<!--&lt;!&ndash;                <label asp-for="#" class="control-label"></label>&ndash;&gt;-->
+<!--                <input asp-for="#" placeholder="Dodaj kategorię" class="form-control" />-->
+<!--                <span asp-validation-for="#" class="text-danger"></span>-->
+<!--            </div>-->
+
+<!--            <div class="form-group">-->
+<!--&lt;!&ndash;                <label asp-for="KategoriaId" class="control-label">Kategoria:</label>&ndash;&gt;-->
+<!--                <select asp-for="KategoriaId" class="form-control">-->
+<!--&lt;!&ndash;                    <option value="">Wybierz kategorię</option>&ndash;&gt;-->
+<!--                    <option th:each="kategoria : ${kategorie}"-->
+<!--                            th:value="${kategoria.idKategorii}"-->
+<!--                            th:text="${kategoria.nazwaKategorii}">-->
+<!--                    </option>-->
+<!--                </select>-->
+<!--                <span asp-validation-for="KategoriaId" class="text-danger"></span>-->
+<!--            </div>-->
+
+
+<!--            <div class="form-group">-->
+<!--&lt;!&ndash;                <label asp-for="#" class="control-label"></label>&ndash;&gt;-->
+<!--                <input asp-for="#" placeholder="Dodaj nazwę" class="form-control" />-->
+<!--                <span asp-validation-for="#" class="text-danger"></span>-->
+<!--            </div>-->
+
+<!--            <div class="form-group">-->
+<!--&lt;!&ndash;                <label asp-for="KategoriaId" class="control-label">Kategoria:</label>&ndash;&gt;-->
+<!--                <select asp-for="KategoriaId" class="form-control custom-select">-->
+<!--                    <option value="">Wybierz kategorię</option>-->
+<!--                    <option th:each="kategoria : ${kategorie}"-->
+<!--                            th:value="${kategoria.idKategorii}"-->
+<!--                            th:text="${kategoria.nazwaKategorii}">-->
+<!--                    </option>-->
+<!--                </select>-->
+<!--                <span asp-validation-for="KategoriaId" class="text-danger"></span>-->
+<!--            </div>-->
+
+            <div class="form-group">
+                <select id="categorySelect" class="form-control custom-select">
+                    <option value="">Wybierz kategorię</option>
+                    <option th:each="kategoria : ${kategorie}"
+                            th:value="${kategoria.idKategorii}"
+                            th:text="${kategoria.nazwaKategorii}">
+                    </option>
+                </select>
+                <span class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+<!--                <label asp-for="#" class="control-label">Nazwa produktu:</label>-->
+                <input asp-for="#" placeholder="Dodaj nazwę" class="form-control custom-input" th:field="*{nazwa}"/>
+                <span asp-validation-for="#" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+<!--                <label asp-for="#" class="control-label"></label>-->
+                <input asp-for="#" placeholder="Dodaj cenę" class="form-control" type="number" th:field="*{cena}"/>
+                <span asp-validation-for="#" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <input asp-for="LinkZdjecia" id="imageUrlInput" placeholder="Dodaj link do zdjęcia" class="form-control" th:field="*{urlzdjecia}"/>
+                <span asp-validation-for="LinkZdjecia" class="text-danger"></span>
+            </div>
+
+
+
+<!--            <p class="tekst">Dodaj rozmiar</p>-->
+<!--            <div class="rozmiar">-->
+<!--                <p >XXS</p>-->
+<!--                <p >XS</p>-->
+<!--                <p >S</p>-->
+<!--                <p >M</p>-->
+<!--                <p >L</p>-->
+<!--                <p >XL</p>-->
+<!--            </div>-->
+
+
+<!--            <div class="rozmiar">-->
+
+<!--                <div class="form-group">-->
+<!--                    <label asp-for="#" class="control-label"></label>-->
+<!--                    <select asp-for="#" class="rozmiarrozwijanie"  asp-items="#">-->
+<!--                        <option value="" >1</option>-->
+<!--                    </select>-->
+<!--                    <span asp-validation-for="#" class="text-danger"></span>-->
+<!--                </div>-->
+
+<!--                <div class="form-group">-->
+<!--                    <label asp-for="#" class="control-label"></label>-->
+<!--                    <select asp-for="#" class="rozmiarrozwijanie"  asp-items="#">-->
+<!--                        <option value="" >1</option>-->
+<!--                    </select>-->
+<!--                    <span asp-validation-for="#" class="text-danger"></span>-->
+<!--                </div>-->
+
+<!--                <div class="form-group">-->
+<!--                    <label asp-for="#" class="control-label"></label>-->
+<!--                    <select asp-for="#" class="rozmiarrozwijanie"  asp-items="#">-->
+<!--                        <option value="" >1</option>-->
+<!--                    </select>-->
+<!--                    <span asp-validation-for="#" class="text-danger"></span>-->
+<!--                </div>-->
+
+<!--                <div class="form-group">-->
+<!--                    <label asp-for="#" class="control-label"></label>-->
+<!--                    <select asp-for="#" class="rozmiarrozwijanie"  asp-items="#">-->
+<!--                        <option value="" >1</option>-->
+<!--                    </select>-->
+<!--                    <span asp-validation-for="#" class="text-danger"></span>-->
+<!--                </div>-->
+
+<!--                <div class="form-group">-->
+<!--                    <label asp-for="#" class="control-label"></label>-->
+<!--                    <select asp-for="#" class="rozmiarrozwijanie"  asp-items="#">-->
+<!--                        <option value="" >1</option>-->
+<!--                    </select>-->
+<!--                    <span asp-validation-for="#" class="text-danger"></span>-->
+<!--                </div>-->
+
+<!--                <div class="form-group">-->
+<!--                    <label asp-for="#" class="control-label"></label>-->
+<!--                    <select asp-for="#" class="rozmiarrozwijanie"  asp-items="#">-->
+<!--                        <option value="" >1</option>-->
+<!--                    </select>-->
+<!--                    <span asp-validation-for="#" class="text-danger"></span>-->
+<!--                </div>-->
+
+<!--            </div>-->
+
+            <div class="form-group">
+                <label asp-for="Rozmiar" class="control-label">Rozmiar:</label>
+                <select asp-for="Rozmiar" class="rozmiarrozwijanie" th:field="*{rozmiar}">
+                    <option value="">Wybierz rozmiar</option>
+                    <option value="XXS">XXS</option>
+                    <option value="XS">XS</option>
+                    <option value="S">S</option>
+                    <option value="M">M</option>
+                    <option value="L">L</option>
+                    <option value="XL">XL</option>
+                </select>
+                <span asp-validation-for="Rozmiar" class="text-danger"></span>
+            </div>
+
+            <div class="przyciski">
+                <button asp-action="Create">Dodaj produkt</button>
+                <button asp-action="Create">Anuluj</button>
+<!--                <a class="button" asp-action="Create">Dodaj produkt</a>-->
+<!--                <a class="button" asp-action="Create">Anuluj</a>-->
+            </div>
+
+
+        </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+<script>
+    var imageUrlInput = document.getElementById('imageUrlInput');
+    var previewImage = document.getElementById('previewImage');
+
+    imageUrlInput.addEventListener('input', function() {
+        previewImage.src = imageUrlInput.value;
+    });
+</script>
+
+</body>
+
+</html>

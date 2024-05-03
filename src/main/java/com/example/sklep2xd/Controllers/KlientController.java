@@ -78,9 +78,12 @@ public class KlientController {
     }
 
     @PostMapping("/edytuj/{klientId}")
-    public String updateKlient(@PathVariable("klientId") int klientId, @ModelAttribute("klient") KlientDto klientDto) {
+    public String updateKlient(@PathVariable("klientId") int klientId, @ModelAttribute("klient") KlientDto klientDto, @ModelAttribute("adres") AdresDto adresDto) {
         klientDto.setIdKlienta(klientId);
         klientService.updateKlient(klientDto);
+        adresService.updateAdres(adresDto); // Przekazujemy istniejące dane adresowe zamiast tworzyć nowy pusty obiekt
+
         return "redirect:/Pracownik/lista";
     }
+
 }

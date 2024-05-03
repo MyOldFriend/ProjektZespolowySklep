@@ -8,7 +8,8 @@ import lombok.*;
 @AllArgsConstructor
 @Builder
 public class KategoriaDto {
-    private int idKategorii;
+    private int idKategorii; // Zmieniono na idKategorii
     private String nazwaKategorii;
+
 
 }

@@ -36,12 +36,19 @@ public class AdresServiceimpl implements AdresService {
         return adresRep.save(adres);
     }
 
-    @Override
     public void updateAdres(AdresDto adresDto) {
-        AdresEntity adres = mapToAdres(adresDto);
+        AdresEntity adres = adresRep.findById(adresDto.getIdAdresu())
+                .orElseThrow(() -> new RuntimeException("Adres not found with id " + adresDto.getIdAdresu()));
+        adres.setKraj(adresDto.getKraj());
+        adres.setMiejscowosc(adresDto.getMiejscowosc());
+        adres.setKodPocztowy(adresDto.getKodPocztowy());
+        adres.setUlica(adresDto.getUlica());
+        adres.setNrDomu(adresDto.getNrDomu());
+        adres.setNrMieszkania(adresDto.getNrMieszkania());
         adresRep.save(adres);
     }
-//metoda edycji wymaga mapowania
+
+    //metoda edycji wymaga mapowania
     private AdresEntity mapToAdres(AdresDto adres) {
         AdresEntity adresDto = AdresEntity.builder()
                 .idAdresu(adres.getIdAdresu())
