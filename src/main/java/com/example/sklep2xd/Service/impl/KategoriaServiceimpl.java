@@ -41,6 +41,12 @@ public class KategoriaServiceimpl implements KategoriaService {
 
     }
 
+    @Override
+    public List<KategoriaDto> findAllKategories(){
+        List<KategoriaEntity> kategorie = kategoriaRep.findAll();
+        return kategorie.stream().map(this::mapToKategoriaDto).collect(Collectors.toList());
+    }
+
     private KategoriaDto mapToKategoriaDto(KategoriaEntity kategoria){
         KategoriaDto kategoriaDto = KategoriaDto.builder()
                 .idKategorii(kategoria.getIdKategorii())

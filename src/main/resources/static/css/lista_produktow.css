@@ -1,0 +1,335 @@
+/*body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+.naglowek {
+    max-width: 1980px;
+    height: 150px;
+    background-color: #fdf7f0;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 20px 10px;
+}
+
+.icon-container-left {
+    width: 20vw;
+    padding-left: 1vw;
+}
+
+.logo-container {
+    flex-grow: 1;
+    text-align: center;
+}
+
+.logo {
+    max-width: 162px;
+    max-height: 90px;
+    margin: 0 auto;
+}
+
+.icon-container-right {
+    width: 20vw;
+    padding-right: 1vw;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.icon {
+    width: 30px;
+    height: 30px;
+    margin: 0 10px;
+}*/
+
+.tytul {
+    /*text-align: center;*/
+    /*font-size: 30px;*/
+    /*font-weight: 800;*/
+    /*font-family:"Segoe UI", sans-serif;*/
+    /*margin-bottom: 45px;*/
+    /*margin-top: -15px;*/
+
+    margin: 40px auto 45px;
+    text-align: center;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.przyciski {
+
+    width: 700px;
+    height: 50px;
+    display: flex;
+    margin: 0 auto;
+    margin-top: -10px;
+    margin-bottom: 35px;
+    justify-content: center;
+    flex-direction: row;
+    text-align: center;
+}
+
+/*.button {*/
+
+/*    !*padding: 13px 10px 13px 10px;*!*/
+/*    padding: 10px;*/
+/*    text-align: center;*/
+/*    background-color: #f76e36;*/
+/*    !*width: 115px;*!*/
+/*    !*height: 25px;*!*/
+/*    color: #000000;*/
+/*    !*font-family:"Segoe UI", sans-serif;*!*/
+/*    !*font-weight: 550;*!*/
+/*    border-radius:50px;*/
+/*    cursor: pointer;*/
+/*    margin-left: 10px;*/
+/*    margin-right: 10px;*/
+/*}*/
+
+.button {
+    margin-right: 10px;
+    padding: 10px 20px;
+    border: none;
+    background-color: #f76e36;
+    color: #fff;
+    cursor: pointer;
+    width: 200px;
+    border-radius: 50px;
+
+}
+
+.button:hover {
+
+    /*padding: 13px 10px 13px 10px;*/
+    /*padding: 10px;*/
+    text-align: center;
+    background-color: #e0541b;
+    /*width: 115px;*/
+    /*height: 25px;*/
+    color: #fdfdfd;
+    /*font-family:"Segoe UI", sans-serif;*/
+    /*font-weight: 550;*/
+    /*border-radius:50px;*/
+    cursor: pointer;
+    /*margin-left: 10px;
+    margin-right: 10px;*/
+}
+
+.produkt{
+    /*background-color: white;*/
+    /*width: 1000px;*/
+    /*height: 140px;*/
+    /*justify-content: center;*/
+    /*margin: auto;*/
+    /*margin-top: 30px;*/
+
+    position: relative; /* Ustawiamy pozycję kontenera na względną */
+    text-align: center;
+    display: flex;
+    /*align-items: center;*/
+    /*justify-content: center;*/
+    flex-direction: column;
+    margin: 15px auto;
+    width: 70%;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #fff;
+    padding: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+
+}
+
+.daneproduktu{
+    display: flex;
+    justify-content: flex-start;
+}
+
+.obrazek{
+    width: 112px;
+    height: 112px;
+    margin: 15px;
+}
+
+.produkttekst{
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-direction: column;
+}
+
+.tytulproduktu{
+    display: flex;
+    margin-top: 15px;
+    font-weight: 600;
+}
+
+.edytuj{
+    color: gray;
+    font-weight: 400;
+    margin-left: 10px;
+}
+
+.cenaproduktu{
+    display: flex;
+    margin-top: -10px;
+    font-size: 18px;
+}
+.dostepnerozmiary{
+    display: flex;
+    margin-top: -10px;
+    font-size: 10px;
+}
+
+.rozmiar{
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    text-align: center;
+}
+.rozmiar p{
+    border: 1px solid #616161;
+    width:35px;
+    height: 15px;
+    /*margin-top: 5px;*/
+    font-size: 12px;
+    margin-right: 10px;
+    text-align: center;
+    /*padding: 4px 5px 6px 5px;*/
+    padding: 5px;
+    font-weight: 600;
+    /*font-family:"Segoe UI", sans-serif;*/
+}
+
+.rozmiarx{
+    margin-top:10px;
+    background-color: #f76e36;
+    color: #fff;
+}
+
+.rozmiarxxs{
+    margin-top:10px;
+    background-color: #FB3939;
+}
+.rozmiarxs{
+    margin-top:10px;
+    background-color: #FFEC3D;
+}
+.rozmiars{
+    margin-top:10px;
+    background-color: #1FEB25;
+}
+.rozmiarm{
+    margin-top:10px;
+    background-color: #FB3939;
+}
+.rozmiarl{
+    margin-top:10px;
+    background-color: #FFEC3D;
+}
+.rozmiarxl{
+    margin-top:10px;
+    background-color: #1FEB25;
+}
+
+
+.usun{
+    /*margin-top: 15px;*/
+    display: flex;
+    /*margin-left: 480px;*/
+    position: relative; /* Ustawiamy pozycję kontenera na względną */
+    justify-content: flex-end;
+
+    /*position: relative; !* Ustawiamy pozycję kontenera na względną *!*/
+    /*text-align: center;*/
+    /*display: flex;*/
+    /*align-items: center;*/
+    /*justify-content: center;*/
+    /*flex-direction: column;*/
+    /*margin: 15px auto;*/
+    /*width: 70%;*/
+    /*border: 1px solid #ccc;*/
+    /*border-radius: 5px;*/
+    /*background-color: #fff;*/
+    /*padding: 20px;*/
+    /*box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);*/
+}
+
+/*.close{*/
+/*    width: 15px;*/
+/*    height: 15px;*/
+/*}*/
+
+.close-button {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background-color: transparent;
+    border: none;
+    font-size: 20px;
+    color: #999;
+    cursor: pointer;
+}
+
+.edit-button {
+    position: absolute;
+    bottom: 15px;
+    right: 15px;
+    background-color: transparent;
+    border: none;
+    font-size: 20px;
+    color: #999;
+    cursor: pointer;
+
+
+    background-image: url("../Grafiki/edit-button.png");
+    background-size: cover;
+    width: 24px;
+    height: 24px;
+}
+
+.close-button:hover {
+    color: #000; /* Zmieniamy kolor ikonki po najechaniu */
+}
+
+.przyciskdodaj{
+    width: 1020px;
+    height: 140px;
+    justify-content: center;
+    margin: auto;
+    margin-top: 40px;
+
+}
+
+.button2 {
+
+    padding: 15px;
+    text-align: center;
+    background-color: #f76e36;
+    width: 115px;
+    height: 25px;
+    color: #000000;
+    font-family:"Segoe UI", sans-serif;
+    font-weight: 550;
+    cursor: pointer;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.button2:hover {
+
+    padding: 15px;
+    text-align: center;
+    background-color: #e0541b;
+    width: 115px;
+    height: 25px;
+    color: #fdfdfd;
+    font-family:"Segoe UI", sans-serif;
+    font-weight: 550;
+    cursor: pointer;
+    margin-left: 10px;
+    margin-right: 10px;
+}

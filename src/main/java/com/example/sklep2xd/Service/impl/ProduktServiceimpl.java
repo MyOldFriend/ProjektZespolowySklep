@@ -3,6 +3,7 @@ package com.example.sklep2xd.Service.impl;
 import com.example.sklep2xd.Dto.ProduktDto;
 import com.example.sklep2xd.Models.PracownikEntity;
 import com.example.sklep2xd.Models.ProduktEntity;
+import com.example.sklep2xd.Models.RecenzjaEntity;
 import com.example.sklep2xd.Repositories.ProduktRep;
 import com.example.sklep2xd.Service.ProduktService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,11 +57,17 @@ public class ProduktServiceimpl implements ProduktService {
 
     @Override
     public ProduktEntity saveProdukt(ProduktEntity produkt) {
-        return null;
+        return produktRep.save(produkt);
     }
 
     @Override
     public void updateProdukt(ProduktDto produktDto) {
 
+    }
+
+    @Override
+    public void removeProduktById(int produktId) {
+        ProduktEntity produkt = produktRep.findByIdProduktu(produktId);
+        produktRep.delete(produkt);
     }
 }

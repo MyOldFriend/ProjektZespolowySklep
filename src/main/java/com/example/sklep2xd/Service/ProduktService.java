@@ -16,4 +16,6 @@ public interface ProduktService {
 
     ProduktEntity saveProdukt(ProduktEntity produkt);
     void updateProdukt(ProduktDto produktDto);
+
+    void removeProduktById(int produktId);
 }
