@@ -82,6 +82,7 @@ public class KlientController {
         klientDto.setIdKlienta(klientId);
         klientService.updateKlient(klientDto);
         adresService.updateAdres(adresDto); // Przekazujemy istniejące dane adresowe zamiast tworzyć nowy pusty obiekt
+
         return "redirect:/Pracownik/lista";
     }
 

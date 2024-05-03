@@ -98,7 +98,8 @@ public class KlientServiceimpl implements KlientService {
             klient.setEmail(klientDto.getEmail());
             klient.setHaslo(klientDto.getHaslo());
             klient.setTelefon(klientDto.getTelefon());
-            klient.setAdresByAdresId(klientDto.getAdresId());
+            klient.setAdresByAdresId(klientDto.getAdresId()); // Przypisanie obiektu adresu
+            klientRep.save(klient);
         }
     }
 }

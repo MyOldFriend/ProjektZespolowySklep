@@ -37,6 +37,7 @@
 <div class="container">
     <form id="account-form" action="#" th:action="@{/klienci/edytuj/{klientId}(klientId=${klient.idKlienta})}" method="post">
         <div class="column">
+
             <input type="text" name="imie" placeholder="Imię" th:value="${klient.imie}">
             <input type="text" name="nazwisko" placeholder="Nazwisko" th:value="${klient.nazwisko}">
             <input type="email" name="email" placeholder="E-mail" th:value="${klient.email}">
@@ -53,6 +54,23 @@
             </div>
             <input type="text" name="adres.kodPocztowy" placeholder="Kod pocztowy" th:value="${klient.adresId.kodPocztowy}">
             <input type="text" name="adres.miejscowosc" placeholder="Miejscowość" th:value="${klient.adresId.miejscowosc}">
+
+            <input type="text" placeholder="Imię" name="imie" th:value="${klient.imie}">
+            <input type="text" placeholder="Nazwisko" name="nazwisko" th:value="${klient.nazwisko}">
+            <input type="email" placeholder="E-mail" name="email" th:value="${klient.email}">
+            <input type="password" placeholder="Hasło" name="haslo" th:value="${klient.haslo}">
+            <input type="password" id="change-password" placeholder="Zmień hasło">
+        </div>
+        <div class="column">
+            <input type="text" placeholder="Kraj" name="kraj" th:value="${klient.adresId.kraj}">
+            <input type="text" placeholder="Ulica" name="ulica" th:value="${klient.adresId.ulica}">
+            <div class="row">
+                <input type="text" placeholder="Nr domu" name="nrDomu" th:value="${klient.adresId.nrDomu}">
+                <input type="text" placeholder="Nr mieszkania" name="nrMieszkania" th:value="${klient.adresId.nrMieszkania}">
+            </div>
+            <input type="text" placeholder="Kod pocztowy" name="kodPocztowy" th:value="${klient.adresId.kodPocztowy}">
+            <input type="text" placeholder="Miejscowość" name="miejscowosc" th:value="${klient.adresId.miejscowosc}">
+
         </div>
     </form>
 </div>
