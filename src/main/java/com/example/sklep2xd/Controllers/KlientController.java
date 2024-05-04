@@ -2,9 +2,13 @@ package com.example.sklep2xd.Controllers;
 
 import com.example.sklep2xd.Dto.AdresDto;
 import com.example.sklep2xd.Dto.KlientDto;
+import com.example.sklep2xd.Models.AdresEntity;
 import com.example.sklep2xd.Models.KlientEntity;
+import com.example.sklep2xd.Repositories.AdresRep;
+import com.example.sklep2xd.Repositories.KlientRep;
 import com.example.sklep2xd.Service.AdresService;
 import com.example.sklep2xd.Service.KlientService;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,6 +21,13 @@ import java.util.List;
 public class KlientController {
     private final KlientService klientService;
     private final AdresService adresService;
+
+    @Autowired
+    private KlientRep klientRepository;
+
+    @Autowired
+    private AdresRep adresRepository;
+
 
     @Autowired
     public KlientController(KlientService klientService, AdresService adresService) {
@@ -77,13 +88,44 @@ public class KlientController {
         return "TwojeKonto";
     }
 
+    // Metoda do obsługi zapisu zmian danych klienta i adresu
     @PostMapping("/edytuj/{klientId}")
-    public String updateKlient(@PathVariable("klientId") int klientId, @ModelAttribute("klient") KlientDto klientDto, @ModelAttribute("adres") AdresDto adresDto) {
-        klientDto.setIdKlienta(klientId);
-        klientService.updateKlient(klientDto);
-        adresService.updateAdres(adresDto); // Przekazujemy istniejące dane adresowe zamiast tworzyć nowy pusty obiekt
+    public String edytujKlienta(@PathVariable("klientId") int klientId,
+                                @RequestParam("imie") String imie,
+                                @RequestParam("nazwisko") String nazwisko,
+                                @RequestParam("email") String email,
+                                @RequestParam("haslo") String haslo,
+                                @RequestParam("ulica") String ulica,
+                                @RequestParam("nrDomu") String nrDomu,
+                                @RequestParam("nrMieszkania") String nrMieszkania,
+                                @RequestParam("kodPocztowy") String kodPocztowy,
+                                @RequestParam("miejscowosc") String miejscowosc) {
+        // Pobierz klienta z bazy danych
+        KlientEntity klient = klientRepository.findById(klientId).orElse(null);
+        if (klient != null) {
+            // Zaktualizuj dane klienta
+            klient.setImie(imie);
+            klient.setNazwisko(nazwisko);
+            klient.setEmail(email);
+            klient.setHaslo(haslo);
+            klientRepository.save(klient);
 
-        return "redirect:/Pracownik/lista";
+            // Pobierz adres klienta z bazy danych
+            AdresEntity adres = klient.getAdresId();
+            if (adres != null) {
+                // Zaktualizuj dane adresowe
+                adres.setUlica(ulica);
+                adres.setNrDomu(nrDomu);
+                adres.setNrMieszkania(nrMieszkania);
+                adres.setKodPocztowy(kodPocztowy);
+                adres.setMiejscowosc(miejscowosc);
+                adresRepository.save(adres);
+            }
+        }
+        // Przekieruj użytkownika na odpowiednią stronę po zapisie zmian
+//        return "redirect:/klienci/" + klientId;
+        return "StronaGlowna";
     }
+
 
 }
