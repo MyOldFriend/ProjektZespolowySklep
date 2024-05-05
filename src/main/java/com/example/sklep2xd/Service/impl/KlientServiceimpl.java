@@ -34,7 +34,7 @@ public class KlientServiceimpl implements KlientService {
                 .telefon(klient.getTelefon())
                 .imie(klient.getImie())
                 .nazwisko(klient.getNazwisko())
-                .adresId(klient.getAdresByAdresId())
+                .adresId(klient.getAdresId())
                 .build();
                 return klientDto;
     }
@@ -98,7 +98,7 @@ public class KlientServiceimpl implements KlientService {
             klient.setEmail(klientDto.getEmail());
             klient.setHaslo(klientDto.getHaslo());
             klient.setTelefon(klientDto.getTelefon());
-            klient.setAdresByAdresId(klientDto.getAdresId()); // Przypisanie obiektu adresu
+            klient.setAdresId(klientDto.getAdresId()); // Przypisanie obiektu adresu
             klientRep.save(klient);
         }
     }

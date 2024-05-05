@@ -106,11 +106,19 @@ public class KlientEntity {
         this.nazwisko = nazwisko;
     }
 
-    public AdresEntity getAdresByAdresId() {
+//    public AdresEntity getAdresByAdresId() {
+//        return adresId;
+//    }
+//
+//    public void setAdresByAdresId(AdresEntity adresByAdresId) {
+//        this.adresId = adresByAdresId;
+//    }
+
+    public AdresEntity getAdresId() {
         return adresId;
     }
 
-    public void setAdresByAdresId(AdresEntity adresByAdresId) {
-        this.adresId = adresByAdresId;
+    public void setAdresId(AdresEntity adresId) {
+        this.adresId = adresId;
     }
 }

@@ -90,16 +90,38 @@ public class ProduktController {
     @GetMapping("/edytuj/{produktId}")
     public String editProduktForm(@PathVariable("produktId") int produktId, Model model) {
         ProduktDto produkt = produktService.findProduktById(produktId);
+        List<KategoriaDto> kategorie = kategoriaService.findAllKategories();
+        model.addAttribute("kategorie", kategorie);
         model.addAttribute("produkt", produkt);
         return "EdytujProdukt";
     }
 
-    @PostMapping("/edytuj/{produktId}")
-    public String updateProdukt(@PathVariable("produktId") int produktId, @ModelAttribute("produkt") ProduktDto produktDto) {
+//    @PostMapping("/edytuj")
+//    public String updateProdukt(@ModelAttribute("produkt") ProduktDto produktDto, @RequestParam("produktId") int produktId) {
+//        produktDto.setIdProduktu(produktId);
+//        produktService.updateProdukt(produktDto);
+//        return "redirect:/Produkt/lista";
+//    }
+
+    @PostMapping("/edytuj")
+    public String updateProdukt(@ModelAttribute("produkt") ProduktDto produktDto, @RequestParam("produktId") int produktId, @RequestParam("kategoriaId") int kategoriaId) {
         produktDto.setIdProduktu(produktId);
-        produktService.updateProdukt(produktDto);
-        return "redirect:/Produkt/lista";
+        KategoriaDto kategoriaDto = kategoriaService.findKategoriaByIdKategori(kategoriaId);
+        if (kategoriaDto != null) {
+            KategoriaEntity kategoriaEntity = kategoriaService.mapToKategoriaEntity(kategoriaDto);
+            produktDto.setKategoria(kategoriaEntity);
+            produktService.updateProdukt(produktDto);
+            return "redirect:/Produkt/lista";
+        } else {
+            return "redirect:/error";
+        }
     }
+
+
+
+
+
+
 
     @DeleteMapping("/usun/{produktId}")
     @ResponseBody

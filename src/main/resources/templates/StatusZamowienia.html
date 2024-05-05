@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/status_zamowienia.css">
+    <link rel="icon" th:href="@{/Grafiki/ff.ico}" type="image/png" size="32">
+    <title>Status zamówienia</title>
+</head>
+<body>
+
+<div class="header">
+    <div class="icon-container-left">
+        <img src="" th:src="@{/Grafiki/search.png}" alt="Ikona lewa" class="icon">
+    </div>
+    <div class="logo-container">
+        <img src="" th:src="@{/Grafiki/ff.png}" alt="Logo" class="logo">
+    </div>
+    <div class="icon-container-right">
+        <img src="" th:src="@{/Grafiki/shopping-bag.png}" alt="Ikona prawa" class="icon">
+        <img src="" th:src="@{/Grafiki/user.png}" alt="Ikona prawa" class="icon">
+    </div>
+</div>
+
+<div class="tytul">Status zamówienia</div>
+
+
+<div class="statuszamowienia">
+    <div class="produkty">
+        <div class="daneproduktu">
+            <img src="img/obrazek.jpg" class="obrazek">
+            <div class="produkttekst">
+                <p class="tytulproduktu">Bluza David Star</p>
+                <p class="cenaproduktu">147,77zł</p>
+                <p class="dostepnerozmiary">Rozmiar: M</p>
+            </div>
+        </div>
+        <div class="daneproduktu">
+            <img src="img/obrazek.jpg" class="obrazek">
+            <div class="produkttekst">
+                <p class="tytulproduktu">Bluza David Star</p>
+                <p class="cenaproduktu">147,77zł</p>
+                <p class="dostepnerozmiary">Rozmiar: M</p>
+            </div>
+        </div>
+
+    </div>
+    <div class="informacje" th:object="${zamowienieDto}">
+        <p>Łączna wartość zamówienia: <span th:text="*{wartoscZamowienia}"></span> PLN</p>
+        <p>Numer faktury: 474747</p>
+
+        <div class="form-group">
+<!--            <label for="status" class="control-label">Status zamówienia</label>-->
+            <select id="status" class="form-control" name="status">
+                <option value="" disabled selected>Kategoria</option>
+                <option value="Zrealizowane" th:selected="${zamowienieDto.status == 'Zrealizowane'}">Zrealizowane</option>
+                <option value="W trakcje realizacji" th:selected="${zamowienieDto.status == 'W trakcje realizacji'}">W trakcie realizacji</option>
+                <option value="Niemożliwe do realizacji" th:selected="${zamowienieDto.status == 'Niemożliwe do realizacji'}">Niemożliwe do realizacji</option>
+                <option value="Niemożliwe do realizacji" th:selected="${zamowienieDto.status == 'Oczekujące'}">Oczekujące</option>
+            </select>
+        </div>
+
+    </div>
+
+</div>
+
+
+</body>
+
+</html>

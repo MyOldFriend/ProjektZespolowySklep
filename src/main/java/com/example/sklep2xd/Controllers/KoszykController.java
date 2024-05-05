@@ -8,9 +8,11 @@ import com.example.sklep2xd.Repositories.KlientRep;
 import com.example.sklep2xd.Repositories.ProduktRep;
 import com.example.sklep2xd.Service.KoszykService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
@@ -59,11 +61,13 @@ public class KoszykController {
         koszykService.saveKoszyk(koszykEntity);
         return "nwm co chyba listę zakupów albo widok koszyka";
     }
-    @DeleteMapping("/{idk}/{idp}")
-    public String usunZKoszyka(@PathVariable("idk") int idKlienta, @PathVariable("idp") int idProduktu){
+    @PostMapping("/usun/{idk}/{idp}")
+    public String usunZKoszyka(@PathVariable("idk") int idKlienta, @PathVariable("idp") int idProduktu, RedirectAttributes redirectAttributes) {
         koszykService.deleteKoszyk(idKlienta, idProduktu);
-        return "Produktylista";
+        redirectAttributes.addFlashAttribute("successMessage", "Produkt został usunięty z koszyka.");
+        return "redirect:/koszyk/" + idKlienta;
     }
+
     @DeleteMapping("/{idKlienta}")
     public String wyczyscKosszykKlienta(@PathVariable("idKlienta") int idKlienta){
         koszykService.deleteKoszykKlienta(idKlienta);

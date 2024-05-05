@@ -6,10 +6,12 @@ import com.example.sklep2xd.Models.KlientEntity;
 import com.example.sklep2xd.Models.ZamowienieEntity;
 import com.example.sklep2xd.Repositories.ZamowienieRep;
 import com.example.sklep2xd.Service.ZamowienieService;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -45,7 +47,14 @@ public class ZamowienieServiceimpl implements ZamowienieService {
 
     @Override
     public ZamowienieDto findZamowienieById(int id) {
-        return null;
+        Optional<ZamowienieEntity> optionalZamowienie = zamowienieRep.findById(id);
+        if (optionalZamowienie.isPresent()) {
+            ZamowienieEntity zamowienie = optionalZamowienie.get();
+            return mapTozamowienieDto(zamowienie);
+        } else {
+            // Obsługa przypadku, gdy nie znaleziono zamówienia
+            throw new EntityNotFoundException("Zamówienie o podanym identyfikatorze nie istnieje: " + id);
+        }
     }
 
     @Override

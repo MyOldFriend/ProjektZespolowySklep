@@ -14,5 +14,7 @@ public interface KategoriaService {
     void updateKategoria(KategoriaDto kategoriaDto);
 
     List<KategoriaDto> findAllKategories();
+
+    KategoriaEntity mapToKategoriaEntity(KategoriaDto kategoriaDto);
 }
 

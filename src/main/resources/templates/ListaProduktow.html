@@ -58,7 +58,9 @@
     </div>
 <!--    <div class="usun">-->
 <!--      <button class="close" th:attr="onclick='deleteProdukt(\'' + ${produkt.idProduktu} + '\')'">&#10006;</button>-->
-    <button class="edit-button"></button>
+    <a class="edit-button" th:href="@{'/Produkt/edytuj/' + ${produkt.idProduktu}}">
+    </a>
+
     <button class="close-button" th:attr="onclick='deleteProdukt(\'' + ${produkt.idProduktu} + '\')'">&#10006;</button>
       <!--      <img src="close.png" class="close">-->
 <!--    </div>-->
