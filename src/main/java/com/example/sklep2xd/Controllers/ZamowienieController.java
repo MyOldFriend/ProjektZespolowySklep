@@ -27,7 +27,8 @@ public class ZamowienieController {
         List<ZamowienieDto> zamowienia = zamowienieService.findAllZamowienia();
         model.addAttribute("header", "Lista wszystkich Zamówień");
         model.addAttribute("zamowienieList", zamowienia);
-        return "Zamowienia";
+//        return "Zamowienia";
+        return "ListaZamowien";
     }
 
     @GetMapping("/dodajform")
@@ -45,10 +46,11 @@ public class ZamowienieController {
 
     @GetMapping("/edytuj/{zamowienieId}")
     public String editZamowienieForm(@PathVariable("zamowienieId") int zamowienieId, Model model) {
-        ZamowienieDto zamowienie = zamowienieService.findZamowienieById(zamowienieId);
-        model.addAttribute("zamowienie", zamowienie);
-        return "EdytujZamowienie";
+        ZamowienieDto zamowienieDto = zamowienieService.findZamowienieById(zamowienieId);
+        model.addAttribute("zamowienieDto", zamowienieDto);
+        return "StatusZamowienia";
     }
+
 
     @PostMapping("/edytuj/{zamowienieId}")
     public String updateZamowienie(@PathVariable("zamowienieId") int zamowienieId, @ModelAttribute("zamowienie") ZamowienieDto zamowienieDto) {

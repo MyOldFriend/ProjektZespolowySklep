@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/dodaj_produkt.css">
+    <link rel="icon" th:href="@{/Grafiki/ff.ico}" type="image/png" size="32">
+    <title>Edytuj produkt</title>
+</head>
+
+<body>
+
+<div class="header">
+    <div class="icon-container-left">
+        <img src="" th:src="@{/Grafiki/search.png}" alt="Ikona lewa" class="icon">
+    </div>
+    <div class="logo-container">
+        <img src="" th:src="@{/Grafiki/ff.png}" alt="Logo" class="logo">
+    </div>
+    <div class="icon-container-right">
+        <img src="" th:src="@{/Grafiki/shopping-bag.png}" alt="Ikona prawa" class="icon">
+        <img src="" th:src="@{/Grafiki/user.png}" alt="Ikona prawa" class="icon">
+    </div>
+</div>
+
+<div class="tytul">Edytuj produkt</div>
+
+
+<div class="oknoproduktu">
+
+    <div class="dodajzdjecie">
+        <img crossorigin="anonymous" id="previewImage" src="" alt="Podgląd zdjęcia">
+    </div>
+
+    <div class="daneproduktu">
+
+        <form method="post" action="/Produkt/edytuj" th:object="${produkt}">
+            <input type="hidden" name="produktId" th:value="${produkt.idProduktu}">
+            <div class="produkttekst">
+
+                <div class="form-group">
+                    <select id="categorySelect" class="form-control custom-select">
+                        <option value="">Wybierz kategorię</option>
+                        <option th:each="kategoria : ${kategorie}"
+                                th:value="${kategoria.idKategorii}"
+                                th:text="${kategoria.nazwaKategorii}">
+                        </option>
+                    </select>
+                    <input type="hidden" name="kategoriaId" id="kategoriaIdInput">
+                    <span class="text-danger"></span>
+                </div>
+
+
+                <div class="form-group">
+                    <input asp-for="#" placeholder="Dodaj nazwę" class="form-control custom-input" th:field="*{nazwa}"/>
+                    <span asp-validation-for="#" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <input asp-for="#" placeholder="Dodaj cenę" class="form-control" type="text" th:field="*{cena}"/>
+                    <span asp-validation-for="#" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <input asp-for="LinkZdjecia" id="imageUrlInput" placeholder="Dodaj link do zdjęcia" class="form-control" th:field="*{urlzdjecia}"/>
+                    <span asp-validation-for="LinkZdjecia" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Rozmiar" class="control-label">Rozmiar:</label>
+                    <select asp-for="Rozmiar" class="rozmiarrozwijanie" th:field="*{rozmiar}">
+                        <option value="">Wybierz rozmiar</option>
+                        <option value="XXS">XXS</option>
+                        <option value="XS">XS</option>
+                        <option value="S">S</option>
+                        <option value="M">M</option>
+                        <option value="L">L</option>
+                        <option value="XL">XL</option>
+                    </select>
+                    <span asp-validation-for="Rozmiar" class="text-danger"></span>
+                </div>
+
+                <div class="przyciski">
+                    <button type="submit" asp-action="Update">Zapisz zmiany</button>
+                    <button asp-action="Cancel">Anuluj</button>
+                </div>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+<script>
+    var imageUrlInput = document.getElementById('imageUrlInput');
+    var previewImage = document.getElementById('previewImage');
+
+    imageUrlInput.addEventListener('input', function() {
+        previewImage.src = imageUrlInput.value;
+    });
+
+    var categorySelect = document.getElementById('categorySelect');
+    var kategoriaIdInput = document.getElementById('kategoriaIdInput');
+
+    categorySelect.addEventListener('change', function() {
+        kategoriaIdInput.value = this.value;
+    });
+
+
+</script>
+
+</body>
+</html>

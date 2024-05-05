@@ -28,7 +28,13 @@ public class KategoriaServiceimpl implements KategoriaService {
 
     @Override
     public KategoriaDto findKategoriaByIdKategori(int id) {
-        return null;
+        KategoriaEntity kategoria = kategoriaRep.findById(id).orElse(null);
+        if (kategoria != null) {
+            return mapToKategoriaDto(kategoria);
+        } else {
+            // Obsługa przypadku, gdy kategoria o danym id nie istnieje
+            return null;
+        }
     }
 
     @Override
@@ -53,5 +59,13 @@ public class KategoriaServiceimpl implements KategoriaService {
                 .nazwaKategorii(kategoria.getNazwaKategorii())
                 .build();
         return kategoriaDto;
+    }
+
+    @Override
+    public KategoriaEntity mapToKategoriaEntity(KategoriaDto kategoriaDto) {
+        KategoriaEntity kategoriaEntity = new KategoriaEntity();
+        kategoriaEntity.setIdKategorii(kategoriaDto.getIdKategorii());
+        kategoriaEntity.setNazwaKategorii(kategoriaDto.getNazwaKategorii());
+        return kategoriaEntity;
     }
 }

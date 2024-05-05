@@ -22,8 +22,8 @@ public class ProduktServiceimpl implements ProduktService {
     }
 
 
-    private ProduktDto mapToProduktDto(ProduktEntity produkt){
-        ProduktDto produktDto = ProduktDto.builder()
+    private ProduktDto mapToProduktDto(ProduktEntity produkt) {
+        return ProduktDto.builder()
                 .idProduktu(produkt.getIdProduktu())
                 .nazwa(produkt.getNazwa())
                 .cena(produkt.getCena())
@@ -31,7 +31,6 @@ public class ProduktServiceimpl implements ProduktService {
                 .urlzdjecia(produkt.getUrlzdjecia())
                 .kategoria(produkt.getKategoriaByKategoriaId())
                 .build();
-        return produktDto;
     }
 
     @Override
@@ -62,12 +61,22 @@ public class ProduktServiceimpl implements ProduktService {
 
     @Override
     public void updateProdukt(ProduktDto produktDto) {
-
+        ProduktEntity existingProdukt = produktRep.findById(produktDto.getIdProduktu()).orElse(null);
+        if (existingProdukt != null) {
+            existingProdukt.setNazwa(produktDto.getNazwa());
+            existingProdukt.setCena(produktDto.getCena());
+            existingProdukt.setRozmiar(produktDto.getRozmiar());
+            existingProdukt.setUrlzdjecia(produktDto.getUrlzdjecia());
+            // Ustawienie kategorii - wymaga implementacji
+            produktRep.save(existingProdukt);
+        }
     }
 
     @Override
     public void removeProduktById(int produktId) {
         ProduktEntity produkt = produktRep.findByIdProduktu(produktId);
-        produktRep.delete(produkt);
+        if (produkt != null) {
+            produktRep.delete(produkt);
+        }
     }
 }
