@@ -77,13 +77,13 @@
 
     <div class="our-products">
         <!-- Iteracja przez listę produktów -->
-        <div th:each="produkty : ${produktList}" class="ocena">
+        <div th:each="produkt : ${produktList}" class="ocena">
             <div class="ocenaproduktu">
-                <img th:src="@{${produkty.urlzdjecia}}" class="obrazek">
+                <img th:src="@{${produkt.urlzdjecia}}" class="obrazek">
                 <div class="produkttekst">
                     <!-- Wyświetlenie nazwy i ceny produktu -->
-                    <p th:text="${produkty.nazwa}" class="tytulproduktu"></p>
-                    <p th:text="${produkty.cena} + 'zł'" class="cenaproduktu"></p>
+                    <p th:text="${produkt.nazwa}" class="tytulproduktu"></p>
+                    <p th:text="${produkt.cena} + 'zł'" class="cenaproduktu"></p>
 
                 </div>
 
@@ -102,7 +102,8 @@
             </div>
             <div class="right-info">
                 <p class="add-button">
-                    <a th:href="@{/DodajDoKoszyka/{produktId}(produktId=${produkty.idProduktu})}" class="add-to-cart-button">Dodaj do koszyka</a>
+                    <a th:href="@{/dodajDoKoszyka/{idKlienta}/{idProduktu}/1(idKlienta=${nwmJakUzyskacIdKlienta}, idProduktu=${produkt.idProduktu})}" class="add-to-cart-button">Dodaj do koszyka</a>
+
                 </p>
         </div>
     </div>
