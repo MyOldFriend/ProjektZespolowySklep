@@ -88,29 +88,7 @@ public class ZamowienieEntity {
         this.status = status;
     }
 
-//    public Integer getAdresId() {
-//        return adresId;
-//    }
-//
-//    public void setAdresId(Integer adresId) {
-//        this.adresId = adresId;
-//    }
-//
-//    public Integer getKlientId() {
-//        return klientId;
-//    }
-//
-//    public void setKlientId(Integer klientId) {
-//        this.klientId = klientId;
-//    }
-//
-//    public Integer getPracownikId() {
-//        return pracownikId;
-//    }
-//
-//    public void setPracownikId(Integer pracownikId) {
-//        this.pracownikId = pracownikId;
-//    }
+
 
     public AdresEntity getAdresByAdresId() {
         return adres;

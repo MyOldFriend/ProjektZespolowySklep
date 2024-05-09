@@ -3,8 +3,9 @@ package com.example.sklep2xd.Controllers;
 import com.example.sklep2xd.Dto.KategoriaDto;
 import com.example.sklep2xd.Dto.ProduktDto;
 import com.example.sklep2xd.Dto.RecenzjaDto;
-import com.example.sklep2xd.Models.KategoriaEntity;
-import com.example.sklep2xd.Models.ProduktEntity;
+import com.example.sklep2xd.Models.*;
+import com.example.sklep2xd.Repositories.KlientRep;
+import com.example.sklep2xd.Repositories.ProduktRep;
 import com.example.sklep2xd.Service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,12 +21,22 @@ public class ProduktController {
     private final RecenzjaService recenzjaService; // Define RecenzjaService
     private final KategoriaService kategoriaService;
 
+    private final KoszykService koszykService;
+    @Autowired
+    private final KlientRep klientRep;
+    @Autowired
+    private final ProduktRep produktRep;
+
+
 
     @Autowired
-    public ProduktController(ProduktService produktService, RecenzjaService recenzjaService, KategoriaService kategoriaService) {
+    public ProduktController(ProduktService produktService, RecenzjaService recenzjaService, KategoriaService kategoriaService, KoszykService koszykService, KlientRep klientRep, ProduktRep produktRep) {
         this.produktService = produktService;
         this.recenzjaService = recenzjaService; // Assign RecenzjaService
         this.kategoriaService = kategoriaService;
+        this.koszykService = koszykService;
+        this.klientRep = klientRep;
+        this.produktRep = produktRep;
     }
 
     @GetMapping("/lista")
@@ -35,6 +46,14 @@ public class ProduktController {
         model.addAttribute("produktList", produkty);
         //return "Produktylista";
         return "ListaProduktow";
+    }
+
+    @GetMapping("/lista")
+    public String listProduktyForKlient(Model model) {
+        List<ProduktDto> produkty = produktService.findAllProdukty();
+        model.addAttribute("header", "Lista wszystkich Produktów");
+        model.addAttribute("produktList", produkty);
+        return "Produktylista";
     }
 
     @GetMapping("/lista/{idKat}")
@@ -116,7 +135,22 @@ public class ProduktController {
             return "redirect:/error";
         }
     }
-
+    @PostMapping("/dodajDoKoszyka/{idKlienta}/{idProduktu}/{ilosc}") //ma być wywoływane na stronach z produktami
+    public String dodajDoKoszyka(@PathVariable("idKlienta") int idKlienta,
+                                 @PathVariable("idProduktu") int idProduktu,
+                                 @PathVariable("ilosc") int ilosc, Model model){
+        KlientEntity klient = klientRep.findByIdKlienta(idKlienta);
+        ProduktEntity produkt = produktRep.findByIdProduktu(idProduktu);
+        model.addAttribute("Koszyk1",produkt);
+        KoszykPK id = new KoszykPK(idKlienta, idProduktu);
+        KoszykEntity koszykEntity = new KoszykEntity();
+        koszykEntity.setKpk(id);
+        koszykEntity.setIlosc(ilosc);
+        koszykEntity.setKlient(klient);
+        koszykEntity.setProdukt(produkt);
+        koszykService.saveKoszyk(koszykEntity);
+        return "Placeholder";
+    }
 
 
 

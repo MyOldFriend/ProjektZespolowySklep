@@ -1,60 +1,35 @@
 package com.example.sklep2xd.Models;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Entity
 @Builder
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "produkt_zamowienie", schema = "public", catalog = "Sklep")
 public class ProduktZamowienieEntity {
-//    @Basic
-//    @Column(name = "zamowienie_id", nullable = true)
-//    private Integer zamowienieId;
-//    @Basic
-//    @Column(name = "produkt_id", nullable = true)
-//    private Integer produktId;
 
-    @Basic
-    @Column(name = "ilosc", nullable = true)
-    private Integer ilosc;
-    @MapsId("idZamowienia")
-    @ManyToOne
-    @JoinColumn(name = "zamowienie_id", referencedColumnName = "id_zamowienia")
-    private ZamowienieEntity zamowienie;
-    @MapsId("idProduktu")
-    @ManyToOne
-    @JoinColumn(name = "produkt_id", referencedColumnName = "id_produktu")
-    private ProduktEntity produkt;
     @EmbeddedId
     private ProduktZamowieniePK idpz;
 
-//    public Integer getZamowienieId() {
-//        return zamowienieId;
-//    }
-//
-//    public void setZamowienieId(Integer zamowienieId) {
-//        this.zamowienieId = zamowienieId;
-//    }
-//
-//    public Integer getProduktId() {
-//        return produktId;
-//    }
-//
-//    public void setProduktId(Integer produktId) {
-//        this.produktId = produktId;
-//    }
+    @ManyToOne
+    @JoinColumn(name = "zamowienie_id", insertable = false, updatable = false)
+    private ZamowienieEntity zamowienie;
 
-    public Integer getIlosc() {
-        return ilosc;
-    }
+    @ManyToOne
+    @JoinColumn(name = "produkt_id", insertable = false, updatable = false)
+    private ProduktEntity produkt;
 
-    public void setIlosc(Integer ilosc) {
-        this.ilosc = ilosc;
-    }
+    @Setter
+    @Getter
+    @Column(name = "ilosc")
+    private Integer ilosc;
+
+    // getters and setters
+
 
     public ZamowienieEntity getZamowienieByZamowienieId() {
         return zamowienie;
@@ -71,6 +46,5 @@ public class ProduktZamowienieEntity {
     public void setProduktByProduktId(ProduktEntity produktByProduktId) {
         this.produkt = produktByProduktId;
     }
-
 
 }
