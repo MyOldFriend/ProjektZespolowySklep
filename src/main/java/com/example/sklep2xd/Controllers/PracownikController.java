@@ -32,6 +32,15 @@ public class PracownikController {
 //        return "Pracownicy";
 //    }
 
+    @GetMapping("dzialzamowien")
+    public String homeEmployePage(){
+        return "DzialZamowien";
+    }
+    @GetMapping("administrator")
+    public String homeAdminPage(){
+        return "StronaAdmin";
+    }
+
     @GetMapping("/lista")
     public String listPracownicy(Model model) {
         List<PracownikDto> pracownicy = pracownikService.findAllPracownicy();

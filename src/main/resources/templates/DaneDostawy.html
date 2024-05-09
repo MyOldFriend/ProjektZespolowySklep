@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/dane_dostawy.css">
+    <link rel="icon" th:href="@{/Grafiki/ff.ico}" type="image/png" size="32">    <title>Dane dostawy</title>
+</head>
+<body>
+
+<div class="header">
+    <div class="icon-container-left">
+        <img src="" th:src="@{/Grafiki/search.png}" alt="Ikona lewa" class="icon">
+    </div>
+    <div class="logo-container">
+        <img src="" th:src="@{/Grafiki/ff.png}" alt="Logo" class="logo">
+    </div>
+    <div class="icon-container-right">
+        <img src="" th:src="@{/Grafiki/shopping-bag.png}" alt="Ikona prawa" class="icon">
+        <img src="" th:src="@{/Grafiki/user.png}" alt="Ikona prawa" class="icon">
+    </div>
+</div>
+
+<div class="navbar">
+    <div class="navbar-line"></div>
+    <a href="#">Odnośnik 1</a>
+    <a href="#">Odnośnik 2</a>
+    <a href="#">Odnośnik 3</a>
+    <a href="#">Odnośnik 4</a>
+    <a href="#">Odnośnik 5</a>
+</div>
+
+<div class="container">
+    <h2>Podaj dane dostawy</h2>
+    <div class="delivery-details">
+        <div class="left-section">
+            <input type="text" placeholder="Imię">
+            <input type="text" placeholder="Nazwisko">
+            <input type="text" placeholder="Adres">
+            <input type="text" placeholder="Miasto">
+            <input type="text" placeholder="Kod pocztowy">
+            <input type="text" placeholder="Telefon">
+            <input type="text" placeholder="E-mail">
+        </div>
+        <div class="right-section">
+            <p>Tekst:</p>
+            <input type="radio" id="option1" name="option" value="option1">
+            <label for="option1">Opcja 1</label><br>
+            <input type="radio" id="option2" name="option" value="option2">
+            <label for="option2">Opcja 2</label><br>
+            <input type="radio" id="option3" name="option" value="option3">
+            <label for="option3">Opcja 3</label><br>
+
+            <p>Kolejne tekst:</p>
+            <div class="option-block">
+                <input type="radio" id="option4" name="option2" value="option4">
+                <label for="option4">Opcja 4</label>
+                <div class="price">14.99 PLN</div>
+            </div>
+            <div class="option-block">
+                <input type="radio" id="option5" name="option2" value="option5">
+                <label for="option5">Opcja 5</label>
+                <div class="price">14.99 PLN</div>
+            </div>
+            <div class="option-block">
+                <input type="radio" id="option6" name="option2" value="option6">
+                <label for="option6">Opcja 6</label>
+                <div class="price">14.99 PLN</div>
+            </div>
+            <hr>
+
+            <div class="option-block">
+                <p>Suma:</p>
+                <div class="price">
+                    <p>14.99 PLN</p>
+                </div>
+            </div>
+            <button type="submit">Zatwierdź</button>
+        </div>
+
+
+    </div>
+
+</div>
+
+<footer>
+    <p>Zawartość tej strony</p>
+    <img src="" th:src="@{/Grafiki/ff.png}" alt="Logo" class="logo-footer">
+</footer>
+
+<script>
+    window.onload = function() {
+        var footer = document.querySelector("footer");
+        var bodyHeight = document.body.offsetHeight;
+        var windowHeight = window.innerHeight;
+
+        if (bodyHeight < windowHeight) {
+            footer.style.position = "fixed";
+            footer.style.bottom = "0";
+            footer.style.width = "100%";
+        }
+    };
+</script>
+
+</body>
+</html>

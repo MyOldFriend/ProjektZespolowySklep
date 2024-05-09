@@ -1,0 +1,72 @@
+.container {
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50vw;
+    flex-direction: column;
+    margin: 20px auto;
+}
+
+.delivery-details {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+}
+
+.left-section {
+    flex: 1;
+    padding-right: 10px;
+    text-align: left;
+}
+
+.right-section {
+    flex: 1;
+    padding-left: 10px;
+    text-align: left;
+}
+
+input[type="text"] {
+    width: calc(100% - 20px);
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+/*
+input[type="radio"] {
+    vertical-align: middle;
+    margin-right: 10px;
+}*/
+
+.right-section input, label {
+    margin-bottom: 20px;
+    margin-right: 10px;
+}
+
+
+button {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: #fff;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+hr {
+    margin: 20px 0;
+}
+
+.option-block {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.option-block .price {
+    margin-left: auto;
+}
