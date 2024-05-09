@@ -9,16 +9,26 @@
     <title></title>
 </head>
 <body>
-<div>
-    <div th:each="produkt : ${produktList}">
-        <div class="images-container">
-            <div class="image">
-                <img th:src="@{${produkt.urlzdjecia}}" alt="Zdjęcie 1">
-                <div class="image-caption">
-                    <a th:text="${produkt.nazwa}"></a><br>
-                    <a th:text="${produkt.cena}"></a>
-                </div>
-            </div>
+<!--<div class="products-container">-->
+<!--    <div class="product" th:each="produkt : ${produktList}">-->
+<!--        <div class="images-container">-->
+<!--            <div class="image">-->
+<!--                <img crossorigin="anonymous" th:src="@{${produkt.urlzdjecia}}" alt="Zdjęcie 1">-->
+<!--                <div class="image-caption">-->
+<!--                    <a th:text="${produkt.nazwa}"></a><br>-->
+<!--                    <a th:text="${produkt.cena}"></a>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
+
+<div class="images-container">
+    <div class="image" th:each="produkt : ${produktList}">
+        <img crossorigin="anonymous" th:src="@{${produkt.urlzdjecia}}" alt="Zdjęcie 1">
+        <div class="image-caption">
+            <a th:text="${produkt.nazwa}"></a><br>
+            <a th:text="${produkt.cena}"></a>
         </div>
     </div>
 </div>

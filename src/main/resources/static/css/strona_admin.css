@@ -1,0 +1,34 @@
+.container {
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50vw;
+    flex-direction: column;
+    margin: 20px auto;
+    flex-grow: 1; /* Rozciąganie kontenera, aby wypełnić dostępną przestrzeń */
+}
+
+.order-section {
+    margin-top: 20px; /* Dodajemy margines na górę */
+}
+
+.order-section p {
+    font-size: 24px; /* Ustawiamy większą czcionkę dla nagłówka działu zamówień */
+    font-weight: 1000; /* Dodajemy pogrubienie dla nagłówka */
+}
+
+.order-section button {
+    margin: 10px; /* Dodajemy odstęp między przyciskami */
+    padding: 10px 20px; /* Zwiększamy odstępy wewnątrz przycisków */
+    border-radius: 50px; /* Zaokrąglamy krawędzie przycisków */
+    border: none;
+    background-color: #ee4702;
+    color: #fff;
+    cursor: pointer;
+}
+
+button a{
+    text-decoration: none;
+    color: #fff;
+}

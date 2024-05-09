@@ -31,11 +31,12 @@ public class StronaGlownaController {
         return "StronaGlowna";
     }
 
-    @GetMapping("/{idKat}") //wywołać na stronie głównej dla kilku kategorii albo w 'mini widoku'
+    @GetMapping("/{idKat}")
     public String podgladKategorii(@PathVariable("idKat")int idKat, Model model){
         List<ProduktDto> produkty = produktService.findProdukyByKategoria_KategoriaId(idKat);
         model.addAttribute("header", "Lista Produktów");
-        model.addAttribute("produktList", produkty);
-        return "miniwidok"; //trza dorobić mały widok html do wyświetlenia w iframe - taką tabelę małą
+        model.addAttribute("produktList", produkty.subList(0, Math.min(produkty.size(), 2))); // Ogranicz do 4 produktów
+        return "miniwidok";
     }
+
 }

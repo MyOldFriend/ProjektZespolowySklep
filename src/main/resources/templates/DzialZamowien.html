@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/dzial_zamowien.css">
+    <link rel="icon" th:href="@{/Grafiki/ff.ico}" type="image/png" size="32">
+    <title>Dział zamówień</title>
+</head>
+<body>
+
+<div class="header">
+    <div class="icon-container-left">
+        <img src="" th:src="@{/Grafiki/search.png}" alt="Ikona lewa" class="icon">
+    </div>
+    <div class="logo-container">
+        <img src="" th:src="@{/Grafiki/ff.png}" alt="Logo" class="logo">
+    </div>
+    <div class="icon-container-right">
+        <img src="" th:src="@{/Grafiki/shopping-bag.png}" alt="Ikona prawa" class="icon">
+        <img src="" th:src="@{/Grafiki/user.png}" alt="Ikona prawa" class="icon">
+    </div>
+</div>
+
+<div class="navbar">
+    <div class="navbar-line"></div>
+    <a href="#">Odnośnik 1</a>
+    <a href="#">Odnośnik 2</a>
+    <a href="#">Odnośnik 3</a>
+    <a href="#">Odnośnik 4</a>
+    <a href="#">Odnośnik 5</a>
+</div>
+
+<div class="container">
+    <div class="order-section">
+        <p>Dział zamówień</p>
+        <button>Zarządzaj zaopatrzeniem</button>
+        <button>Zarządzaj zamówieniami klientów</button>
+        <button>Lista zamówień</button>
+    </div>
+</div>
+
+<footer>
+    <p>Zawartość tej strony</p>
+    <img src="" th:src="@{/Grafiki/ff.png}" alt="Logo" class="logo-footer">
+</footer>
+
+<script>
+    window.onload = function() {
+        var footer = document.querySelector("footer");
+        var bodyHeight = document.body.offsetHeight;
+        var windowHeight = window.innerHeight;
+
+        if (bodyHeight < windowHeight) {
+            footer.style.position = "fixed";
+            footer.style.bottom = "0";
+            footer.style.width = "100%";
+        }
+    };
+</script>
+
+</body>
+</html>
