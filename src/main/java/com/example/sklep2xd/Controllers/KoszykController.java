@@ -66,12 +66,14 @@ public class KoszykController {
         KlientEntity klient = klientRep.findByIdKlienta(idKlienta);
         ProduktEntity produkt = produktRep.findByIdProduktu(idProduktu);
         model.addAttribute("Koszyk1",produkt);
+        KoszykPK id = new KoszykPK(idKlienta, idProduktu);
         KoszykEntity koszykEntity = new KoszykEntity();
+        koszykEntity.setKpk(id);
         koszykEntity.setIlosc(ilosc);
         koszykEntity.setKlient(klient);
         koszykEntity.setProdukt(produkt);
         koszykService.saveKoszyk(koszykEntity);
-        return "nwm co chyba listę zakupów albo widok koszyka";
+        return "Placeholder";
     }
     @PostMapping("/usun/{idk}/{idp}")
     public String usunZKoszyka(@PathVariable("idk") int idKlienta, @PathVariable("idp") int idProduktu, RedirectAttributes redirectAttributes) {
