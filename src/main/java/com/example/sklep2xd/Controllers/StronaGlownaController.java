@@ -35,7 +35,7 @@ public class StronaGlownaController {
     public String podgladKategorii(@PathVariable("idKat")int idKat, Model model){
         List<ProduktDto> produkty = produktService.findProdukyByKategoria_KategoriaId(idKat);
         model.addAttribute("header", "Lista Produktów");
-        model.addAttribute("produktList", produkty.subList(0, Math.min(produkty.size(), 2))); // Ogranicz do 4 produktów
+        model.addAttribute("produktList", produkty.subList(0, Math.min(produkty.size(), 5))); // Ogranicz do 4 produktów
         return "miniwidok";
     }
 

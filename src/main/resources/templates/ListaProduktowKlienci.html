@@ -27,10 +27,10 @@
 
     <div class="navbar">
         <div class="navbar-line"></div>
-        <a href="#">Bluzy</a>
-        <a href="#">Kurtki</a>
-        <a href="#">Koszulki</a>
-        <a href="#">Spodnie</a>
+        <a href="/Produkt/lista2/5">Bluzy</a>
+        <a href="/Produkt/lista2/3">Kurtki</a>
+        <a href="/Produkt/lista2/1">Koszulki</a>
+        <a href="/Produkt/lista2/2">Spodnie</a>
         <a href="/Produkt/lista2">Przeglądaj wszystko</a>
     </div>
 
@@ -81,7 +81,7 @@
         <!-- Iteracja przez listę produktów -->
         <div th:each="produkt : ${produktList}" class="ocena">
             <div class="ocenaproduktu">
-                <img th:src="@{${produkt.urlzdjecia}}" class="obrazek">
+                <img crossorigin="anonymous" th:src="@{${produkt.urlzdjecia}}" alt="Zdjęcie 1">
                 <div class="produkttekst">
                     <!-- Wyświetlenie nazwy i ceny produktu -->
                     <p th:text="${produkt.nazwa}" class="tytulproduktu"></p>
@@ -99,7 +99,9 @@
             </div>
             <div class="right-info">
                 <p class="add-button">
-                    <a th:href="@{/dodajDoKoszyka/{idKlienta}/{idProduktu}/1(idKlienta=${session.userId}, idProduktu=${produkt.idProduktu})}" class="add-to-cart-button">Dodaj do koszyka</a>
+                    <a th:href="@{/koszyk/dodajDoKoszyka/{idKlienta}/{idProduktu}/{ilosc}(idKlienta=${session.userId}, idProduktu=${produkt.idProduktu}, ilosc=1)}" class="add-to-cart-button">Dodaj do koszyka</a>
+
+<!--                    <a th:href="@{/dodajDoKoszyka/{idKlienta}/{idProduktu}/1(idKlienta=${session.userId}, idProduktu=${produkt.idProduktu})}" class="add-to-cart-button">Dodaj do koszyka</a>-->
                 </p>
         </div>
     </div>
