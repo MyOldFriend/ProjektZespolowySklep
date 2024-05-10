@@ -76,7 +76,7 @@
     <form th:action="@{/Recenzja/dodajform}" method="post">
     <div class="rating">
         <input type="hidden" name="idKlienta" value="1"> <!-- Domyślnie ustawiamy ID klienta -->
-        <input type="hidden" name="idProd" value="1"> <!-- Domyślnie ustawiamy ID produktu -->
+        <input type="hidden" name="idProd" th:value="${produkt.idProduktu}" /> <!-- Domyślnie ustawiamy ID produktu -->
         <input type="radio" id="star5" name="rating" value="5">
             <label for="star5"></label>
             <input type="radio" id="star4" name="rating" value="4">

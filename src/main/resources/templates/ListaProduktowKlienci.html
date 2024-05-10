@@ -12,20 +12,15 @@
 
 <div class="header">
     <div class="icon-container-left">
-        <!-- <img src="" th:src="@{/Grafiki/search.png}" alt="Ikona lewa" class="icon"> -->
-        <a href="/klienci/edytuj/1">
-            <img src="" th:src="@{/Grafiki/user.png}" alt="Ikona prawa" class="icon">
-        </a>
+<!--        <img src="" th:src="@{/Grafiki/search.png}" alt="Ikona lewa" class="icon">-->
+        <img src="" th:src="@{/Grafiki/user.png}" alt="Ikona prawa" class="icon">
     </div>
     <div class="logo-container">
-        <a href="/home">
-            <img src="" th:src="@{/Grafiki/ff.png}" alt="Logo" class="logo">
-        </a>
+        <img src="" th:src="@{/Grafiki/ff.png}" alt="Logo" class="logo">
     </div>
     <div class="icon-container-right">
-        <a href="/koszyk/1">
-            <img src="" th:src="@{/Grafiki/shopping-bag.png}" alt="Ikona prawa" class="icon">
-        </a>
+        <img src="" th:src="@{/Grafiki/shopping-bag.png}" alt="Ikona prawa" class="icon">
+<!--        <img src="" th:src="@{/Grafiki/user.png}" alt="Ikona prawa" class="icon">-->
     </div>
 </div>
 
@@ -57,18 +52,16 @@
 
         <div class="klocek2">
             <div class="form-group">
-                <label for="minPrice" class="control-label"></label>
-                <input type="number" id="minPrice" placeholder="Cena min." class="form-control2" onkeyup="filterProducts()">
-                <span class="text-danger"></span>
+                <label asp-for="#" class="control-label"></label>
+                <input asp-for="#" placeholder="Cena min." class="form-control2" />
+                <span asp-validation-for="#" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label for="maxPrice" class="control-label"></label>
-                <input type="number" id="maxPrice" placeholder="Cena max." class="form-control2" onkeyup="filterProducts()">
-                <span class="text-danger"></span>
+                <label asp-for="DataSwiecen" class="control-label"></label>
+                <input asp-for="DataSwiecen" placeholder="Cena max." class="form-control2" />
+                <span asp-validation-for="DataSwiecen" class="text-danger"></span>
             </div>
         </div>
-
-
 
         <div class="klocek2">
             <div class="form-group">
@@ -79,17 +72,16 @@
             </div>
         </div>
 </div>
+
     <div class="our-products">
         <!-- Iteracja przez listę produktów -->
         <div th:each="produkt : ${produktList}" class="ocena">
             <div class="ocenaproduktu">
-                <!-- Otaczanie obrazka linkiem, który prowadzi do strony produktu -->
-                <a th:href="@{/Produkt/{id}(id=${produkt.idProduktu})}">
-                    <img th:src="@{${produkt.urlzdjecia}}" class="obrazek">
-                </a>
+                <img th:src="@{${produkt.urlzdjecia}}" class="obrazek">
                 <div class="produkttekst">
-                    <!-- Link do strony produktu po kliknięciu w nazwę -->
+                    <!-- Zamiana p na a dla nazwy, aby była klikalna -->
                     <a th:href="@{/Produkt/{id}(id=${produkt.idProduktu})}" th:text="${produkt.nazwa}" class="tytulproduktu"></a>
+                    <p></p>
                     <p th:text="${produkt.cena} + ' zł'" class="cenaproduktu"></p>
                     <p th:text="${produkt.rozmiar} " class="rozmiarx"></p>
                 </div>
@@ -131,36 +123,23 @@
             window.location.href = `/Produkt/lista2/${categoryId}`;
         }
     }
+
 </script>
 
 <script>
-    function filterProducts() {
-        var inputName = document.getElementById('searchProduct').value.toLowerCase();
-        var minPrice = parseFloat(document.getElementById('minPrice').value);
-        var maxPrice = parseFloat(document.getElementById('maxPrice').value);
+    function searchProducts() {
+        var input = document.getElementById('searchProduct').value.toLowerCase();
         var productList = document.querySelectorAll('.ocena');
 
         productList.forEach(function(product) {
             var productName = product.querySelector('.tytulproduktu').textContent.toLowerCase();
-            var productPrice = parseFloat(product.querySelector('.cenaproduktu').textContent.replace(' zł', '').trim());
-
-            var isNameMatch = inputName ? productName.includes(inputName) : true;
-            var isPriceMatch = (isNaN(minPrice) || productPrice >= minPrice) && (isNaN(maxPrice) || productPrice <= maxPrice);
-
-            // Sprawdzanie, czy produkt spełnia oba kryteria
-            if (isNameMatch && isPriceMatch) {
+            if (productName.includes(input)) {
                 product.style.display = '';
             } else {
                 product.style.display = 'none';
             }
         });
     }
-
-    // Dodanie listenerów do pól wejściowych
-    document.getElementById('searchProduct').addEventListener('keyup', filterProducts);
-    document.getElementById('minPrice').addEventListener('keyup', filterProducts);
-    document.getElementById('maxPrice').addEventListener('keyup', filterProducts);
 </script>
-
 </body>
 </html>
