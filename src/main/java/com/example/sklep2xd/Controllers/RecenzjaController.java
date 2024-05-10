@@ -45,17 +45,37 @@ public class RecenzjaController {
             return "NowaRecenzja";
         }
 
-        @PostMapping("/dodajform")
-        public String saveRecenzja(@ModelAttribute("recenzja") RecenzjaEntity recenzja, int idKlienta, int idProd) {
-            KlientEntity klient = klientRep.findByIdKlienta(idKlienta);
-            ProduktEntity produkt = produktRep.findByIdProduktu(idProd);
-            recenzja.setKlientByKlientId(klient);
-            recenzja.setProduktByProduktId(produkt);
-            recenzjaService.saveRecenzja(recenzja);
-            return "redirect:/Recenzja/lista";
-        }
+//        @PostMapping("/dodajform")
+//        public String saveRecenzja(@ModelAttribute("recenzja") RecenzjaEntity recenzja, int idKlienta, int idProd) {
+//            KlientEntity klient = klientRep.findByIdKlienta(idKlienta);
+//            ProduktEntity produkt = produktRep.findByIdProduktu(idProd);
+//            recenzja.setKlientByKlientId(klient);
+//            recenzja.setProduktByProduktId(produkt);
+//            recenzjaService.saveRecenzja(recenzja);
+//            return "redirect:/Recenzja/lista";
+//        }
 
-        @GetMapping("/edytuj/{recenzjaId}")
+    @PostMapping("/dodajform")
+    public String saveRecenzja(@ModelAttribute("recenzja") RecenzjaEntity recenzja,
+                               @RequestParam("review") String review,
+                               @RequestParam("rating") int rating,
+                               @RequestParam("idKlienta") int idKlienta,
+                               @RequestParam("idProd") int idProd) {
+        KlientEntity klient = klientRep.findByIdKlienta(idKlienta);
+        ProduktEntity produkt = produktRep.findByIdProduktu(idProd);
+
+        // Ustawienie wartości pola 'tresc' na wartość odczytaną z pola formularza
+        recenzja.setTresc(review);
+        recenzja.setOcena(rating);
+
+        recenzja.setKlientByKlientId(klient);
+        recenzja.setProduktByProduktId(produkt);
+        recenzjaService.saveRecenzja(recenzja);
+        return "redirect:/Recenzja/lista";
+    }
+
+
+    @GetMapping("/edytuj/{recenzjaId}")
         public String editRecenzjaForm(@PathVariable("recenzjaId") int recenzjaId, Model model) {
             RecenzjaDto recenzja = recenzjaService.findRecenzjaById(recenzjaId);
             model.addAttribute("recenzja", recenzja);
