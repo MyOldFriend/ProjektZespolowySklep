@@ -6,14 +6,20 @@ import com.example.sklep2xd.Repositories.AdresRep;
 import com.example.sklep2xd.Repositories.KlientRep;
 import com.example.sklep2xd.Service.KlientService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
-public class KlientServiceimpl implements KlientService {
+public class KlientServiceimpl implements KlientService, UserDetailsService {
 
     private KlientRep klientRep;
     private AdresRep adresRep;
@@ -24,6 +30,8 @@ public class KlientServiceimpl implements KlientService {
         this.klientRep = klientRep;
 
     }
+
+
 
     private KlientDto mapToKlientDto(KlientEntity klient){
         KlientDto klientDto  =KlientDto.builder()
@@ -101,5 +109,13 @@ public class KlientServiceimpl implements KlientService {
             klient.setAdresId(klientDto.getAdresId()); // Przypisanie obiektu adresu
             klientRep.save(klient);
         }
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException {
+        KlientEntity klient = klientRep.findByLogin(login);
+        if(klient==null)
+            throw new UsernameNotFoundException("User not found");
+        return new User(klient.getLogin(), klient.getHaslo(), Collections.singletonList(new SimpleGrantedAuthority("ROLE_KLIENT")));
     }
 }
