@@ -105,7 +105,7 @@ public class ProduktController {
         List<RecenzjaDto> recenzje = recenzjaService.findRecenzjeByProductId(produktId);
         model.addAttribute("produkt", produkt);
         model.addAttribute("recenzjaList", recenzje);
-        return "Produkt";
+        return "Produkt"; // nazwa widoku szczegółów produktu
     }
 
 

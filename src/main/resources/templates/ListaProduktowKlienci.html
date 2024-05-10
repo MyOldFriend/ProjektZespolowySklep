@@ -48,8 +48,8 @@
                             th:selected="${kategoria.idKategorii == param.idKat}"></option>
                 </th:block>
             </select>
-
         </div>
+
         <div class="klocek2">
             <div class="form-group">
                 <label asp-for="#" class="control-label"></label>
@@ -63,35 +63,30 @@
             </div>
         </div>
 
-
         <div class="klocek2">
             <div class="form-group">
                 <label for="searchProduct" class="control-label"></label>
-                <img src="" th:src="@{/Grafiki/search.png}" class="obrazgwiazdka">
+<!--                <img src="" th:src="@{/Grafiki/search.png}" class="obrazgwiazdka">-->
                 <input type="text" id="searchProduct" class="form-control3" placeholder="Wpisz nazwę produktu" onkeyup="searchProducts()">
                 <span id="searchError" class="text-danger"></span>
             </div>
         </div>
-
-
-
 </div>
-
     <div class="our-products">
         <!-- Iteracja przez listę produktów -->
         <div th:each="produkt : ${produktList}" class="ocena">
             <div class="ocenaproduktu">
-                <img crossorigin="anonymous" th:src="@{${produkt.urlzdjecia}}" alt="Zdjęcie 1">
+                <!-- Otaczanie obrazka linkiem, który prowadzi do strony produktu -->
+                <a th:href="@{/Produkt/{id}(id=${produkt.idProduktu})}">
+                    <img th:src="@{${produkt.urlzdjecia}}" class="obrazek">
+                </a>
                 <div class="produkttekst">
-                    <!-- Wyświetlenie nazwy i ceny produktu -->
-                    <p th:text="${produkt.nazwa}" class="tytulproduktu"></p>
+                    <!-- Link do strony produktu po kliknięciu w nazwę -->
+                    <a th:href="@{/Produkt/{id}(id=${produkt.idProduktu})}" th:text="${produkt.nazwa}" class="tytulproduktu"></a>
                     <p th:text="${produkt.cena} + ' zł'" class="cenaproduktu"></p>
                     <p th:text="${produkt.rozmiar} " class="rozmiarx"></p>
-
                 </div>
-
-
-                </div>
+            </div>
 
             <div class="gwiazdki">
                 <div class="stars-container">
@@ -99,13 +94,10 @@
             </div>
             <div class="right-info">
                 <p class="add-button">
-                    <a th:href="@{/koszyk/dodajDoKoszyka/{idKlienta}/{idProduktu}/{ilosc}(idKlienta=${session.userId}, idProduktu=${produkt.idProduktu}, ilosc=1)}" class="add-to-cart-button">Dodaj do koszyka</a>
-
-<!--                    <a th:href="@{/dodajDoKoszyka/{idKlienta}/{idProduktu}/1(idKlienta=${session.userId}, idProduktu=${produkt.idProduktu})}" class="add-to-cart-button">Dodaj do koszyka</a>-->
+                    <a th:href="@{/dodajDoKoszyka/{idKlienta}/{idProduktu}/1(idKlienta=${session.userId}, idProduktu=${produkt.idProduktu})}" class="add-to-cart-button">Dodaj do koszyka</a>
                 </p>
+            </div>
         </div>
-    </div>
-</div>
     </div>
 </div>
 <footer>
