@@ -4,6 +4,8 @@ import com.example.sklep2xd.Dto.KategoriaDto;
 import com.example.sklep2xd.Models.KategoriaEntity;
 import com.example.sklep2xd.Repositories.KategoriaRep;
 import com.example.sklep2xd.Service.KategoriaService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,7 +14,7 @@ import java.util.stream.Collectors;
 
 @Service
 public class KategoriaServiceimpl implements KategoriaService {
-
+    private static final Logger logger = LoggerFactory.getLogger(KategoriaServiceimpl.class);
     private KategoriaRep kategoriaRep;
 
     @Autowired
@@ -47,8 +49,14 @@ public class KategoriaServiceimpl implements KategoriaService {
 
     }
 
+//    @Override
+//    public List<KategoriaDto> findAllKategories(){
+//        List<KategoriaEntity> kategorie = kategoriaRep.findAll();
+//        return kategorie.stream().map(this::mapToKategoriaDto).collect(Collectors.toList());
+//    }
+
     @Override
-    public List<KategoriaDto> findAllKategories(){
+    public List<KategoriaDto> findAllKategories() {
         List<KategoriaEntity> kategorie = kategoriaRep.findAll();
         return kategorie.stream().map(this::mapToKategoriaDto).collect(Collectors.toList());
     }

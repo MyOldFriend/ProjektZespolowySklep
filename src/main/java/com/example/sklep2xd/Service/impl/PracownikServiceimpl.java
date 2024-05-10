@@ -60,6 +60,8 @@ public class PracownikServiceimpl implements PracownikService {
         return pracownikRep.save(pracownik);
     }
 
+
+
     @Override
     public void updatePracownik(PracownikDto pracownikDto) {
         PracownikEntity pracownik = pracownikRep.findById(pracownikDto.getIdPracownika()).orElse(null);
