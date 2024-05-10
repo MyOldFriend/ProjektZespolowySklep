@@ -12,14 +12,15 @@
 
 <div class="header">
     <div class="icon-container-left">
-        <img src="" th:src="@{/Grafiki/search.png}" alt="Ikona lewa" class="icon">
+        <!--        <img src="" th:src="@{/Grafiki/search.png}" alt="Ikona lewa" class="icon">-->
+        <img src="" th:src="@{/Grafiki/user.png}" alt="Ikona prawa" class="icon">
     </div>
     <div class="logo-container">
         <img src="" th:src="@{/Grafiki/ff.png}" alt="Logo" class="logo">
     </div>
     <div class="icon-container-right">
         <img src="" th:src="@{/Grafiki/shopping-bag.png}" alt="Ikona prawa" class="icon">
-        <img src="" th:src="@{/Grafiki/user.png}" alt="Ikona prawa" class="icon">
+        <!--        <img src="" th:src="@{/Grafiki/user.png}" alt="Ikona prawa" class="icon">-->
     </div>
 </div>
 
@@ -35,14 +36,14 @@
 <div th:object="${produkt}" class="product">
     <div class="product-details">
         <!--<img src="model-girl2.png" alt="Produkt" class="product-image">-->
-<!--        <iframe src="https://drive.google.com/file/d/138AhcA2w7-mBhMp0Rdsqp0XtdX-5X19d/preview" alt="Produkt" class="product-image"></iframe>-->
+        <!--        <iframe src="https://drive.google.com/file/d/138AhcA2w7-mBhMp0Rdsqp0XtdX-5X19d/preview" alt="Produkt" class="product-image"></iframe>-->
         <img  crossorigin="anonymous"src="https://drive.lienuc.com/uc?id=13L8s3HfqP2x06cmDJGM6QCD2jR9WvkXO" alt="">
         <!--<img src="pobierz (1).jpg" alt="Produkt" class="product-image">-->
 
     </div>
     <div class="product-details">
         <div class="product-description">
-            <p th:text="'Nazwa: ' + ${produkt.nazwa}"></p>
+<!--            <p th:text="'Nazwa: ' + ${produkt.nazwa}"></p>-->
             <p th:text="'Cena: ' + ${#numbers.formatDecimal(produkt.cena, 2, 'COMMA', 2, 'POINT')} + ' PLN'"></p>
         </div>
         <p>Wybierz rozmiar:</p>
@@ -59,54 +60,27 @@
             <img src="" th:src="@{/Grafiki/shopping-bag.png}" alt="">
             <p>Dodaj do koszyka</p>
         </button>
-<!--        <a href=""><div class="product-info">-->
-<!--            <img src="" th:src="@{/Grafiki/location.png}" alt="Ikonka" class="info-icon">-->
-<!--            <p>Sprawdź dostępność</p>-->
-<!--            <img src="" th:src="@{/Grafiki/arrow-right.png}" alt="Ikonka" class="info-icon">-->
-<!--        </div></a>-->
+        <!--        <a href=""><div class="product-info">-->
+        <!--            <img src="" th:src="@{/Grafiki/location.png}" alt="Ikonka" class="info-icon">-->
+        <!--            <p>Sprawdź dostępność</p>-->
+        <!--            <img src="" th:src="@{/Grafiki/arrow-right.png}" alt="Ikonka" class="info-icon">-->
+        <!--        </div></a>-->
     </div>
+    <!-- Button added here -->
 
 </div>
 
-
 <div th:each="recenzja : ${recenzjaList}" class="reviews">
+
     <h2>Recenzje</h2>
     <div class="rating">
         <img th:each="star : ${#numbers.sequence(1, recenzja.ocena)}" src="" th:src="@{/Grafiki/star.png}" alt="Gwiazdka" class="star">
     </div>
     <p th:text="${recenzja.tresc}"></p>
+    <button id="scrollToReviews" class="orange-button">
+        <p>Przejdź do recenzji</p>
+    </button>
 </div>
-
-
-<!--<div th:each="recenzja : ${recenzjaList}" class="reviews">-->
-<!--    <h2>Recenzje</h2>-->
-<!--    <div class="rating">-->
-<!--        <img src="star.png" alt="Gwiazdka" class="star">-->
-<!--        <img src="star.png" alt="Gwiazdka" class="star">-->
-<!--        <img src="star.png" alt="Gwiazdka" class="star">-->
-<!--        <img src="star.png" alt="Gwiazdka" class="star">-->
-<!--        <img src="star.png" alt="Gwiazdka" class="star">-->
-<!--    </div>-->
-<!--    <p>Opis oceny</p>-->
-
-<!--    <div class="rating">-->
-<!--        <img src="star.png" alt="Gwiazdka" class="star">-->
-<!--        <img src="star.png" alt="Gwiazdka" class="star">-->
-<!--        <img src="star.png" alt="Gwiazdka" class="star">-->
-<!--        <img src="star.png" alt="Gwiazdka" class="star">-->
-<!--        <img src="star.png" alt="Gwiazdka" class="star">-->
-<!--    </div>-->
-<!--    <p>Opis oceny</p>-->
-
-<!--    <div class="rating">-->
-<!--        <img src="star.png" alt="Gwiazdka" class="star">-->
-<!--        <img src="star.png" alt="Gwiazdka" class="star">-->
-<!--        <img src="star.png" alt="Gwiazdka" class="star">-->
-<!--        <img src="star.png" alt="Gwiazdka" class="star">-->
-<!--        <img src="star.png" alt="Gwiazdka" class="star">-->
-<!--    </div>-->
-<!--    <p>Opis oceny</p>-->
-<!--</div>-->
 
 <footer>
     <p>Zawartość tej strony</p>
@@ -124,6 +98,13 @@
             footer.style.bottom = "0";
             footer.style.width = "100%";
         }
+
+        // Smooth scrolling to reviews section
+        document.getElementById('scrollToReviews').addEventListener('click', function() {
+            document.querySelector('.reviews').scrollIntoView({
+                behavior: 'smooth'
+            });
+        });
     };
 </script>
 

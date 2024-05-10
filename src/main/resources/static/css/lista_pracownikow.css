@@ -137,6 +137,39 @@
     cursor: pointer;
 }
 
+.add-employee-container {
+    text-align: center;
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.add-employee-button {
+    padding: 7px 15px;
+    text-align: center;
+    background-color: #ea4502;
+    border: 3px solid #ea4502;
+    /*height: 20px;*/
+    color: #fbfbfb;
+    border-radius:50px;
+    cursor: pointer;
+    margin-right: 30px;
+    font-size: 14px;
+    /*font-family:"Segoe UI", sans-serif;*/
+    font-weight: 600;
+    transition: background-color 0.3s;
+}
+
+.add-employee-button:hover {
+
+    background-color: #fbfbfb;
+    border: 3px solid #ea4502;
+
+    color: #ea4502;
+
+}
+
+
 
 
 

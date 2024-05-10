@@ -1,6 +1,7 @@
 package com.example.sklep2xd.Service.impl;
 
 import com.example.sklep2xd.Dto.PracownikDto;
+import com.example.sklep2xd.Models.KlientEntity;
 import com.example.sklep2xd.Models.PracownikEntity;
 import com.example.sklep2xd.Repositories.PracownikRep;
 import com.example.sklep2xd.Service.PracownikService;
@@ -49,7 +50,14 @@ public class PracownikServiceimpl implements PracownikService {
 
     @Override
     public PracownikEntity savePracownik(PracownikEntity pracownik) {
-        return null;
+        // Sprawdzenie czy użytkownik o podanym loginie już istnieje
+        PracownikEntity existingLoginUser = pracownikRep.findByLogin(pracownik.getLogin());
+        if (existingLoginUser != null) {
+            throw new RuntimeException("Użytkownik o podanym loginie już istnieje");
+        }
+
+        // Zapis nowego użytkownika do bazy danych
+        return pracownikRep.save(pracownik);
     }
 
     @Override
