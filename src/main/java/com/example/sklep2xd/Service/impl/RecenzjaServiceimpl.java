@@ -40,13 +40,17 @@ public class RecenzjaServiceimpl implements RecenzjaService {
 
     @Override
     public RecenzjaDto findRecenzjaById(int id) {
-
+        RecenzjaEntity recenzja = recenzjaRep.findByIdRecenzji(id);
+        if (recenzja != null) {
+            return mapToRecenzjaDto(recenzja);
+        }
         return null;
     }
 
+
     @Override
     public RecenzjaEntity saveRecenzja(RecenzjaEntity recenzja) {
-        return null;
+        return recenzjaRep.save(recenzja);
     }
 
     @Override
@@ -64,6 +68,13 @@ public class RecenzjaServiceimpl implements RecenzjaService {
 
     @Override
     public void updateRecenzja(RecenzjaDto recenzjaDto) {
-
+        RecenzjaEntity recenzja = recenzjaRep.findByIdRecenzji(recenzjaDto.getIdRecenzji());
+        if (recenzja != null) {
+            recenzja.setOcena(recenzjaDto.getOcena());
+            recenzja.setTresc(recenzjaDto.getTresc());
+            // Możesz również zaktualizować inne pola recenzji
+            recenzjaRep.save(recenzja);
+        }
     }
+
 }

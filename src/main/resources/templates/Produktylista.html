@@ -85,7 +85,8 @@
                 <div class="produkttekst">
                     <!-- Wyświetlenie nazwy i ceny produktu -->
                     <p th:text="${produkt.nazwa}" class="tytulproduktu"></p>
-                    <p th:text="${produkt.cena} + 'zł'" class="cenaproduktu"></p>
+                    <p th:text="${produkt.cena} + ' zł'" class="cenaproduktu"></p>
+                    <p th:text="${produkt.rozmiar} " class="rozmiarx"></p>
 
                 </div>
 
@@ -93,25 +94,21 @@
                 </div>
 
             <div class="gwiazdki">
-                <p>Ocena kupujących<br></p>
                 <div class="stars-container">
-                    <img src="" th:src="@{/Grafiki/star.png}" class="obrazgwiazdka">
-                    <img src="" th:src="@{/Grafiki/star.png}" class="obrazgwiazdka">
-                    <img src="" th:src="@{/Grafiki/star.png}" class="obrazgwiazdka">
-                    <img src="" th:src="@{/Grafiki/star.png}" class="obrazgwiazdka">
-                    <img src="" th:src="@{/Grafiki/star.png}" class="obrazgwiazdka">
                 </div>
             </div>
             <div class="right-info">
                 <p class="add-button">
-                    <a th:href="@{/dodajDoKoszyka/{idKlienta}/{idProduktu}/1(idKlienta=${nwmJakUzyskacIdKlienta}, idProduktu=${produkt.idProduktu})}" class="add-to-cart-button">Dodaj do koszyka</a>
-
+                    <a th:href="@{/dodajDoKoszyka/{idKlienta}/{idProduktu}/1(idKlienta=${session.userId}, idProduktu=${produkt.idProduktu})}" class="add-to-cart-button">Dodaj do koszyka</a>
                 </p>
         </div>
     </div>
 
 
+
 </div>
+
+    </div>
 </div>
 <footer>
     <p>Zawartość tej strony</p>
@@ -131,5 +128,8 @@
         }
     };
 </script>
+
+
+
 </body>
 </html>

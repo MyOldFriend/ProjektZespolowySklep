@@ -178,6 +178,62 @@
 }
 
 
+.add-review-form {
+    margin: 20px;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    background-color: #f9f9f9;
+}
+
+.add-review-form h2 {
+    margin-bottom: 10px;
+}
+
+.add-review-form form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.add-review-form label {
+    margin-top: 10px;
+}
+
+.add-review-form textarea {
+    width: 80%;
+    margin-top: 10px;
+    resize: vertical;
+}
+
+.add-review-form .rating {
+    display: flex;
+    justify-content: center;
+    flex-direction: row-reverse; /* Zmiana kierunku układu gwiazdek */
+}
+
+.add-review-form .rating input[type="radio"] {
+    display: none;
+}
+
+.add-review-form .rating label {
+    font-size: 30px;
+    color: #ccc;
+    cursor: pointer;
+    margin: 0 5px;
+}
+
+.add-review-form .rating label:before {
+    content: '\2605'; /* Unicode dla gwiazdki */
+}
+
+.add-review-form .rating input[type="radio"]:checked ~ label,
+.add-review-form .rating input[type="radio"]:checked ~ label ~ label,
+.add-review-form .rating input[type="radio"]:hover ~ label {
+    color: #ffc107; /* Kolor gwiazdek, które zostały zaznaczone lub najechane */
+}
+
+
 
 /*
 footer {

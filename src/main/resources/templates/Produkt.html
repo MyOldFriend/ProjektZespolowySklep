@@ -70,6 +70,36 @@
 
 </div>
 
+<!-- Formularz dodawania recenzji -->
+<div class="add-review-form">
+    <h2>Dodaj recenzję</h2>
+    <form th:action="@{/Recenzja/dodajform}" method="post">
+    <div class="rating">
+        <input type="hidden" name="idKlienta" value="1"> <!-- Domyślnie ustawiamy ID klienta -->
+        <input type="hidden" name="idProd" value="1"> <!-- Domyślnie ustawiamy ID produktu -->
+        <input type="radio" id="star5" name="rating" value="5">
+            <label for="star5"></label>
+            <input type="radio" id="star4" name="rating" value="4">
+            <label for="star4"></label>
+            <input type="radio" id="star3" name="rating" value="3">
+            <label for="star3"></label>
+            <input type="radio" id="star2" name="rating" value="2">
+            <label for="star2"></label>
+            <input type="radio" id="star1" name="rating" value="1">
+            <label for="star1"></label>
+
+        </div>
+        <label for="review">Opis recenzji:</label>
+        <textarea id="review" name="review" rows="4"></textarea>
+        <button type="submit" class="orange-button">
+            <p>Dodaj recenzję</p>
+        </button>
+    </form>
+</div>
+
+
+
+
 <div th:each="recenzja : ${recenzjaList}" class="reviews">
 
     <h2>Recenzje</h2>
@@ -77,10 +107,18 @@
         <img th:each="star : ${#numbers.sequence(1, recenzja.ocena)}" src="" th:src="@{/Grafiki/star.png}" alt="Gwiazdka" class="star">
     </div>
     <p th:text="${recenzja.tresc}"></p>
-    <button id="scrollToReviews" class="orange-button">
-        <p>Przejdź do recenzji</p>
-    </button>
 </div>
+
+<!--<div th:each="recenzja : ${recenzjaList}" class="reviews">-->
+<!--    <h2>Recenzje</h2>-->
+<!--    <div class="rating">-->
+<!--        <img th:each="star : ${#numbers.sequence(1, recenzja.ocena)}" src="" th:src="@{/Grafiki/star.png}" alt="Gwiazdka" class="star">-->
+<!--    </div>-->
+<!--    <p th:text="${recenzja.tresc}"></p>-->
+<!--</div>-->
+
+
+
 
 <footer>
     <p>Zawartość tej strony</p>
