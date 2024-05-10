@@ -1,10 +1,8 @@
-
-
 .advert-section {
-    background-image: url('aaaa.png');
+    /*background-image: url('aaaa.png');*/
     background-size: cover;
     background-position: center;
-    background-color: antiquewhite;
+    /*background-color: antiquewhite;*/
     height: 45vh;
     color: white;
     padding: 50px 20px;
@@ -326,7 +324,6 @@
     text-align: center;
     margin-top: 10px;
 }
-
 
 .logo-footer {
     max-width: 200px;
