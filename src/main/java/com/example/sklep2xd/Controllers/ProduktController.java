@@ -149,7 +149,7 @@ public class ProduktController {
         koszykEntity.setKlient(klient);
         koszykEntity.setProdukt(produkt);
         koszykService.saveKoszyk(koszykEntity);
-        return "Placeholder";
+        return "Koszyk";
     }
 
 

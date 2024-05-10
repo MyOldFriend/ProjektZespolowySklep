@@ -72,7 +72,7 @@ public class KoszykController {
         koszykEntity.setKlient(klient);
         koszykEntity.setProdukt(produkt);
         koszykService.saveKoszyk(koszykEntity);
-        return "Placeholder";
+        return "Koszyk";
     }
     @PostMapping("/usun/{idk}/{idp}")
     public String usunZKoszyka(@PathVariable("idk") int idKlienta, @PathVariable("idp") int idProduktu, RedirectAttributes redirectAttributes) {
