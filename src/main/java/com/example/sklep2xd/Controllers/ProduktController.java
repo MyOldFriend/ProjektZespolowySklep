@@ -153,14 +153,17 @@ public class ProduktController {
     }
 
 
-
-
-
-
     @DeleteMapping("/usun/{produktId}")
     @ResponseBody
     public void deleteProdukt(@PathVariable("produktId") int produktId) {
         produktService.removeProduktById(produktId);
     }
 
+    @GetMapping("/{idKat}")
+    public String podgladKategorii(@PathVariable("idKat")int idKat, Model model){
+        List<ProduktDto> produkty = produktService.findProdukyByKategoria_KategoriaId(idKat);
+        model.addAttribute("header", "Lista Produktów");
+        model.addAttribute("produktList", produkty.subList(0, Math.min(produkty.size(), 2))); // Ogranicz do 4 produktów
+        return "Produktylista";
+    }
 }

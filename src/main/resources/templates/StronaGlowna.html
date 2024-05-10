@@ -12,15 +12,20 @@
 
 <div class="header">
     <div class="icon-container-left">
-<!--        <img src="" th:src="@{/Grafiki/search.png}" alt="Ikona lewa" class="icon">-->
-        <img src="" th:src="@{/Grafiki/user.png}" alt="Ikona prawa" class="icon">
+            <!-- <img src="" th:src="@{/Grafiki/search.png}" alt="Ikona lewa" class="icon"> -->
+        <a href="/klienci/edytuj/1">
+            <img src="" th:src="@{/Grafiki/user.png}" alt="Ikona prawa" class="icon">
+        </a>
     </div>
     <div class="logo-container">
+        <a href="/home">
         <img src="" th:src="@{/Grafiki/ff.png}" alt="Logo" class="logo">
+        </a>
     </div>
     <div class="icon-container-right">
-        <img src="" th:src="@{/Grafiki/shopping-bag.png}" alt="Ikona prawa" class="icon">
-<!--        <img src="" th:src="@{/Grafiki/user.png}" alt="Ikona prawa" class="icon">-->
+        <a href="/koszyk/1">
+            <img src="" th:src="@{/Grafiki/shopping-bag.png}" alt="Ikona prawa" class="icon">
+        </a>
     </div>
 </div>
 
@@ -30,7 +35,7 @@
     <a href="#">Kurtki</a>
     <a href="#">Koszulki</a>
     <a href="#">Spodnie</a>
-    <a href="#">Przeglądaj wszystko</a>
+    <a href="/Produkt/lista2">Przeglądaj wszystko</a>
 </div>
 
 <div class="advert-section">

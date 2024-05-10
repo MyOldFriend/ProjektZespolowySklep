@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/kat.css">
+    <link rel="stylesheet" href="/css/style.css">
     <link rel="icon" th:href="@{/Grafiki/ff.ico}" type="image/png" size="32">
     <title>Lista produktów</title>
 </head>
@@ -30,7 +31,7 @@
         <a href="#">Kurtki</a>
         <a href="#">Koszulki</a>
         <a href="#">Spodnie</a>
-        <a href="#">Przeglądaj wszystko</a>
+        <a href="/Produkt/lista2">Przeglądaj wszystko</a>
     </div>
 
 </div>
@@ -109,12 +110,26 @@
         </div>
     </div>
 
-    <footer>
-        <p>Zawartość tej strony</p>
-        <img src="" th:src="@{/Grafiki/ff.png}" alt="Logo" class="logo-footer">
-    </footer>
-</div>
-</div>
 
+</div>
+</div>
+<footer>
+    <p>Zawartość tej strony</p>
+    <img src="" th:src="@{/Grafiki/ff.png}" alt="Logo" class="logo-footer">
+</footer>
+
+<script>
+    window.onload = function() {
+        var footer = document.querySelector("footer");
+        var bodyHeight = document.body.offsetHeight;
+        var windowHeight = window.innerHeight;
+
+        if (bodyHeight < windowHeight) {
+            footer.style.position = "fixed";
+            footer.style.bottom = "0";
+            footer.style.width = "100%";
+        }
+    };
+</script>
 </body>
 </html>
