@@ -1,10 +1,7 @@
 package com.example.sklep2xd.Controllers;
 
-import com.example.sklep2xd.Dto.AdresDto;
 import com.example.sklep2xd.Dto.KategoriaDto;
-import com.example.sklep2xd.Models.AdresEntity;
 import com.example.sklep2xd.Models.KategoriaEntity;
-import com.example.sklep2xd.Service.AdresService;
 import com.example.sklep2xd.Service.KategoriaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

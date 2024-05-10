@@ -32,10 +32,10 @@
     <a href="#">Odnośnik 5</a>
 </div>
 
-<p class="account-text">Edytuj dane pracownika</p>
+<p class="account-text">Dodawanie pracownika</p>
 
 <div class="container">
-    <form action="#" th:object="${pracownikEdit}" method="post">
+    <form action="#" th:object="${pracownik}" method="post">
         <div class="column">
             <input type="text" placeholder="Imię" th:field="*{imie}">
             <input type="text" placeholder="Nazwisko" th:field="*{nazwisko}">

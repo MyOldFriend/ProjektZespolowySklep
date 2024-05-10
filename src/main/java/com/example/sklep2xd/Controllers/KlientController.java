@@ -1,6 +1,5 @@
 package com.example.sklep2xd.Controllers;
 
-import com.example.sklep2xd.Dto.AdresDto;
 import com.example.sklep2xd.Dto.KlientDto;
 import com.example.sklep2xd.Models.AdresEntity;
 import com.example.sklep2xd.Models.KlientEntity;
@@ -8,7 +7,6 @@ import com.example.sklep2xd.Repositories.AdresRep;
 import com.example.sklep2xd.Repositories.KlientRep;
 import com.example.sklep2xd.Service.AdresService;
 import com.example.sklep2xd.Service.KlientService;
-import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
