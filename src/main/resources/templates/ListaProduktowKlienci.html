@@ -37,21 +37,19 @@
 </div>
 <div class="kolcek">
     <div class="klocek2">
+        <button onclick="window.location.href='/Produkt/lista2';" class="form-control">Pokaż wszystkie produkty</button>
         <div class="form-group">
-            <label asp-for="#" class="control-label"></label>
-            <select asp-for="#" class="form-control"  asp-items="#">
-                <option value="" disabled selected>Kategoria</option>
+            <label for="idKat" class="control-label"></label>
+            <select id="idKat" name="kategoria" class="form-control" required onchange="redirectToCategory()">
+                <option value="" disabled>Wybierz kategorię</option>
+                <option value="">Wszystkie kategorie</option>
+                <th:block th:each="kategoria : ${kategorie}">
+                    <option th:value="${kategoria.idKategorii}" th:text="${kategoria.nazwaKategorii}"
+                            th:selected="${kategoria.idKategorii == param.idKat}"></option>
+                </th:block>
             </select>
-            <span asp-validation-for="#" class="text-danger"></span>
-        </div>
-        <div class="form-group">
-            <label asp-for="#" class="control-label"></label>
-            <select asp-for="#" class="form-control" asp-items="#">
-                <option value="" disabled selected>Marka</option>
-            </select>
-            <span asp-validation-for="#" class="text-danger"></span>
-        </div>
 
+        </div>
         <div class="klocek2">
             <div class="form-group">
                 <label asp-for="#" class="control-label"></label>
@@ -64,17 +62,6 @@
                 <span asp-validation-for="DataSwiecen" class="text-danger"></span>
             </div>
         </div>
-
-        <div class="klocek2">
-            <div class="form-group">
-
-                <label asp-for="DataSwiecen" class="control-label"></label>
-                <img src="" th:src="@{/Grafiki/search.png}" class="obrazgwiazdka">
-                <input asp-for="DataSwiecen" class="form-control3" />
-                <span asp-validation-for="DataSwiecen" class="text-danger"></span>
-            </div>
-        </div>
-
 </div>
 
     <div class="our-products">
@@ -129,6 +116,14 @@
             footer.style.width = "100%";
         }
     };
+
+    function redirectToCategory() {
+        var categoryId = document.getElementById('idKat').value;
+        if (categoryId) {
+            window.location.href = `/Produkt/lista2/${categoryId}`;
+        }
+    }
+
 </script>
 
 

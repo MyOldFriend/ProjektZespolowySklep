@@ -18,4 +18,6 @@ public interface ProduktService {
     void updateProdukt(ProduktDto produktDto);
 
     void removeProduktById(int produktId);
+
+
 }
