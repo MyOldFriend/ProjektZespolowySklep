@@ -1,7 +1,9 @@
 package com.example.sklep2xd.config;
 
 import com.example.sklep2xd.Service.impl.KlientServiceimpl;
+import com.example.sklep2xd.security.JwtAuthenticationFilter;
 import com.example.sklep2xd.ssecurity.JwtUtil;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -11,24 +13,34 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
-
     private final KlientServiceimpl userDetailsService;
+    private final PasswordEncoder passwordEncoder;
 
-    public SecurityConfig(KlientServiceimpl userDetailsService) {
+    public SecurityConfig(KlientServiceimpl userDetailsService, PasswordEncoder passwordEncoder) {
         this.userDetailsService = userDetailsService;
+        this.passwordEncoder = passwordEncoder;
+    }
+
+    @Autowired
+    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+        auth
+                .userDetailsService(userDetailsService)
+                .passwordEncoder(passwordEncoder);
     }
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http, JwtUtil jwtUtil) throws Exception {
         http
-                .authorizeRequests()
-                .anyRequest().authenticated()
-                .and()
-                .addFilter(new com.example.sklep2xd.security.JwtAuthenticationFilter(jwtUtil));  // Correctly passing JwtUtil
+                .authorizeRequests(authorize -> authorize
+                        .requestMatchers("/logowanie","/home/**", "/css/**", "/js/**", "/images/**").permitAll()  // Allow access to login page and static resources
+                        .anyRequest().authenticated()
+                )
+                .addFilterBefore(new JwtAuthenticationFilter(jwtUtil), UsernamePasswordAuthenticationFilter.class);
         return http.build();
     }
 
@@ -37,15 +49,9 @@ public class SecurityConfig {
         return new JwtUtil();
     }
 
+    // Define PasswordEncoder as a Bean
     @Bean
-    public AuthenticationManager authenticationManager(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userDetailsService)
-                .passwordEncoder(passwordEncoder());
-        return auth.build();
-    }
-
-    @Bean
-    public PasswordEncoder passwordEncoder() {
+    public static PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 }
