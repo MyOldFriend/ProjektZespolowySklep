@@ -9,6 +9,7 @@ import java.util.List;
 public interface PracownikService {
     List<PracownikDto> findAllPracownicy();
     PracownikDto findPracownikById(int id);
+    PracownikDto findPracownikByLogin(String login);
     PracownikEntity savePracownik(PracownikEntity pracownik);
     void updatePracownik(PracownikDto pracownikDto);
 

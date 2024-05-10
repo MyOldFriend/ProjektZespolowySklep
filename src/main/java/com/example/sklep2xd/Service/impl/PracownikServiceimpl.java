@@ -47,6 +47,15 @@ public class PracownikServiceimpl implements PracownikService {
         return null;
     }
 
+    @Override
+    public PracownikDto findPracownikByLogin(String login) {
+        PracownikEntity pracownik = pracownikRep.findByLogin(login);
+        if (pracownik != null) {
+            return mapToPracownikDto(pracownik);
+        }
+        return null;
+    }
+
 
     @Override
     public PracownikEntity savePracownik(PracownikEntity pracownik) {

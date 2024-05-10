@@ -1,6 +1,7 @@
 package com.example.sklep2xd.config;
 
 import com.example.sklep2xd.Service.impl.KlientServiceimpl;
+import com.example.sklep2xd.ssecurity.JwtUtil;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -20,15 +21,20 @@ public class SecurityConfig {
     public SecurityConfig(KlientServiceimpl userDetailsService) {
         this.userDetailsService = userDetailsService;
     }
-//te dwa wyżej to ma być serwis klienta chyba
+
     @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+    public SecurityFilterChain filterChain(HttpSecurity http, JwtUtil jwtUtil) throws Exception {
         http
                 .authorizeRequests()
                 .anyRequest().authenticated()
                 .and()
-                .addFilter(new com.example.sklep2xd.ssecurity.JwtAuthenticationFilter(authenticationManager(http.getSharedObject(AuthenticationManagerBuilder.class))));
+                .addFilter(new com.example.sklep2xd.security.JwtAuthenticationFilter(jwtUtil));  // Correctly passing JwtUtil
         return http.build();
+    }
+
+    @Bean
+    public JwtUtil jwtUtil() {
+        return new JwtUtil();
     }
 
     @Bean

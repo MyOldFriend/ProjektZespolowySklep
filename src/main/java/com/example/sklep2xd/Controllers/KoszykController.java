@@ -6,6 +6,7 @@ import com.example.sklep2xd.Repositories.*;
 import com.example.sklep2xd.Service.KoszykService;
 import com.example.sklep2xd.Service.ProduktZamowienieService;
 import com.example.sklep2xd.Service.ZamowienieService;
+import com.example.sklep2xd.ssecurity.JwtUtil;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -48,23 +49,30 @@ public class KoszykController {
 //        model.addAttribute("Koszyk", koszyk);
 //        return "Koszyk";
 //    }
-        @GetMapping("/{idKlienta}")
-        public String koszykKlienta(@PathVariable("idKlienta") int idKlienta, Model model){
-            List<KoszykDto> koszyk = koszykService.findKoszykByKlientId(idKlienta);
-            double sumaCen = KoszykService.obliczCeneKoszyka(koszyk);
-            model.addAttribute("header", "Twój koszyk");
-            model.addAttribute("Koszyk", koszyk);
-            model.addAttribute("sumaCen", sumaCen);
-            return "Koszyk";
+    @GetMapping
+    public String koszykKlienta(Model model) {
+        Integer idKlienta = JwtUtil.getCurrentAuthenticatedKlientId();
+        if (idKlienta == null) {
+            return "error"; // Or handle the case where the klientId is not available
         }
+        List<KoszykDto> koszyk = koszykService.findKoszykByKlientId(idKlienta);
+        double sumaCen = KoszykService.obliczCeneKoszyka(koszyk);
+        model.addAttribute("header", "Twój koszyk");
+        model.addAttribute("Koszyk", koszyk);
+        model.addAttribute("sumaCen", sumaCen);
+        return "Koszyk";
+    }
 
-    @PostMapping("/dodajDoKoszyka/{idKlienta}/{idProduktu}/{ilosc}") //ma być wywoływane na stronach z produktami
-    public String dodajDoKoszyka(@PathVariable("idKlienta") int idKlienta,
-                                 @PathVariable("idProduktu") int idProduktu,
-                                 @PathVariable("ilosc") int ilosc, Model model){
+    @PostMapping("/dodajDoKoszyka/{idProduktu}/{ilosc}")
+    public String dodajDoKoszyka(@PathVariable("idProduktu") int idProduktu,
+                                 @PathVariable("ilosc") int ilosc, Model model) {
+        Integer idKlienta = JwtUtil.getCurrentAuthenticatedKlientId();
+        if (idKlienta == null) {
+            return "error"; // Or handle appropriately
+        }
         KlientEntity klient = klientRep.findByIdKlienta(idKlienta);
         ProduktEntity produkt = produktRep.findByIdProduktu(idProduktu);
-        model.addAttribute("Koszyk1",produkt);
+        model.addAttribute("Koszyk1", produkt);
         KoszykPK id = new KoszykPK(idKlienta, idProduktu);
         KoszykEntity koszykEntity = new KoszykEntity();
         koszykEntity.setKpk(id);
@@ -72,7 +80,7 @@ public class KoszykController {
         koszykEntity.setKlient(klient);
         koszykEntity.setProdukt(produkt);
         koszykService.saveKoszyk(koszykEntity);
-        return "Placeholder";
+        return "Redirect:/koszyk";  // Redirect to the basket view after adding the item
     }
     @PostMapping("/usun/{idk}/{idp}")
     public String usunZKoszyka(@PathVariable("idk") int idKlienta, @PathVariable("idp") int idProduktu, RedirectAttributes redirectAttributes) {
@@ -81,10 +89,14 @@ public class KoszykController {
         return "redirect:/koszyk/" + idKlienta;
     }
 
-    @DeleteMapping("/{idKlienta}")
-    public String wyczyscKosszykKlienta(@PathVariable("idKlienta") int idKlienta){
+    @DeleteMapping()
+    public String wyczyscKosszykKlienta(){
+        Integer idKlienta = JwtUtil.getCurrentAuthenticatedKlientId();
+        if (idKlienta == null) {
+            return "error"; // Or handle the case where the klientId is not available
+        }
         koszykService.deleteKoszykKlienta(idKlienta);
-        return "koszyk";
+        return "Koszyk";
     }
     @PostMapping("/{idKlienta}/zlozzamowienie") //dalej trzeba obczaić jak uzyskać Id klienta (może z JWT?)
     @Transactional
