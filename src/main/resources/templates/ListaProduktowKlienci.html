@@ -12,15 +12,20 @@
 
 <div class="header">
     <div class="icon-container-left">
-<!--        <img src="" th:src="@{/Grafiki/search.png}" alt="Ikona lewa" class="icon">-->
-        <img src="" th:src="@{/Grafiki/user.png}" alt="Ikona prawa" class="icon">
+        <!-- <img src="" th:src="@{/Grafiki/search.png}" alt="Ikona lewa" class="icon"> -->
+        <a href="/klienci/edytuj/1">
+            <img src="" th:src="@{/Grafiki/user.png}" alt="Ikona prawa" class="icon">
+        </a>
     </div>
     <div class="logo-container">
-        <img src="" th:src="@{/Grafiki/ff.png}" alt="Logo" class="logo">
+        <a href="/home">
+            <img src="" th:src="@{/Grafiki/ff.png}" alt="Logo" class="logo">
+        </a>
     </div>
     <div class="icon-container-right">
-        <img src="" th:src="@{/Grafiki/shopping-bag.png}" alt="Ikona prawa" class="icon">
-<!--        <img src="" th:src="@{/Grafiki/user.png}" alt="Ikona prawa" class="icon">-->
+        <a href="/koszyk/1">
+            <img src="" th:src="@{/Grafiki/shopping-bag.png}" alt="Ikona prawa" class="icon">
+        </a>
     </div>
 </div>
 
@@ -52,16 +57,18 @@
 
         <div class="klocek2">
             <div class="form-group">
-                <label asp-for="#" class="control-label"></label>
-                <input asp-for="#" placeholder="Cena min." class="form-control2" />
-                <span asp-validation-for="#" class="text-danger"></span>
+                <label for="minPrice" class="control-label"></label>
+                <input type="number" id="minPrice" placeholder="Cena min." class="form-control2" onkeyup="filterProducts()">
+                <span class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="DataSwiecen" class="control-label"></label>
-                <input asp-for="DataSwiecen" placeholder="Cena max." class="form-control2" />
-                <span asp-validation-for="DataSwiecen" class="text-danger"></span>
+                <label for="maxPrice" class="control-label"></label>
+                <input type="number" id="maxPrice" placeholder="Cena max." class="form-control2" onkeyup="filterProducts()">
+                <span class="text-danger"></span>
             </div>
         </div>
+
+
 
         <div class="klocek2">
             <div class="form-group">
@@ -124,23 +131,36 @@
             window.location.href = `/Produkt/lista2/${categoryId}`;
         }
     }
-
 </script>
 
 <script>
-    function searchProducts() {
-        var input = document.getElementById('searchProduct').value.toLowerCase();
+    function filterProducts() {
+        var inputName = document.getElementById('searchProduct').value.toLowerCase();
+        var minPrice = parseFloat(document.getElementById('minPrice').value);
+        var maxPrice = parseFloat(document.getElementById('maxPrice').value);
         var productList = document.querySelectorAll('.ocena');
 
         productList.forEach(function(product) {
             var productName = product.querySelector('.tytulproduktu').textContent.toLowerCase();
-            if (productName.includes(input)) {
+            var productPrice = parseFloat(product.querySelector('.cenaproduktu').textContent.replace(' zł', '').trim());
+
+            var isNameMatch = inputName ? productName.includes(inputName) : true;
+            var isPriceMatch = (isNaN(minPrice) || productPrice >= minPrice) && (isNaN(maxPrice) || productPrice <= maxPrice);
+
+            // Sprawdzanie, czy produkt spełnia oba kryteria
+            if (isNameMatch && isPriceMatch) {
                 product.style.display = '';
             } else {
                 product.style.display = 'none';
             }
         });
     }
+
+    // Dodanie listenerów do pól wejściowych
+    document.getElementById('searchProduct').addEventListener('keyup', filterProducts);
+    document.getElementById('minPrice').addEventListener('keyup', filterProducts);
+    document.getElementById('maxPrice').addEventListener('keyup', filterProducts);
 </script>
+
 </body>
 </html>
