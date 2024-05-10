@@ -74,6 +74,16 @@ public class KoszykController {
         koszykService.saveKoszyk(koszykEntity);
         return "Koszyk";
     }
+
+    @PostMapping("/dodajDoKoszyka")
+    public String dodajDoKoszyka(@RequestParam("idKlienta") int idKlienta,
+                                 @RequestParam("idProduktu") int idProduktu,
+                                 Model model) {
+        // Tutaj dodaj logikę dodawania produktu do koszyka
+        return "redirect:/lista-produktow"; // Przekierowanie do listy produktów lub innego widoku
+    }
+
+
     @PostMapping("/usun/{idk}/{idp}")
     public String usunZKoszyka(@PathVariable("idk") int idKlienta, @PathVariable("idp") int idProduktu, RedirectAttributes redirectAttributes) {
         koszykService.deleteKoszyk(idKlienta, idProduktu);
