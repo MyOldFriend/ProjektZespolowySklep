@@ -62,6 +62,19 @@
                 <span asp-validation-for="DataSwiecen" class="text-danger"></span>
             </div>
         </div>
+
+
+        <div class="klocek2">
+            <div class="form-group">
+                <label for="searchProduct" class="control-label"></label>
+                <img src="" th:src="@{/Grafiki/search.png}" class="obrazgwiazdka">
+                <input type="text" id="searchProduct" class="form-control3" placeholder="Wpisz nazwę produktu" onkeyup="searchProducts()">
+                <span id="searchError" class="text-danger"></span>
+            </div>
+        </div>
+
+
+
 </div>
 
     <div class="our-products">
@@ -92,11 +105,7 @@
                 </p>
         </div>
     </div>
-
-
-
 </div>
-
     </div>
 </div>
 <footer>
@@ -126,7 +135,20 @@
 
 </script>
 
+<script>
+    function searchProducts() {
+        var input = document.getElementById('searchProduct').value.toLowerCase();
+        var productList = document.querySelectorAll('.ocena');
 
-
+        productList.forEach(function(product) {
+            var productName = product.querySelector('.tytulproduktu').textContent.toLowerCase();
+            if (productName.includes(input)) {
+                product.style.display = '';
+            } else {
+                product.style.display = 'none';
+            }
+        });
+    }
+</script>
 </body>
 </html>
