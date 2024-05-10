@@ -51,16 +51,19 @@ public class ProduktController {
     @GetMapping("/lista2")
     public String listProduktyForKlient(Model model) {
         List<ProduktDto> produkty = produktService.findAllProdukty();
+        List<KategoriaDto> kategorie = kategoriaService.findAllKategories();
         model.addAttribute("header", "Lista wszystkich Produktów");
         model.addAttribute("produktList", produkty);
+        model.addAttribute("kategorie", kategorie);
         return "ListaProduktowKlienci";
     }
 
     @GetMapping("/lista2/{idKat}")
-    public String listProdukty(@PathVariable("idKat") int idKat, Model model) {
+    public String listProduktyByKategoria(@PathVariable("idKat") int idKat, Model model) {
         List<ProduktDto> produkty = produktService.findProdukyByKategoria_KategoriaId(idKat);
-        model.addAttribute("header", "Lista Produktów");
+        List<KategoriaDto> kategorie = kategoriaService.findAllKategories();
         model.addAttribute("produktList", produkty);
+        model.addAttribute("kategorie", kategorie); // Tutaj dodajesz kategorie do modelu
         return "ListaProduktowKlienci";
     }
 
