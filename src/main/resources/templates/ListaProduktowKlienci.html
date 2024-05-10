@@ -85,7 +85,7 @@
             <div class="ocenaproduktu">
                 <!-- Otaczanie obrazka linkiem, który prowadzi do strony produktu -->
                 <a th:href="@{/Produkt/{id}(id=${produkt.idProduktu})}">
-                    <img th:src="@{${produkt.urlzdjecia}}" class="obrazek">
+                    <img crossorigin="anonymous" th:src="@{${produkt.urlzdjecia}}" alt="Zdjęcie produktu" class="obrazek">
                 </a>
                 <div class="produkttekst">
                     <!-- Link do strony produktu po kliknięciu w nazwę -->
@@ -94,7 +94,7 @@
                     <p th:text="${produkt.rozmiar} " class="rozmiarx"></p>
                 </div>
             </div>
-
+        </div>
             <div class="gwiazdki">
                 <div class="stars-container">
                 </div>
