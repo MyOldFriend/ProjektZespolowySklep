@@ -67,6 +67,15 @@ public class ProduktController {
         return "ListaProduktowKlienci";
     }
 
+    @GetMapping("/lista/{idKat}")
+    public String listProduktyByKategoriaPracownik(@PathVariable("idKat") int idKat, Model model) {
+        List<ProduktDto> produkty = produktService.findProdukyByKategoria_KategoriaId(idKat);
+        List<KategoriaDto> kategorie = kategoriaService.findAllKategories();
+        model.addAttribute("produktList", produkty);
+        model.addAttribute("kategorie", kategorie); // Tutaj dodajesz kategorie do modelu
+        return "ListaProduktowPracownik";
+    }
+
 
 
 
