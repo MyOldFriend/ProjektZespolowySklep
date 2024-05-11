@@ -32,11 +32,11 @@ public class PracownikController {
 //        return "Pracownicy";
 //    }
 
-    @GetMapping("dzialzamowien")
+    @GetMapping("/dzialzamowien")
     public String homeEmployePage(){
         return "DzialZamowien";
     }
-    @GetMapping("administrator")
+    @GetMapping("/administrator")
     public String homeAdminPage(){
         return "StronaAdmin";
     }

@@ -7,6 +7,7 @@ import com.example.sklep2xd.Repositories.AdresRep;
 import com.example.sklep2xd.Repositories.KlientRep;
 import com.example.sklep2xd.Service.AdresService;
 import com.example.sklep2xd.Service.KlientService;
+import com.example.sklep2xd.ssecurity.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -42,11 +43,15 @@ public class KlientController {
     }
 
 
-    @GetMapping("/{klientId}")
-    public String singleKlient(@PathVariable("klientId") int klientId, Model model) {
-        KlientDto klient = klientService.findKlientById(klientId);
+    @GetMapping("/konto")
+    public String singleKlient(Model model) {
+        Integer idKlienta = JwtUtil.getCurrentAuthenticatedKlientId();
+        if (idKlienta == null) {
+            return "error"; // Or handle appropriately
+        }
+        KlientDto klient = klientService.findKlientById(idKlienta);
         model.addAttribute("klient", klient);
-        return "/Klient/single";
+        return "/TwojeKonto";
     }
 
     @GetMapping("/dodajform")
@@ -78,9 +83,21 @@ public class KlientController {
     }
 
 
-    @GetMapping("/edytuj/{klientId}")
+    @GetMapping("/edytuj/{klientId}")//wersja dla admina
     public String editKlientForm(@PathVariable("klientId") int klientId, Model model) {
         KlientDto klient = klientService.findKlientById(klientId);
+        model.addAttribute("klient", klient);
+//        return "EdytujKlienta";
+        return "TwojeKonto";
+    }
+
+    @GetMapping("/edytujKonto")//wersja dla klienta
+    public String editKlientForm(Model model) {
+        Integer idKlienta = JwtUtil.getCurrentAuthenticatedKlientId();
+        if (idKlienta == null) {
+            return "error"; // Or handle appropriately
+        }
+        KlientDto klient = klientService.findKlientById(idKlienta);
         model.addAttribute("klient", klient);
 //        return "EdytujKlienta";
         return "TwojeKonto";

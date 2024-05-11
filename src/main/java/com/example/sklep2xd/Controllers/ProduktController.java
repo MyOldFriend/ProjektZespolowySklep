@@ -7,6 +7,7 @@ import com.example.sklep2xd.Models.*;
 import com.example.sklep2xd.Repositories.KlientRep;
 import com.example.sklep2xd.Repositories.ProduktRep;
 import com.example.sklep2xd.Service.*;
+import com.example.sklep2xd.ssecurity.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -52,6 +53,14 @@ public class ProduktController {
     public String listProduktyForKlient(Model model) {
         List<ProduktDto> produkty = produktService.findAllProdukty();
         model.addAttribute("header", "Lista wszystkich Produktów");
+        model.addAttribute("produktList", produkty);
+        return "Produktylista";
+    }
+
+    @GetMapping("/lista2/{idKat}")
+    public String listProduktyFromKategoriaForKlient(@PathVariable("idKat") int idKat, Model model) {
+        List<ProduktDto> produkty = produktService.findProdukyByKategoria_KategoriaId(idKat);
+        model.addAttribute("header", "Lista Produktów");
         model.addAttribute("produktList", produkty);
         return "Produktylista";
     }
@@ -135,10 +144,13 @@ public class ProduktController {
             return "redirect:/error";
         }
     }
-    @PostMapping("/dodajDoKoszyka/{idKlienta}/{idProduktu}/{ilosc}") //ma być wywoływane na stronach z produktami
-    public String dodajDoKoszyka(@PathVariable("idKlienta") int idKlienta,
-                                 @PathVariable("idProduktu") int idProduktu,
+    @PostMapping("/dodajDoKoszyka/{idProduktu}/{ilosc}") //ma być wywoływane na stronach z produktami
+    public String dodajDoKoszyka(@PathVariable("idProduktu") int idProduktu,
                                  @PathVariable("ilosc") int ilosc, Model model){
+        Integer idKlienta = JwtUtil.getCurrentAuthenticatedKlientId();
+        if (idKlienta == null) {
+            return "error"; // Or handle appropriately
+        }
         KlientEntity klient = klientRep.findByIdKlienta(idKlienta);
         ProduktEntity produkt = produktRep.findByIdProduktu(idProduktu);
         model.addAttribute("Koszyk1",produkt);

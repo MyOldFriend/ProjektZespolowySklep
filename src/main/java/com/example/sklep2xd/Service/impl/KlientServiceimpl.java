@@ -88,12 +88,12 @@ public class KlientServiceimpl implements KlientService, UserDetailsService {
     }
 
     @Override
-    public boolean zalogujKlienta(String login, String haslo) {
-        KlientEntity klient = klientRep.findByLogin(login);
+    public KlientDto zalogujKlienta(String login, String haslo) {
+        KlientDto klient = mapToKlientDto(klientRep.findByLogin(login));
         if (klient != null && klient.getHaslo().equals(haslo)) {
-            return true;
+            return klient;
         }
-        return false;
+        return null;
     }
 
 

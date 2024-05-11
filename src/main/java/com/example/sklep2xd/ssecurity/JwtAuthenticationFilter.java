@@ -1,6 +1,6 @@
-package com.example.sklep2xd.security;
+package com.example.sklep2xd.ssecurity;
 
-import com.example.sklep2xd.ssecurity.JwtUtil;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -10,7 +10,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.Collections;
+import java.util.List;
 
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
@@ -27,14 +27,20 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         String token = request.getHeader("Authorization");
         if (token != null && token.startsWith("Bearer ")) {
             token = token.substring(7); // Remove "Bearer " prefix
-            if (jwtUtil.validateToken(token)) {
-                String username = jwtUtil.extractUsername(token);
-                int klientId = jwtUtil.extractKlientId(token);  // Example of extracting klientId
-                UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(
-                        username, null, Collections.singletonList(new SimpleGrantedAuthority("USER")));
-                SecurityContextHolder.getContext().setAuthentication(auth);
+            UsernamePasswordAuthenticationToken authentication = getAuthentication(token);
+            if (authentication != null) {
+                SecurityContextHolder.getContext().setAuthentication(authentication);
             }
         }
         filterChain.doFilter(request, response);
+    }
+
+    private UsernamePasswordAuthenticationToken getAuthentication(String token) {
+        if (jwtUtil.validateToken(token)) {
+            String username = jwtUtil.extractUsername(token);
+            List<GrantedAuthority> authorities = jwtUtil.extractAuthorities(token);
+            return new UsernamePasswordAuthenticationToken(username, null, authorities);
+        }
+        return null;
     }
 }

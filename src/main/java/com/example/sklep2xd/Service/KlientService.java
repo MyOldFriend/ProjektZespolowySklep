@@ -14,6 +14,6 @@ public interface KlientService {
     KlientEntity findKlientByEmail(String email);
     KlientEntity findKlientByLogin(String login);
 
-    boolean zalogujKlienta(String login, String haslo);
+    KlientDto zalogujKlienta(String login, String haslo);
 }
 

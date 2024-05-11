@@ -82,8 +82,12 @@ public class KoszykController {
         koszykService.saveKoszyk(koszykEntity);
         return "Redirect:/koszyk";  // Redirect to the basket view after adding the item
     }
-    @PostMapping("/usun/{idk}/{idp}")
-    public String usunZKoszyka(@PathVariable("idk") int idKlienta, @PathVariable("idp") int idProduktu, RedirectAttributes redirectAttributes) {
+    @PostMapping("/usun/{idp}")
+    public String usunZKoszyka(@PathVariable("idp") int idProduktu, RedirectAttributes redirectAttributes) {
+        Integer idKlienta = JwtUtil.getCurrentAuthenticatedKlientId();
+        if (idKlienta == null) {
+            return "error"; // Or handle appropriately
+        }
         koszykService.deleteKoszyk(idKlienta, idProduktu);
         redirectAttributes.addFlashAttribute("successMessage", "Produkt został usunięty z koszyka.");
         return "redirect:/koszyk/" + idKlienta;
@@ -98,10 +102,14 @@ public class KoszykController {
         koszykService.deleteKoszykKlienta(idKlienta);
         return "Koszyk";
     }
-    @PostMapping("/{idKlienta}/zlozzamowienie") //dalej trzeba obczaić jak uzyskać Id klienta (może z JWT?)
+    @PostMapping("/zlozzamowienie") //dalej trzeba obczaić jak uzyskać Id klienta (może z JWT?)
     @Transactional
-    public String zlozZamowienie(@PathVariable("idKlienta") int idKlienta){
+    public String zlozZamowienie(){
         //Uzyskaj potrzebne dane klienta
+        Integer idKlienta = JwtUtil.getCurrentAuthenticatedKlientId();
+        if (idKlienta == null) {
+            return "error"; // Or handle appropriately
+        }
         KlientEntity klient = klientRep.findByIdKlienta(idKlienta);
 //        System.out.println("Dane klienta" + klient.getImie() +" "+ klient.getAdresId().getIdAdresu());
         //utwórz nowe zamówienie dla id klienta

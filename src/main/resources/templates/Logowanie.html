@@ -6,6 +6,37 @@
     <link rel="stylesheet" href="/css/logowanie.css">
     <link rel="icon" th:href="@{/Grafiki/ff.ico}" type="image/png" size="32">
     <title>Strona Logowania</title>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var loginForm = document.querySelector('.registration-form form');
+            loginForm.addEventListener('submit', function(event) {
+                event.preventDefault();
+                var formData = new FormData(loginForm);
+
+                fetch('/logowanie', {
+                    method: 'POST',
+                    body: formData
+                })
+                    .then(response => {
+                        if (response.ok) {
+                            return response.headers.get('Authorization');
+                        } else {
+                            throw new Error('Login failed');
+                        }
+                    })
+                    .then(token => {
+                        if (token) {
+                            localStorage.setItem('authToken', token.replace('Bearer ', ''));
+                            window.location.href = '/home'; // Redirect to home page or dashboard
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        alert('Login failed, please check your credentials.');
+                    });
+            });
+        });
+    </script>
 </head>
 <body>
 
@@ -17,15 +48,12 @@
             <button type="button">Przycisk</button>
         </div>
     </div>
+    <!-- Logowanie.html Update -->
     <div class="registration-form">
         <h2>Logowanie</h2>
         <form action="#" th:action="@{/logowanie}" th:object="${logowanieForm}" method="post">
             <input type="text" th:field="*{login}" placeholder="Login">
             <input type="password" th:field="*{haslo}" placeholder="Hasło">
-            <select th:field="*{rodzajUzytkownika}">
-                <option value="klient">Klient</option>
-                <option value="pracownik">Pracownik</option>
-            </select>
             <button type="submit">Zaloguj się</button>
         </form>
 
@@ -33,6 +61,7 @@
             <p th:text="${errorMessage}"></p>
         </div>
     </div>
+
 </div>
 
 </body>
