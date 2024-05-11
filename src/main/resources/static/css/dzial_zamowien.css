@@ -20,10 +20,15 @@
 
 .order-section button {
     margin: 10px; /* Dodajemy odstęp między przyciskami */
-    padding: 10px 20px; /* Zwiększamy odstępy wewnątrz przycisków */
+    padding: 20px 30px; /* Zwiększamy odstępy wewnątrz przycisków */
     border-radius: 50px; /* Zaokrąglamy krawędzie przycisków */
     border: none;
     background-color: #ee4702;
     color: #fff;
     cursor: pointer;
+}
+
+.order-section button a{
+    text-decoration:none;
+    color: #FFF;
 }

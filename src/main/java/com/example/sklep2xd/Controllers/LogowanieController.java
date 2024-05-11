@@ -41,9 +41,9 @@ public class LogowanieController {
             PracownikDto pracownik = pracownikService.zalogujPracownika(login, haslo);
             if (pracownik != null) {
                 if (pracownikService.czyAdmin(pracownik)) {
-                    return "redirect:/admin";
+                    return "redirect:/Pracownik/administrator";
                 } else {
-                    return "redirect:/employee";
+                    return "redirect:/Pracownik/dzialzamowien";
                 }
             } else {
                 model.addAttribute("errorMessage", "Niepoprawny login lub hasło dla pracownika");

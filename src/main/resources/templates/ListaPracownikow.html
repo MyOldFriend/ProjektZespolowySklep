@@ -15,7 +15,9 @@
         <!--        <img src="" th:src="@{/Grafiki/search.png}" alt="Ikona lewa" class="icon">-->
     </div>
     <div class="logo-container">
-        <img src="" th:src="@{/Grafiki/ff.png}" alt="Logo" class="logo">
+        <a href="/Pracownik/administrator">
+            <img src="" th:src="@{/Grafiki/ff.png}" alt="Logo" class="logo">
+        </a>
     </div>
     <div class="icon-container-right">
         <!--        <img src="" th:src="@{/Grafiki/shopping-bag.png}" alt="Ikona prawa" class="icon">-->
@@ -25,11 +27,12 @@
 
 <div class="navbar">
     <div class="navbar-line"></div>
-    <!--    <a href="#">Odnośnik 1</a>-->
-    <!--    <a href="#">Odnośnik 2</a>-->
-    <!--    <a href="#">Odnośnik 3</a>-->
-    <!--    <a href="#">Odnośnik 4</a>-->
-    <!--    <a href="#">Odnośnik 5</a>-->
+    <button>
+        <a class="order-section" href="/Pracownik/lista">Zarządzanie pracownikami</a>
+    </button>
+    <button>
+        <a class="order-section" href="/Recenzja/lista">Zarządzanie recenzjami</a>
+    </button>
 </div>
 
 <p class="employee-text">Lista pracowników</p>

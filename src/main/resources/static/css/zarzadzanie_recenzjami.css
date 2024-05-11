@@ -63,6 +63,20 @@
 /*}*/
 
 
+.navbar button {
+    margin: 10px; /* Dodajemy odstęp między przyciskami */
+    padding: 10px 20px; /* Zwiększamy odstępy wewnątrz przycisków */
+    border-radius: 50px; /* Zaokrąglamy krawędzie przycisków */
+    border: none;
+    background-color: #ee4702;
+    color: #fff;
+    cursor: pointer;
+}
+
+.navbar button a{
+    text-decoration: none;
+    color: #fff;
+}
 
 
 .review-text{
