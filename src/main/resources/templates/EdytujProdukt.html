@@ -30,7 +30,7 @@
 <div class="oknoproduktu">
 
     <div class="dodajzdjecie">
-        <img crossorigin="anonymous" id="previewImage" src="" alt="Podgląd zdjęcia">
+        <img crossorigin="anonymous" id="previewImage" th:src="@{${produkt.urlzdjecia}}" alt="Podgląd zdjęcia">
     </div>
 
     <div class="daneproduktu">
@@ -40,14 +40,14 @@
             <div class="produkttekst">
 
                 <div class="form-group">
-                    <select id="categorySelect" class="form-control custom-select">
+                    <select id="categorySelect" class="form-control custom-select" name="kategoriaId">
                         <option value="">Wybierz kategorię</option>
                         <option th:each="kategoria : ${kategorie}"
                                 th:value="${kategoria.idKategorii}"
+                                th:selected="${kategoria.idKategorii == produkt.kategoria.idKategorii}"
                                 th:text="${kategoria.nazwaKategorii}">
                         </option>
                     </select>
-                    <input type="hidden" name="kategoriaId" id="kategoriaIdInput">
                     <span class="text-danger"></span>
                 </div>
 
@@ -68,6 +68,11 @@
                 </div>
 
                 <div class="form-group">
+                    <textarea asp-for="Opis" id="descriptionInput" placeholder="Dodaj opis produktu" class="form-control" rows="4" th:field="*{opis}"></textarea>
+                    <span asp-validation-for="Opis" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
                     <label asp-for="Rozmiar" class="control-label">Rozmiar:</label>
                     <select asp-for="Rozmiar" class="rozmiarrozwijanie" th:field="*{rozmiar}">
                         <option value="">Wybierz rozmiar</option>
@@ -81,9 +86,11 @@
                     <span asp-validation-for="Rozmiar" class="text-danger"></span>
                 </div>
 
+
                 <div class="przyciski">
                     <button type="submit" asp-action="Update">Zapisz zmiany</button>
-                    <button asp-action="Cancel">Anuluj</button>
+                    <!-- Zmiana typu przycisku Anuluj na button i dodanie funkcji JavaScript do powrotu -->
+                    <button type="button" onclick="window.history.back();">Anuluj</button>
                 </div>
 
             </div>
@@ -106,6 +113,7 @@
     var kategoriaIdInput = document.getElementById('kategoriaIdInput');
 
     categorySelect.addEventListener('change', function() {
+        console.log("Selected Category ID: ", this.value);  // This will log the value to the console
         kategoriaIdInput.value = this.value;
     });
 
