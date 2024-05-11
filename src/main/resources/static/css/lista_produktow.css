@@ -92,13 +92,14 @@
 
 .button {
     margin-right: 10px;
-    padding: 10px 20px;
+    padding: 16px 20px;
     border: none;
     background-color: #f76e36;
     color: #fff;
     cursor: pointer;
     width: 200px;
     border-radius: 50px;
+    text-decoration: none;
 
 }
 
