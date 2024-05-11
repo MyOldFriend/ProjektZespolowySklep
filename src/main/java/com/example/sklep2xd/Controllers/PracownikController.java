@@ -76,5 +76,10 @@ public class PracownikController {
         pracownikService.updatePracownik(pracownikDto);
         return "redirect:/Pracownik/lista";
     }
+    @DeleteMapping("/usun/{pracownikId}")
+    public String deletePracownik(@PathVariable("pracownikId") int pracownikId) {
+        pracownikService.removePracownikById(pracownikId);
+        return "redirect:/Pracownik/lista";
+    }
 
 }

@@ -169,6 +169,14 @@
 
 }
 
+.delete-button {
+    background-color: red;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    margin-left: 10px;
+    cursor: pointer;
+}
 
 
 
