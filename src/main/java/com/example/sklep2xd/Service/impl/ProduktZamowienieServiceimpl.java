@@ -59,4 +59,6 @@ public class ProduktZamowienieServiceimpl implements ProduktZamowienieService {
 
     } //to raczej trzeba będzie wywoływać w pętli dla każdego zmienionego rekordu
     //(albo, np. wywoływać za każdym razem gdy klient zmieni ilość produktu w swoim zamówieniu?)
+
+
 }
