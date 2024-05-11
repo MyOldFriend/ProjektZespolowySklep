@@ -28,8 +28,9 @@ public class ProduktServiceimpl implements ProduktService {
                 .nazwa(produkt.getNazwa())
                 .cena(produkt.getCena())
                 .rozmiar(produkt.getRozmiar())
-                .urlzdjecia(produkt.getUrlzdjecia())
                 .kategoria(produkt.getKategoriaByKategoriaId())
+                .urlzdjecia(produkt.getUrlzdjecia())
+                .opis(produkt.getOpis())
                 .build();
     }
 
@@ -67,6 +68,7 @@ public class ProduktServiceimpl implements ProduktService {
             existingProdukt.setCena(produktDto.getCena());
             existingProdukt.setRozmiar(produktDto.getRozmiar());
             existingProdukt.setUrlzdjecia(produktDto.getUrlzdjecia());
+            existingProdukt.setOpis(produktDto.getOpis());
             // Ustawienie kategorii - wymaga implementacji
             produktRep.save(existingProdukt);
         }

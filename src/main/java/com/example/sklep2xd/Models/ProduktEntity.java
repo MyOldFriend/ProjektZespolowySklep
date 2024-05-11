@@ -24,18 +24,23 @@ public class ProduktEntity {
     @Basic
     @Column(name = "rozmiar", nullable = true)
     private String rozmiar;
+    @ManyToOne
+    @JoinColumn(name = "kategoria_id", referencedColumnName = "id_kategorii")
+    private KategoriaEntity kategoria;
 //    @Basic
 //    @Column(name = "kategoria_id", nullable = true)
 //    private Integer kategoriaId;
     @Basic
     @Column(name = "urlzdjecia", nullable = true, length = 255)
     private String urlzdjecia;
-    @ManyToOne
-    @JoinColumn(name = "kategoria_id", referencedColumnName = "id_kategorii")
-    private KategoriaEntity kategoria;
+
 //    @ManyToOne
 //    @JoinColumn(name = "id_produktu", referencedColumnName = "produkt_id")
 //    private ProduktZamowienieEntity produktZamowienie;
+
+    @Basic
+    @Column(name = "opis", nullable = true)
+    private String opis;
 
     public int getIdProduktu() {
         return idProduktu;
@@ -76,6 +81,13 @@ public class ProduktEntity {
 //    public void setKategoriaId(Integer kategoriaId) {
 //        this.kategoriaId = kategoriaId;
 //    }
+    public KategoriaEntity getKategoriaByKategoriaId() {
+    return kategoria;
+}
+
+    public void setKategoriaByKategoriaId(KategoriaEntity kategoriaByKategoriaId) {
+        this.kategoria = kategoriaByKategoriaId;
+    }
 
     public String getUrlzdjecia() {
         return urlzdjecia;
@@ -85,11 +97,13 @@ public class ProduktEntity {
         this.urlzdjecia = urlzdjecia;
     }
 
-    public KategoriaEntity getKategoriaByKategoriaId() {
-        return kategoria;
+    public String getOpis() {
+        return opis;
     }
 
-    public void setKategoriaByKategoriaId(KategoriaEntity kategoriaByKategoriaId) {
-        this.kategoria = kategoriaByKategoriaId;
+    public void setOpis(String opis) {
+        this.opis = opis;
     }
+
+
 }
