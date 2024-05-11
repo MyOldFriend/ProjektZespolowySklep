@@ -83,14 +83,18 @@
         if (confirm("Czy na pewno chcesz usunąć tego pracownika?")) {
             fetch('/Pracownik/usun/' + pracownikId, {
                 method: 'DELETE'
-            }).then(response => {
-                if (response.ok) {
-                    alert("Pracownik został usunięty.");
-                    window.location.reload(); // Odświeżenie strony
-                } else {
-                    alert("Wystąpił błąd podczas usuwania pracownika.");
-                }
-            }).catch(error => alert("Wystąpił błąd: " + error));
+            })
+                .then(response => {
+                    if (response.ok) {
+                        alert("Pracownik został usunięty.");
+                         // Przekierowanie na listę pracowników
+                    } else {
+                        window.location.href = 'http://localhost:8081/Pracownik/lista';
+                    }
+                })
+                .catch(error => {
+                    alert("Wystąpił błąd: " + error.message);
+                });
         }
     }
 </script>
