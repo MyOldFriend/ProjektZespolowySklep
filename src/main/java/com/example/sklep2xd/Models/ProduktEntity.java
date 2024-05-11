@@ -42,6 +42,7 @@ public class ProduktEntity {
     @Column(name = "opis", nullable = true)
     private String opis;
 
+
     public int getIdProduktu() {
         return idProduktu;
     }

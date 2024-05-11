@@ -76,7 +76,7 @@ public class ProduktController {
 //        return "DodajProdukt";
 //    }
 
-    @GetMapping("/dodajform")
+    @GetMapping("/dodajprodukt")
     public String dodajProduktForm(Model model) {
         ProduktEntity produkt = new ProduktEntity();
 //        model.addAttribute("produkt", produkt);
@@ -86,10 +86,25 @@ public class ProduktController {
         return "DodajProdukt";
     }
 
+//    @PostMapping("/dodaj")
+//    public String dodajProdukt(@ModelAttribute("produkt") ProduktEntity produktDto) {
+//        List<KategoriaDto> kategoria = kategoriaService.findAllKategories();
+//        produktService.saveProdukt(produktDto);
+//        kategoriaService.saveKategoria();
+//        return "redirect:/Produkt/lista";
+//    }
+
     @PostMapping("/dodaj")
-    public String dodajProdukt(@ModelAttribute("produkt") ProduktEntity produktDto) {
-        produktService.saveProdukt(produktDto);
-        return "redirect:/Produkt/lista";
+    public String dodajProdukt(@ModelAttribute("produkt") ProduktEntity produkt, @RequestParam("kategoriaId") int kategoriaId) {
+        KategoriaDto kategoriaDto = kategoriaService.findKategoriaByIdKategori(kategoriaId);
+        if (kategoriaDto != null) {
+            KategoriaEntity kategoria = kategoriaService.mapToKategoriaEntity(kategoriaDto);
+            produkt.setKategoriaByKategoriaId(kategoria);
+            produktService.saveProdukt(produkt);
+            return "redirect:/Produkt/lista";
+        } else {
+            return "redirect:/error";
+        }
     }
 
 

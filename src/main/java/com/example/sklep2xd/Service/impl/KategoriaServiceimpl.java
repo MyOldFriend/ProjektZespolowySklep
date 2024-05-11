@@ -76,4 +76,9 @@ public class KategoriaServiceimpl implements KategoriaService {
         kategoriaEntity.setNazwaKategorii(kategoriaDto.getNazwaKategorii());
         return kategoriaEntity;
     }
+
+    @Override
+    public void saveKategoria() {
+
+    }
 }

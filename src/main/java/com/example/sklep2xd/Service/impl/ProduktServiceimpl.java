@@ -69,7 +69,7 @@ public class ProduktServiceimpl implements ProduktService {
             existingProdukt.setRozmiar(produktDto.getRozmiar());
             existingProdukt.setUrlzdjecia(produktDto.getUrlzdjecia());
             existingProdukt.setOpis(produktDto.getOpis());
-            // Ustawienie kategorii - wymaga implementacji
+            existingProdukt.setKategoriaByKategoriaId(produktDto.getKategoria());
             produktRep.save(existingProdukt);
         }
     }
