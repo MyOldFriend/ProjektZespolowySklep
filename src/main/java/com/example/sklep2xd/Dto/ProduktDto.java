@@ -14,6 +14,8 @@ public class ProduktDto {
     private String nazwa;
     private Double cena;
     private String rozmiar;
-    private String urlzdjecia;
     private KategoriaEntity kategoria;
+    private String urlzdjecia;
+    private String opis;
+
 }
