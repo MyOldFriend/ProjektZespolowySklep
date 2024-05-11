@@ -64,14 +64,14 @@ public class RecenzjaController {
         KlientEntity klient = klientRep.findByIdKlienta(idKlienta);
         ProduktEntity produkt = produktRep.findByIdProduktu(idProd);
 
-        // Ustawienie wartości pola 'tresc' na wartość odczytaną z pola formularza
         recenzja.setTresc(review);
         recenzja.setOcena(rating);
-
         recenzja.setKlientByKlientId(klient);
         recenzja.setProduktByProduktId(produkt);
         recenzjaService.saveRecenzja(recenzja);
-        return "redirect:/Recenzja/lista";
+
+        // Przekierowanie z powrotem na stronę produktu
+        return "redirect:/Produkt/" + idProd;
     }
 
 
