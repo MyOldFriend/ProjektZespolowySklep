@@ -33,21 +33,21 @@ public class KlientController {
         this.adresService = adresService;
     }
 
-    @GetMapping("/lista")
-    public String listKlients(Model model) {
-        List<KlientDto> klienci = klientService.findAllKlients();
-        model.addAttribute("header", "Lista wszystkich Klientów");
-        model.addAttribute("klientList", klienci);
-        return "Klienci";
-    }
+//    @GetMapping("/lista")
+//    public String listKlients(Model model) {
+//        List<KlientDto> klienci = klientService.findAllKlients();
+//        model.addAttribute("header", "Lista wszystkich Klientów");
+//        model.addAttribute("klientList", klienci);
+//        return "Klienci";
+//    }
 
 
-    @GetMapping("/{klientId}")
-    public String singleKlient(@PathVariable("klientId") int klientId, Model model) {
-        KlientDto klient = klientService.findKlientById(klientId);
-        model.addAttribute("klient", klient);
-        return "/Klient/single";
-    }
+//    @GetMapping("/{klientId}")
+//    public String singleKlient(@PathVariable("klientId") int klientId, Model model) {
+//        KlientDto klient = klientService.findKlientById(klientId);
+//        model.addAttribute("klient", klient);
+//        return "/Klient/single";
+//    }
 
     @GetMapping("/dodajform")
     public String createKlientForm(Model model) {
@@ -62,7 +62,7 @@ public class KlientController {
         KlientEntity existingEmailUser = klientService.findKlientByEmail(klient.getEmail());
         if (existingEmailUser != null) {
             model.addAttribute("errorMessage", "Użytkownik z podanym adresem e-mail już istnieje.");
-            return "Rejestracja";
+            return "Logowanie";
         }
 
         // Sprawdzenie czy istnieje użytkownik o podanym loginie
@@ -74,7 +74,7 @@ public class KlientController {
 
         // Jeśli nie istnieje, zapisujemy nowego użytkownika
         klientService.saveKlient(klient);
-        return "redirect:/klienci/lista";
+        return "StronaGlowna";
     }
 
 
