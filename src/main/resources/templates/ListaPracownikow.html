@@ -43,11 +43,14 @@
                 <p th:text="'Hasło: ' + ${pracownik.haslo}"></p>
                 <p th:text="'Rola: ' + ${pracownik.dzial}"></p>
             </div>
+
             <div class="right-info">
                 <p class="edit-button">
                     <a th:href="@{edytuj/{pracownikId}(pracownikId=${pracownik.idPracownika})}">Edytuj</a>
+                    <button class="delete-button" th:attr="onclick='deletePracownik(\'' + ${pracownik.idPracownika} + '\')'">&#10006;</button>
                 </p>
             </div>
+
         </div>
     </div>
 </div>
@@ -75,6 +78,23 @@
         }
     };
 </script>
+<script>
+    function deletePracownik(pracownikId) {
+        if (confirm("Czy na pewno chcesz usunąć tego pracownika?")) {
+            fetch('/Pracownik/usun/' + pracownikId, {
+                method: 'DELETE'
+            }).then(response => {
+                if (response.ok) {
+                    alert("Pracownik został usunięty.");
+                    window.location.reload(); // Odświeżenie strony
+                } else {
+                    alert("Wystąpił błąd podczas usuwania pracownika.");
+                }
+            }).catch(error => alert("Wystąpił błąd: " + error));
+        }
+    }
+</script>
+
 
 </body>
 </html>

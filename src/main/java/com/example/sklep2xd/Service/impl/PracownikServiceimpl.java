@@ -89,5 +89,14 @@ public class PracownikServiceimpl implements PracownikService {
         // Sprawdź czy pracownik ma rolę admina
         return pracownikDto.getDzial().equals("admin");
     }
+    @Override
+    public void removePracownikById(int id) {
+        PracownikEntity pracownik = pracownikRep.findById(id).orElse(null);
+        if (pracownik != null) {
+            pracownikRep.delete(pracownik);
+        } else {
+            throw new RuntimeException("Nie znaleziono pracownika o ID: " + id);
+        }
+    }
 
 }

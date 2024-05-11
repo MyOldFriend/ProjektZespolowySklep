@@ -15,4 +15,7 @@ public interface PracownikService {
 
     PracownikDto zalogujPracownika(String login, String haslo);
     boolean czyAdmin(PracownikDto pracownikDto);
+
+    void removePracownikById(int id);
+
 }
