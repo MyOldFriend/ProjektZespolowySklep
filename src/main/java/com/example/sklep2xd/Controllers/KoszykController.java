@@ -140,6 +140,7 @@ public class KoszykController {
             produktZamowienieRep.save(produktZamowienie); // Ensure this is called after all fields are set
         }
 
-        return "PodsumowanieZamowienia"; //widok do zrobienia
+//        return "PodsumowanieZamowienia"; //widok do zrobienia
+        return "DaneDostawy"; //widok do zrobienia
     }
 }
