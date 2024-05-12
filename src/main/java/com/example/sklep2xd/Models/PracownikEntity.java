@@ -36,6 +36,9 @@ public class PracownikEntity {
     @Column(name = "nazwisko", nullable = true, length = 50)
     private String nazwisko;
 
+    @Builder.Default
+    private String someField = "default value";
+
 
     public List<RolaPracownika> getRole() {
         return role;
