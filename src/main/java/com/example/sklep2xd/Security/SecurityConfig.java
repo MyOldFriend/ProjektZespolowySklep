@@ -43,26 +43,7 @@ public class SecurityConfig {
 
         return http.build();
     }
-    //użytkownicy w pamięci - zastąpić prawdziwymi z bazy później
-    public UserDetailsService users(){
-        UserDetails admin = User.builder()
-                .username("admin")
-                .password("zaq1@WSX")
-                .roles("ADMIN", "PRACOWNIK")
-                .build();
-        UserDetails klientId4 = User.builder()
-                .username("ewa_dabrowska")
-                .password("dabrowska123")
-                .roles("KLIENT")
-                .build();
-        UserDetails pracownikId1 = User.builder()
-                .username("pr1")
-                .password("zaq1@WSX")
-                .roles("PRACOWNIK")
-                .build();
-        return new InMemoryUserDetailsManager(admin, klientId4, pracownikId1);
-    }
-    @Bean
+   
     public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
         return authenticationConfiguration.getAuthenticationManager();
     }
