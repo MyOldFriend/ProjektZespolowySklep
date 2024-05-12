@@ -31,7 +31,9 @@ public class SecurityConfig {
                 .authorizeRequests((authorizeRequests)->
                         authorizeRequests
                                 //przerobić jak będzie wyciąganie id z JWT
-                                .requestMatchers("/home","/home/**", "/Produkt/lista2", "/Produkt/lista2/**").permitAll() //dostęp dla wsztskich
+                                .requestMatchers("/home","/home/**", "/Produkt/lista2", "/Produkt/lista2/**", "/auth/rejestracjaPracownika").permitAll() //dostęp dla wsztskich
+                                                                                                // zamienić rejestrację pracownika na rejestrację klienta jak będzie gotowa
+                                                                                                // a rejestrację pracownika dać na admina
                                 .requestMatchers("/klienci/edytuj/**").hasRole("KLIENT") //dostęp dla klienta
                                 .requestMatchers("/Pracownik/dzialzamowien").hasRole("PRACOWNIK") //dostęp dla pracownika
                                 .requestMatchers("/Pracownik/administrator").hasRole("ADMIN") //dostęp dla pracownika admina
