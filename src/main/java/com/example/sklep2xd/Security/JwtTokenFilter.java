@@ -1,5 +1,6 @@
 package com.example.sklep2xd.Security;
 
+import com.example.sklep2xd.Security.JwtTokenProvider;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;

@@ -1,9 +1,12 @@
 package com.example.sklep2xd.Controllers;
 
 import com.example.sklep2xd.Dto.ProduktDto;
+import com.example.sklep2xd.Security.CustomUserDetails;
 import com.example.sklep2xd.Service.KlientService;
 import com.example.sklep2xd.Service.ProduktService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,7 +30,12 @@ public class StronaGlownaController {
     }
 
     @GetMapping
-    public String homepage(){
+    public String homepage(Model model){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication != null && authentication.getPrincipal() instanceof CustomUserDetails) {
+            CustomUserDetails userDetails = (CustomUserDetails) authentication.getPrincipal();
+            model.addAttribute("userId", userDetails.getId());  // Przekazanie ID użytkownika do modelu
+        }
         return "StronaGlowna";
     }
 

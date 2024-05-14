@@ -10,10 +10,12 @@ import java.util.Date;
 public class JwtTokenProvider {
     private final String secretKey = "secret";
 
-    public String createToken(String username) {
+    public String createToken(String username, String role) {
         Claims claims = Jwts.claims().setSubject(username);
+        claims.put("auth", role);
+
         Date now = new Date();
-        Date validity = new Date(now.getTime() + 3600000); // 1 hour validity
+        Date validity = new Date(now.getTime() + 3600000);  // Token valid for 1 hour
 
         return Jwts.builder()
                 .setClaims(claims)

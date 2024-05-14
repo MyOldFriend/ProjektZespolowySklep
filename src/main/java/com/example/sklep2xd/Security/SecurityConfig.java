@@ -30,16 +30,21 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(authz -> authz
-                        .requestMatchers("/logowanie", "/rejestracja").permitAll() // Dostęp dla wszystkich
-                        .requestMatchers("/klienci/dodajform", "/klienci/TwojeKonto", "/klienci/ListaProduktowKlienci", "/klienci/Koszyk").hasRole("KLIENT") // Dostęp tylko dla klientów
-                        .requestMatchers("/pracownik/DodajProdukt", "/pracownik/EdytujProdukt", "/pracownik/ListaZamowien", "/pracownik/administrator").hasRole("PRACOWNIK") // Dostęp tylko dla pracowników
-                        .requestMatchers("/pracownik/administrator").hasRole("ADMIN")  // Tylko dla admina
-                        .anyRequest().authenticated()  // Wszystkie inne żądania wymagają uwierzytelnienia
+//                        .requestMatchers("/logowanie", "/rejestracja").permitAll()
+//                        .requestMatchers("/klienci/**","/home").hasRole("KLIENT")
+//                        .requestMatchers("/Pracownik/**").hasRole("employee")
+                        .requestMatchers("/Pracownik/**", "/admin/**", "/klienci/**", "/Produkt/**", "/home/**", "/logowanie", "/koszyk/**", "/Kategoria/**", "/Recenzja/**", "Zamowienie/**", "/rejestracja").permitAll()
+//                        .requestMatchers("/admin/**").hasRole("ADMIN")
+                        .requestMatchers("/miniwidok.html","/css/**", "/Grafiki/**", "/js/**").permitAll()  // Zawsze zezwalaj na zasoby statyczne
+                        .anyRequest().authenticated()
                 )
+                .headers().frameOptions().sameOrigin() // Ustawienie nagłówka X-Frame-Options
+                .and()
                 .httpBasic(AbstractHttpConfigurer::disable)
                 .addFilterBefore(new JwtTokenFilter(jwtTokenProvider), UsernamePasswordAuthenticationFilter.class);
         return http.build();
     }
+
 
 
 
