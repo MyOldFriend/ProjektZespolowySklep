@@ -3,12 +3,17 @@ package com.example.sklep2xd.Models;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@Data
 @Table(name = "pracownik", schema = "public", catalog = "Sklep")
 public class PracownikEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,6 +35,23 @@ public class PracownikEntity {
     @Basic
     @Column(name = "nazwisko", nullable = true, length = 50)
     private String nazwisko;
+
+    @Builder.Default
+    private String someField = "default value";
+
+
+    public List<RolaPracownika> getRole() {
+        return role;
+    }
+
+    public void setRole(List<RolaPracownika> role) {
+        this.role = role;
+    }
+
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinTable(name = "Role_pracownicy", joinColumns = @JoinColumn(name = "id_pr", referencedColumnName = "id_pracownika"),
+    inverseJoinColumns = @JoinColumn(name = "id_roli", referencedColumnName = "id_roli"))
+    private List<RolaPracownika> role = new ArrayList<>();
 
     public int getIdPracownika() {
         return idPracownika;
