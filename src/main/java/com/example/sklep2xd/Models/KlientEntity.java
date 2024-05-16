@@ -3,7 +3,6 @@ package com.example.sklep2xd.Models;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.List;
@@ -12,7 +11,6 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Data
 @Table(name = "klient", schema = "public", catalog = "Sklep")
 public class KlientEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)

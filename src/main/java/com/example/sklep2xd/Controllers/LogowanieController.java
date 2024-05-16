@@ -30,10 +30,6 @@ public class LogowanieController {
         String haslo = form.getHaslo();
         String rodzajUzytkownika = form.getRodzajUzytkownika();
 
-        // Pobieranie identyfikatora
-        // Tworzenie JWT
-
-
         if (rodzajUzytkownika.equals("klient")) {
             if (klientService.zalogujKlienta(login, haslo)) {
                 return "redirect:/home";

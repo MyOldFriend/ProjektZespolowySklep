@@ -3,14 +3,11 @@ package com.example.sklep2xd.Controllers;
 import com.example.sklep2xd.Dto.KoszykDto;
 import com.example.sklep2xd.Models.*;
 import com.example.sklep2xd.Repositories.*;
-import com.example.sklep2xd.Security.CustomUserDetails;
 import com.example.sklep2xd.Service.KoszykService;
 import com.example.sklep2xd.Service.ProduktZamowienieService;
 import com.example.sklep2xd.Service.ZamowienieService;
 import jakarta.transaction.Transactional;
-import org.springframework.security.core.Authentication;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -51,31 +48,15 @@ public class KoszykController {
 //        model.addAttribute("Koszyk", koszyk);
 //        return "Koszyk";
 //    }
-//        @GetMapping("/{idKlienta}")
-//        public String koszykKlienta(@PathVariable("idKlienta") int idKlienta, Model model){
-//            List<KoszykDto> koszyk = koszykService.findKoszykByKlientId(idKlienta);
-//            double sumaCen = KoszykService.obliczCeneKoszyka(koszyk);
-//            model.addAttribute("header", "Twój koszyk");
-//            model.addAttribute("Koszyk", koszyk);
-//            model.addAttribute("sumaCen", sumaCen);
-//            return "Koszyk";
-//        }
-
-
-    @GetMapping
-    public String koszykKlienta(Model model) {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        CustomUserDetails userDetails = (CustomUserDetails) authentication.getPrincipal();
-        int idKlienta = userDetails.getId(); // Pobierz ID zalogowanego użytkownika
-
-        List<KoszykDto> koszyk = koszykService.findKoszykByKlientId(idKlienta);
-        double sumaCen = KoszykService.obliczCeneKoszyka(koszyk);
-        model.addAttribute("header", "Twój koszyk");
-        model.addAttribute("Koszyk", koszyk);
-        model.addAttribute("sumaCen", sumaCen);
-        return "Koszyk";
-    }
-
+        @GetMapping("/{idKlienta}")
+        public String koszykKlienta(@PathVariable("idKlienta") int idKlienta, Model model){
+            List<KoszykDto> koszyk = koszykService.findKoszykByKlientId(idKlienta);
+            double sumaCen = KoszykService.obliczCeneKoszyka(koszyk);
+            model.addAttribute("header", "Twój koszyk");
+            model.addAttribute("Koszyk", koszyk);
+            model.addAttribute("sumaCen", sumaCen);
+            return "Koszyk";
+        }
 
     @PostMapping("/dodajDoKoszyka/{idKlienta}/{idProduktu}/{ilosc}") //ma być wywoływane na stronach z produktami
     public String dodajDoKoszyka(@PathVariable("idKlienta") int idKlienta,
@@ -117,13 +98,7 @@ public class KoszykController {
     }
     @PostMapping("/{idKlienta}/zlozzamowienie") //dalej trzeba obczaić jak uzyskać Id klienta (może z JWT?)
     @Transactional
-//    public String zlozZamowienie(@PathVariable("idKlienta") int idKlienta){
-    public String zlozZamowienie(Model model) {  // Usunąłem tutaj {int idKlienta} z parametrów
-
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        CustomUserDetails userDetails = (CustomUserDetails) authentication.getPrincipal();
-        int idKlienta = userDetails.getId(); // Pobierz ID zalogowanego użytkownika
-
+    public String zlozZamowienie(@PathVariable("idKlienta") int idKlienta){
         //Uzyskaj potrzebne dane klienta
         KlientEntity klient = klientRep.findByIdKlienta(idKlienta);
 //        System.out.println("Dane klienta" + klient.getImie() +" "+ klient.getAdresId().getIdAdresu());
