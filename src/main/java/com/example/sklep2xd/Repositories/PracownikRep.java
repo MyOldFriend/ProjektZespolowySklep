@@ -9,5 +9,4 @@ public interface PracownikRep extends JpaRepository<PracownikEntity, Integer> {
     PracownikEntity findByIdPracownika(int id);
 
     PracownikEntity findByLogin(String login);
-    Boolean existsByLogin(String login);
 }
