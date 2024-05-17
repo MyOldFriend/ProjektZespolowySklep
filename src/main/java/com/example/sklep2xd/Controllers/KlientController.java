@@ -8,6 +8,7 @@ import com.example.sklep2xd.Repositories.KlientRep;
 import com.example.sklep2xd.Service.AdresService;
 import com.example.sklep2xd.Service.KlientService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -25,12 +26,14 @@ public class KlientController {
 
     @Autowired
     private AdresRep adresRepository;
+    private PasswordEncoder passwordEncoder;
 
 
     @Autowired
-    public KlientController(KlientService klientService, AdresService adresService) {
+    public KlientController(KlientService klientService, AdresService adresService, PasswordEncoder passwordEncoder) {
         this.klientService = klientService;
         this.adresService = adresService;
+        this.passwordEncoder = passwordEncoder;
     }
 
 //    @GetMapping("/lista")
@@ -59,6 +62,9 @@ public class KlientController {
     @PostMapping("/dodajform")
     public String saveKlient(@ModelAttribute("klient") KlientEntity klient, Model model) {
         // Sprawdzenie czy istnieje użytkownik o podanym e-mailu
+        String pass = klient.getHaslo();
+        pass = passwordEncoder.encode(pass);
+        klient.setHaslo(pass);
         KlientEntity existingEmailUser = klientService.findKlientByEmail(klient.getEmail());
         if (existingEmailUser != null) {
             model.addAttribute("errorMessage", "Użytkownik z podanym adresem e-mail już istnieje.");

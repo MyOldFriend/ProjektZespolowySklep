@@ -39,14 +39,18 @@ public class WebSecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests((requests) -> requests
-                        .antMatchers("/admin/**").hasRole("ADMIN")
-                        .antMatchers("/pracownik/**").hasRole("PRACOWNIK")
-                        .antMatchers("/klient/**").hasRole("KLIENT")
-                        .anyRequest().authenticated()
+                        .requestMatchers("/admin/**").hasRole("ADMIN")
+                        .requestMatchers("/pracownik/**").hasRole("PRACOWNIK")
+                        .requestMatchers("/klient/**").hasRole("KLIENT")
+                        .anyRequest().permitAll()
                 )
                 .formLogin((form) -> form
-                        .loginPage("/login")
+                        .loginPage("/logowanie")
                         .permitAll()
+                        .loginProcessingUrl("/logowanie")
+                        .usernameParameter("login")
+                        .passwordParameter("haslo")
+                        .successForwardUrl("/home")
                 )
                 .logout((logout) -> logout
                         .permitAll()
