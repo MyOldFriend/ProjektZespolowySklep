@@ -12,6 +12,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 
 @Configuration
 @EnableWebSecurity
@@ -50,11 +51,14 @@ public class WebSecurityConfig {
                         .loginProcessingUrl("/logowanie")
                         .usernameParameter("login")
                         .passwordParameter("haslo")
-                        .successForwardUrl("/home")
+                        .defaultSuccessUrl("/home", true)
+                        .failureUrl("/logowanie?error=true")
                 )
                 .logout((logout) -> logout
                         .permitAll()
-                );
+                )
+                .csrf(httpSecurityCsrfConfigurer -> httpSecurityCsrfConfigurer.csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())); // Ensures CSRF token is included in the form
+
 
         return http.build();
     }
