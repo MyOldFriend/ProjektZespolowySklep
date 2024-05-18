@@ -52,6 +52,7 @@
             <input type="text" name="nrMieszkania" placeholder="Nr mieszkania" th:value="${klient.adresId != null ? klient.adresId.nrMieszkania : ''}">
             <input type="text" name="kodPocztowy" placeholder="Kod pocztowy" th:value="${klient.adresId != null ? klient.adresId.kodPocztowy : ''}">
             <input type="text" name="miejscowosc" placeholder="Miejscowość" th:value="${klient.adresId != null ? klient.adresId.miejscowosc : ''}">
+            <input type="text" name="kraj" placeholder="Kraj" th:value="${klient.adresId != null ? klient.adresId.kraj : ''}">
         </div>
         <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
     </form>

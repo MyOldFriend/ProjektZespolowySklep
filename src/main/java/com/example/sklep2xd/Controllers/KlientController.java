@@ -88,13 +88,17 @@ public class KlientController {
 
     @GetMapping("/edytuj")
     public String editKlientForm(HttpSession session, Model model) {
-        KlientDto klient = klientService.findKlientById((Integer) session.getAttribute("userId"));
+        Integer klientId = (Integer) session.getAttribute("klientId");
+        if (klientId == null) {
+            // Redirect to login if klientId is not found in the session
+            return "redirect:/logowanie";
+        }
+        KlientDto klient = klientService.findKlientById(klientId);
         model.addAttribute("klient", klient);
-//        return "EdytujKlienta";
+        model.addAttribute("hasAddress", klient.getAdresId() != null);
         return "TwojeKonto";
     }
 
-    // Metoda do obsługi zapisu zmian danych klienta i adresu
     @PostMapping("/edytuj")
     public String edytujKlienta(HttpSession session,
                                 @RequestParam("imie") String imie,
@@ -105,8 +109,9 @@ public class KlientController {
                                 @RequestParam("nrDomu") String nrDomu,
                                 @RequestParam("nrMieszkania") String nrMieszkania,
                                 @RequestParam("kodPocztowy") String kodPocztowy,
-                                @RequestParam("miejscowosc") String miejscowosc) {
-        Integer klientId = (Integer) session.getAttribute("userId");
+                                @RequestParam("miejscowosc") String miejscowosc,
+                                @RequestParam("kraj") String kraj) {
+        Integer klientId = (Integer) session.getAttribute("klientId");
         if (klientId == null) {
             return "redirect:/logowanie"; // or some other appropriate action
         }
@@ -122,26 +127,30 @@ public class KlientController {
             }
             klientRepository.save(klient);
 
-            // Pobierz adres klienta z bazy danych lub utwórz nowy
-            AdresEntity adres = klient.getAdresId();
-            if (adres == null) {
-                adres = new AdresEntity();
-            }
-            // Zaktualizuj dane adresowe
-            adres.setUlica(ulica);
-            adres.setNrDomu(nrDomu);
-            adres.setNrMieszkania(nrMieszkania);
-            adres.setKodPocztowy(kodPocztowy);
-            adres.setMiejscowosc(miejscowosc);
-            adresRepository.save(adres);
+            // Zaktualizuj dane adresowe tylko jeśli są podane wartości
+            if (!ulica.isEmpty() || !nrDomu.isEmpty() || !nrMieszkania.isEmpty() || !kodPocztowy.isEmpty() || !miejscowosc.isEmpty() || !kraj.isEmpty()) {
+                AdresEntity adres = klient.getAdresId();
+                if (adres == null) {
+                    adres = new AdresEntity();
+                }
+                adres.setUlica(ulica);
+                adres.setNrDomu(nrDomu);
+                adres.setNrMieszkania(nrMieszkania);
+                adres.setKodPocztowy(kodPocztowy);
+                adres.setMiejscowosc(miejscowosc);
+                adres.setKraj(kraj);
+                adresRepository.save(adres);
 
-            // Przypisz adres do klienta jeśli nowy
-            if (klient.getAdresId() == null) {
-                klient.setAdresId(adres);
-                klientRepository.save(klient);
+                // Przypisz adres do klienta jeśli nowy
+                if (klient.getAdresId() == null) {
+                    klient.setAdresId(adres);
+                    klientRepository.save(klient);
+                }
             }
         }
         // Przekieruj użytkownika na odpowiednią stronę po zapisie zmian
         return "StronaGlowna";
     }
+
+
 }

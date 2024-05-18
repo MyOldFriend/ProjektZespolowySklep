@@ -6,14 +6,14 @@ import org.springframework.security.core.userdetails.User;
 import java.util.Collection;
 
 public class CustomUserDetails extends User {
-    private final int userId;
+    private final int klientId;
 
-    public CustomUserDetails(String username, String password, Collection<? extends GrantedAuthority> authorities, int userId) {
+    public CustomUserDetails(String username, String password, Collection<? extends GrantedAuthority> authorities, int klientId) {
         super(username, password, authorities);
-        this.userId = userId;
+        this.klientId = klientId;
     }
 
-    public int getUserId() {
-        return userId;
+    public int getKlientId() {
+        return klientId;
     }
 }
