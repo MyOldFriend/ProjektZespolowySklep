@@ -51,7 +51,7 @@ public class KoszykController {
 //    }
         @GetMapping()
         public String koszykKlienta(HttpSession session, Model model){
-            List<KoszykDto> koszyk = koszykService.findKoszykByKlientId((int) session.getAttribute("userId"));
+            List<KoszykDto> koszyk = koszykService.findKoszykByKlientId((int) session.getAttribute("klientId"));
             double sumaCen = KoszykService.obliczCeneKoszyka(koszyk);
             model.addAttribute("header", "Twój koszyk");
             model.addAttribute("Koszyk", koszyk);
