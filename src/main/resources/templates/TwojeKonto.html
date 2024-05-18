@@ -12,17 +12,15 @@
 
 <div class="header">
     <div class="icon-container-left">
-<!--        <img src="/Grafiki/search.png" alt="Ikona lewa" class="icon">-->
         <img src="/Grafiki/user.png" alt="Ikona prawa" class="icon">
     </div>
     <div class="logo-container">
         <a href="/home">
-        <img src="/Grafiki/ff.png" alt="Logo" class="logo">
+            <img src="/Grafiki/ff.png" alt="Logo" class="logo">
         </a>
     </div>
     <div class="icon-container-right">
         <img src="/Grafiki/shopping-bag.png" alt="Ikona prawa" class="icon">
-<!--        <img src="/Grafiki/user.png" alt="Ikona prawa" class="icon">-->
     </div>
 </div>
 
@@ -38,7 +36,7 @@
 <p class="account-text">Twoje konto</p>
 
 <div class="container">
-    <form id="account-form" action="#" th:action="@{/klienci/edytuj/{klientId}(klientId=${klient.idKlienta})}" method="post">
+    <form id="account-form" th:action="@{/klienci/edytuj}" method="post">
         <div class="column">
             <!-- Dane klienta -->
             <input type="text" name="imie" placeholder="Imię" th:value="${klient.imie}">
@@ -49,12 +47,13 @@
         </div>
         <div class="column">
             <!-- Dane adresowe -->
-            <input type="text" name="ulica" placeholder="Ulica" th:value="${klient.adresId.ulica}">
-            <input type="text" name="nrDomu" placeholder="Nr domu" th:value="${klient.adresId.nrDomu}">
-            <input type="text" name="nrMieszkania" placeholder="Nr mieszkania" th:value="${klient.adresId.nrMieszkania}">
-            <input type="text" name="kodPocztowy" placeholder="Kod pocztowy" th:value="${klient.adresId.kodPocztowy}">
-            <input type="text" name="miejscowosc" placeholder="Miejscowość" th:value="${klient.adresId.miejscowosc}">
+            <input type="text" name="ulica" placeholder="Ulica" th:value="${klient.adresId != null ? klient.adresId.ulica : ''}">
+            <input type="text" name="nrDomu" placeholder="Nr domu" th:value="${klient.adresId != null ? klient.adresId.nrDomu : ''}">
+            <input type="text" name="nrMieszkania" placeholder="Nr mieszkania" th:value="${klient.adresId != null ? klient.adresId.nrMieszkania : ''}">
+            <input type="text" name="kodPocztowy" placeholder="Kod pocztowy" th:value="${klient.adresId != null ? klient.adresId.kodPocztowy : ''}">
+            <input type="text" name="miejscowosc" placeholder="Miejscowość" th:value="${klient.adresId != null ? klient.adresId.miejscowosc : ''}">
         </div>
+        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
     </form>
 </div>
 
@@ -68,11 +67,9 @@
         document.getElementById("account-form").submit();
     });
 
-
     document.getElementById("cancel-button").addEventListener("click", function() {
         window.location.href = "@{/klienci/lista}";
     });
-
 </script>
 
 <footer>

@@ -7,6 +7,7 @@ import com.example.sklep2xd.Repositories.AdresRep;
 import com.example.sklep2xd.Repositories.KlientRep;
 import com.example.sklep2xd.Service.AdresService;
 import com.example.sklep2xd.Service.KlientService;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -56,6 +57,7 @@ public class KlientController {
     public String createKlientForm(Model model) {
         KlientEntity klient = new KlientEntity();
         model.addAttribute("klient", klient);
+        model.addAttribute("hasAddress", klient.getAdresId() != null); //jakby był klient bez adresu jeszcze
         return "Rejestracja";
     }
 
@@ -84,17 +86,17 @@ public class KlientController {
     }
 
 
-    @GetMapping("/edytuj/{klientId}")
-    public String editKlientForm(@PathVariable("klientId") int klientId, Model model) {
-        KlientDto klient = klientService.findKlientById(klientId);
+    @GetMapping("/edytuj")
+    public String editKlientForm(HttpSession session, Model model) {
+        KlientDto klient = klientService.findKlientById((Integer) session.getAttribute("userId"));
         model.addAttribute("klient", klient);
 //        return "EdytujKlienta";
         return "TwojeKonto";
     }
 
     // Metoda do obsługi zapisu zmian danych klienta i adresu
-    @PostMapping("/edytuj/{klientId}")
-    public String edytujKlienta(@PathVariable("klientId") int klientId,
+    @PostMapping("/edytuj")
+    public String edytujKlienta(HttpSession session,
                                 @RequestParam("imie") String imie,
                                 @RequestParam("nazwisko") String nazwisko,
                                 @RequestParam("email") String email,
@@ -104,6 +106,10 @@ public class KlientController {
                                 @RequestParam("nrMieszkania") String nrMieszkania,
                                 @RequestParam("kodPocztowy") String kodPocztowy,
                                 @RequestParam("miejscowosc") String miejscowosc) {
+        Integer klientId = (Integer) session.getAttribute("klientId");
+        if (klientId == null) {
+            return "redirect:/logowanie"; // or some other appropriate action
+        }
         // Pobierz klienta z bazy danych
         KlientEntity klient = klientRepository.findById(klientId).orElse(null);
         if (klient != null) {
@@ -111,25 +117,32 @@ public class KlientController {
             klient.setImie(imie);
             klient.setNazwisko(nazwisko);
             klient.setEmail(email);
-            klient.setHaslo(haslo);
+            klient.setHaslo(passwordEncoder.encode(haslo));
             klientRepository.save(klient);
 
-            // Pobierz adres klienta z bazy danych
+            // Pobierz adres klienta z bazy danych lub utwórz nowy
             AdresEntity adres = klient.getAdresId();
-            if (adres != null) {
-                // Zaktualizuj dane adresowe
-                adres.setUlica(ulica);
-                adres.setNrDomu(nrDomu);
-                adres.setNrMieszkania(nrMieszkania);
-                adres.setKodPocztowy(kodPocztowy);
-                adres.setMiejscowosc(miejscowosc);
-                adresRepository.save(adres);
+            if (adres == null) {
+                adres = new AdresEntity();
+            }
+            // Zaktualizuj dane adresowe
+            adres.setUlica(ulica);
+            adres.setNrDomu(nrDomu);
+            adres.setNrMieszkania(nrMieszkania);
+            adres.setKodPocztowy(kodPocztowy);
+            adres.setMiejscowosc(miejscowosc);
+            adresRepository.save(adres);
+
+            // Przypisz adres do klienta jeśli nowy
+            if (klient.getAdresId() == null) {
+                klient.setAdresId(adres);
+                klientRepository.save(klient);
             }
         }
         // Przekieruj użytkownika na odpowiednią stronę po zapisie zmian
-//        return "redirect:/klienci/" + klientId;
         return "StronaGlowna";
     }
+
 
 
 }

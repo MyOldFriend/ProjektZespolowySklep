@@ -1,6 +1,7 @@
 package com.example.sklep2xd.Config;
 
 import com.example.sklep2xd.Service.MyUserDetailsService;
+import jakarta.servlet.http.HttpSessionListener;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -61,5 +62,9 @@ public class WebSecurityConfig {
 
 
         return http.build();
+    }
+    @Bean
+    public HttpSessionListener httpSessionListener(){
+        return new SessionListener();
     }
 }
