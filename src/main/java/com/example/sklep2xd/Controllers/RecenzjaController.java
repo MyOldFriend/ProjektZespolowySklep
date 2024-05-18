@@ -7,6 +7,7 @@ import com.example.sklep2xd.Models.RecenzjaEntity;
 import com.example.sklep2xd.Repositories.KlientRep;
 import com.example.sklep2xd.Repositories.ProduktRep;
 import com.example.sklep2xd.Service.RecenzjaService;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -59,9 +60,9 @@ public class RecenzjaController {
     public String saveRecenzja(@ModelAttribute("recenzja") RecenzjaEntity recenzja,
                                @RequestParam("review") String review,
                                @RequestParam("rating") int rating,
-                               @RequestParam("idKlienta") int idKlienta,
+                               HttpSession session,
                                @RequestParam("idProd") int idProd) {
-        KlientEntity klient = klientRep.findByIdKlienta(idKlienta);
+        KlientEntity klient = klientRep.findByIdKlienta((int) session.getAttribute("userId"));
         ProduktEntity produkt = produktRep.findByIdProduktu(idProd);
 
         recenzja.setTresc(review);

@@ -76,14 +76,17 @@ public class KoszykController {
         koszykService.saveKoszyk(koszykEntity);
         return "Koszyk";
     }
-
-    @PostMapping("/dodajDoKoszyka")
-    public String dodajDoKoszyka(HttpSession session,
-                                 @RequestParam("idProduktu") int idProduktu,
-                                 Model model) {
-        // Tutaj dodaj logikę dodawania produktu do koszyka
-        return "redirect:/lista-produktow"; // Przekierowanie do listy produktów lub innego widoku
-    }
+//
+//    @PostMapping("/dodajDoKoszyka")
+//    public String dodajDoKoszyka(HttpSession session,
+//                                 @RequestParam("idProduktu") int idProduktu,
+//                                 Model model) {
+//        // Tutaj dodaj logikę dodawania produktu do koszyka
+//        KlientEntity klient = klientRep.findByIdKlienta((int) session.getAttribute("userId"));
+//        ProduktEntity produkt = produktRep.findByIdProduktu(idProduktu);
+//        //jak dodać ilość?
+//        return "redirect:/lista-produktow"; // Przekierowanie do listy produktów lub innego widoku
+//    }
 
 
     @PostMapping("/usun/{idp}")
@@ -98,7 +101,7 @@ public class KoszykController {
     public String wyczyscKosszykKlienta(HttpSession session){
         int idKlienta = (int) session.getAttribute("userId");
         koszykService.deleteKoszykKlienta(idKlienta);
-        return "koszyk";
+        return "Koszyk";
     }
     @PostMapping("/zlozzamowienie") //dalej trzeba obczaić jak uzyskać Id klienta (może z JWT?)
     @Transactional
