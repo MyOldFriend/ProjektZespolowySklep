@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
@@ -16,10 +15,9 @@ import java.util.List;
 @RequestMapping("/home")
 public class StronaGlownaController {
 
-
     private final ProduktService produktService;
     private final KlientService klientService;
-    //trzeba wymyśleć jak po logowaniu uzyskać dane klienta aby wyświetlić jego nazwę, c'nie?
+
     @Autowired
     public StronaGlownaController(ProduktService produktService, KlientService klientService) {
         this.produktService = produktService;
@@ -27,16 +25,17 @@ public class StronaGlownaController {
     }
 
     @GetMapping
-    public String homepage(){
+    public String homepage(Model model) {
+        List<ProduktDto> koszulki = produktService.findProdukyByKategoria_KategoriaId(1);
+        List<ProduktDto> spodnie = produktService.findProdukyByKategoria_KategoriaId(2);
+        List<ProduktDto> bluzy = produktService.findProdukyByKategoria_KategoriaId(4);
+        List<ProduktDto> kurtki = produktService.findProdukyByKategoria_KategoriaId(3);
+
+        model.addAttribute("koszulki", koszulki.subList(0, Math.min(koszulki.size(), 5)));
+        model.addAttribute("spodnie", spodnie.subList(0, Math.min(spodnie.size(), 5)));
+        model.addAttribute("bluzy", bluzy.subList(0, Math.min(bluzy.size(), 5)));
+        model.addAttribute("kurtki", kurtki.subList(0, Math.min(kurtki.size(), 5)));
+
         return "StronaGlowna";
     }
-
-    @GetMapping("/{idKat}")
-    public String podgladKategorii(@PathVariable("idKat")int idKat, Model model){
-        List<ProduktDto> produkty = produktService.findProdukyByKategoria_KategoriaId(idKat);
-        model.addAttribute("header", "Lista Produktów");
-        model.addAttribute("produktList", produkty.subList(0, Math.min(produkty.size(), 5))); // Ogranicz do 4 produktów
-        return "miniwidok";
-    }
-
 }

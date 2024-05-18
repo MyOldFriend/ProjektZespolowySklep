@@ -59,23 +59,27 @@ public class KoszykController {
             return "Koszyk";
         }
 
-    @PostMapping("/dodajDoKoszyka/{idProduktu}/{ilosc}") //ma być wywoływane na stronach z produktami
+    @PostMapping("/dodajDoKoszyka/{idProduktu}/{ilosc}")
     public String dodajDoKoszyka(HttpSession session,
                                  @PathVariable("idProduktu") int idProduktu,
-                                 @PathVariable("ilosc") int ilosc, Model model){
-        int idKlienta = (int) session.getAttribute("userId");
-        KlientEntity klient = klientRep.findByIdKlienta(idKlienta);
+                                 @PathVariable("ilosc") int ilosc, Model model) {
+        Integer klientId = (Integer) session.getAttribute("klientId");
+        if (klientId == null) {
+            return "redirect:/logowanie"; // Redirect to login if klientId is not found in the session
+        }
+        KlientEntity klient = klientRep.findByIdKlienta(klientId);
         ProduktEntity produkt = produktRep.findByIdProduktu(idProduktu);
-        model.addAttribute("Koszyk1",produkt);
-        KoszykPK id = new KoszykPK(idKlienta, idProduktu);
+        model.addAttribute("Koszyk1", produkt);
+        KoszykPK id = new KoszykPK(klientId, idProduktu);
         KoszykEntity koszykEntity = new KoszykEntity();
         koszykEntity.setKpk(id);
         koszykEntity.setIlosc(ilosc);
         koszykEntity.setKlient(klient);
         koszykEntity.setProdukt(produkt);
         koszykService.saveKoszyk(koszykEntity);
-        return "Koszyk";
+        return "redirect:/koszyk";
     }
+
 //
 //    @PostMapping("/dodajDoKoszyka")
 //    public String dodajDoKoszyka(HttpSession session,
@@ -91,64 +95,68 @@ public class KoszykController {
 
     @PostMapping("/usun/{idp}")
     public String usunZKoszyka(HttpSession session, @PathVariable("idp") int idProduktu, RedirectAttributes redirectAttributes) {
-        int idKlienta = (int) session.getAttribute("userId");
+        int idKlienta = (int) session.getAttribute("klientId");
         koszykService.deleteKoszyk(idKlienta, idProduktu);
         redirectAttributes.addFlashAttribute("successMessage", "Produkt został usunięty z koszyka.");
-        return "redirect:/koszyk/" + idKlienta;
+        return "redirect:/koszyk";
     }
 
     @DeleteMapping("/wyczyscKoszyk")
     public String wyczyscKosszykKlienta(HttpSession session){
-        int idKlienta = (int) session.getAttribute("userId");
+        int idKlienta = (int) session.getAttribute("klientId");
         koszykService.deleteKoszykKlienta(idKlienta);
-        return "Koszyk";
+        return "redirect:/koszyk";
     }
-    @PostMapping("/zlozzamowienie") //dalej trzeba obczaić jak uzyskać Id klienta (może z JWT?)
+    @PostMapping("/zlozzamowienie")
     @Transactional
-    public String zlozZamowienie(HttpSession session){
-        //Uzyskaj potrzebne dane klienta
-        int idKlienta = (int) session.getAttribute("userId");
-        KlientEntity klient = klientRep.findByIdKlienta(idKlienta);
-//        System.out.println("Dane klienta" + klient.getImie() +" "+ klient.getAdresId().getIdAdresu());
-        //utwórz nowe zamówienie dla id klienta
+    public String zlozZamowienie(HttpSession session, Model model){
+        Integer klientId = (Integer) session.getAttribute("klientId");
+        if (klientId == null) {
+            return "redirect:/logowanie"; // Redirect to login if klientId is not found in the session
+        }
+        KlientEntity klient = klientRep.findByIdKlienta(klientId);
         ZamowienieEntity zamowienie = new ZamowienieEntity();
-        int idZamowienia = zamowienie.getIdZamowienia(); //przypisuje 0 - tego nie chcemy - a może jendak nie w tym problem bo id prawidlowo przypisuje później chyba
-//        System.out.println("Zamowenie nr"+idZamowienia);
         zamowienie.setCzyZaplacone(false);
         zamowienie.setStatus("Złożone");
-        zamowienie.setKlientByKlientId(klientRep.findByIdKlienta(idKlienta));
+        zamowienie.setKlientByKlientId(klientRep.findByIdKlienta(klientId));
 
-        //Kopia adresu klienta aby dodać adres wysyłki
-        AdresEntity adresKlienta = adresRep.findByIdAdresu(klient.getAdresId().getIdAdresu());
-        AdresEntity adresZamowienia = new AdresEntity();
-        adresZamowienia.setKraj(adresKlienta.getKraj());
-        adresZamowienia.setMiejscowosc(adresKlienta.getMiejscowosc());
-        adresZamowienia.setKodPocztowy(adresKlienta.getKodPocztowy());
-        adresZamowienia.setUlica(adresKlienta.getUlica());
-        adresZamowienia.setNrDomu(adresKlienta.getNrDomu());
-        if(adresKlienta.getNrMieszkania()!=null)
-            adresZamowienia.setNrMieszkania(adresKlienta.getNrMieszkania());
-        adresRep.save(adresZamowienia);
+        // Check if the klient has an address
+        AdresEntity adresZamowienia = null;
+        if (klient.getAdresId() != null) {
+            AdresEntity adresKlienta = adresRep.findByIdAdresu(klient.getAdresId().getIdAdresu());
+            adresZamowienia = new AdresEntity();
+            adresZamowienia.setKraj(adresKlienta.getKraj());
+            adresZamowienia.setMiejscowosc(adresKlienta.getMiejscowosc());
+            adresZamowienia.setKodPocztowy(adresKlienta.getKodPocztowy());
+            adresZamowienia.setUlica(adresKlienta.getUlica());
+            adresZamowienia.setNrDomu(adresKlienta.getNrDomu());
+            if (adresKlienta.getNrMieszkania() != null) {
+                adresZamowienia.setNrMieszkania(adresKlienta.getNrMieszkania());
+            }
+            adresRep.save(adresZamowienia);
+        }
 
-        //i przypisujemy adres do zamowienia
-        zamowienie.setAdresByAdresId(adresZamowienia);
+        // Assign address to order if it exists
+        if (adresZamowienia != null) {
+            zamowienie.setAdresByAdresId(adresZamowienia);
+        }
         zamowienieRep.save(zamowienie);
 
-        //pętlą przejdź przez rekordy koszyka dla idklienta i iteracyjnie wypełnij koszykZamowienie
-        List<KoszykDto> koszyk = koszykService.findKoszykByKlientId(idKlienta);
+        // Fill ProduktZamowienie with cart records for the client
+        List<KoszykDto> koszyk = koszykService.findKoszykByKlientId(klientId);
         for (KoszykDto koszykDto : koszyk) {
             ProduktZamowienieEntity produktZamowienie = new ProduktZamowienieEntity();
             ProduktZamowieniePK id = new ProduktZamowieniePK(zamowienie.getIdZamowienia(), koszykDto.getProdukt().getIdProduktu());
-
             produktZamowienie.setIdpz(id);
             produktZamowienie.setProduktByProduktId(koszykDto.getProdukt());
             produktZamowienie.setZamowienieByZamowienieId(zamowienie);
             produktZamowienie.setIlosc(koszykDto.getIlosc());
-
-            produktZamowienieRep.save(produktZamowienie); // Ensure this is called after all fields are set
+            produktZamowienieRep.save(produktZamowienie);
         }
 
-//        return "PodsumowanieZamowienia"; //widok do zrobienia
-        return "DaneDostawy"; //widok do zrobienia
+        model.addAttribute("klient", klient);
+        model.addAttribute("adres", adresZamowienia);
+        koszykService.deleteKoszykKlienta(klientId);
+        return "DaneDostawy"; // Return to the appropriate view
     }
 }

@@ -44,7 +44,7 @@
         <p class="product-quantity" th:text="'Ilość: ' + ${koszyk.ilosc}"></p>
     </div>
     <div class="delete-button-container">
-        <form th:action="@{'/koszyk/usun/' + ${idKlienta} + '/' + ${koszyk.produkt.idProduktu}}" method="post">
+        <form th:action="@{'/koszyk/usun/' + ${koszyk.produkt.idProduktu}}" method="post">
             <button type="submit" class="close-button">
                 <img src="/Grafiki/bin.png" alt="Usuń ikonę">
             </button>
@@ -65,8 +65,9 @@
             <p th:text="'' + ${sumaCen} + ' zł'"></p>
         </div>
     </div>
-    <!-- Przycisk do potwierdzenia zakupu -->
+    <!-- Przycisk do potwierdzenia zakupu --><form th:action="@{/koszyk/zlozzamowienie}" method="post">
     <button type="submit" class="button-confirm">Zatwierdź</button>
+</form>
 </div>
 
 

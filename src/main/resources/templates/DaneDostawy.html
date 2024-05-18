@@ -12,7 +12,6 @@
 
 <div class="header">
     <div class="icon-container-left">
-<!--        <img src="" th:src="@{/Grafiki/search.png}" alt="Ikona lewa" class="icon">-->
         <img src="" th:src="@{/Grafiki/user.png}" alt="Ikona prawa" class="icon">
     </div>
     <div class="logo-container">
@@ -20,7 +19,6 @@
     </div>
     <div class="icon-container-right">
         <img src="" th:src="@{/Grafiki/shopping-bag.png}" alt="Ikona prawa" class="icon">
-<!--        <img src="" th:src="@{/Grafiki/user.png}" alt="Ikona prawa" class="icon">-->
     </div>
 </div>
 
@@ -34,56 +32,54 @@
 </div>
 
 <div class="container">
-    <form id="delivery-form" action="#" th:action="@{/klienci/edytuj/{klientId}(klientId=${klient.idKlienta})}" method="post">
-    <h2>Podaj dane dostawy</h2>
-    <div class="delivery-details">
-        <div class="left-section">
-            <input type="text" placeholder="Imię" th:value="${klient.imie}">
-            <input type="text" placeholder="Nazwisko" th:value="${klient.nazwisko}">
-            <input type="text" name="ulica" placeholder="Ulica" th:value="${klient.adresId.ulica}">
-            <input type="text" name="nrDomu" placeholder="Nr domu" th:value="${klient.adresId.nrDomu}">
-            <input type="text" name="nrMieszkania" placeholder="Nr mieszkania" th:value="${klient.adresId.nrMieszkania}">
-            <input type="text" name="kodPocztowy" placeholder="Kod pocztowy" th:value="${klient.adresId.kodPocztowy}">
-            <input type="text" name="miejscowosc" placeholder="Miejscowość" th:value="${klient.adresId.miejscowosc}">
-            <input type="text" placeholder="Telefon" th:value="${klient.telefon}">
-            <input type="text" placeholder="E-mail" th:value="${klient.email}">
-        </div>
-        <div class="right-section">
-            <p class="text-way">Wybierz sposób płatności:</p>
-            <input type="radio" id="option1" name="option" value="Przelew">
-            <label for="option1">Przelew</label><br>
-            <input type="radio" id="option2" name="option" value="Karta">
-            <label for="option2">Karta</label><br>
-            <input type="radio" id="option3" name="option" value="BLIK">
-            <label for="option3">BLIK</label><br>
-
-            <p class="text-way">Wybierz spoób dostawy:</p>
-
-            <input type="radio" id="option4" name="option2" value="Kurier">
-            <label for="option4">Kurier</label><span class="price">19.99 PLN</span><br>
-
-            <input type="radio" id="option5" name="option2" value="Paczkomat InPost">
-            <label for="option5">Paczkomat InPost</label><span class="price">14.99 PLN</span><br>
-
-            <input type="radio" id="option6" name="option2" value="Odbiór osobisty">
-            <label for="option6">Odbiór osobisty</label><span class="price">0 PLN</span><br>
-
-            <hr>
-
-            <div class="option-block">
-                <p class="text-way">Suma:</p>
-                <div class="price">
-                    <p>14.99 PLN</p>
-                </div>
+    <form id="delivery-form" th:action="@{/DaneDostawy/submitDaneDostawy}" method="post">
+        <h2>Podaj dane dostawy</h2>
+        <div class="delivery-details">
+            <div class="left-section">
+                <input type="text" placeholder="Imię" th:value="${klient.imie}">
+                <input type="text" placeholder="Nazwisko" th:value="${klient.nazwisko}">
+                <input type="text" name="ulica" placeholder="Ulica" th:if="${adres != null}" th:value="${adres.ulica}">
+                <input type="text" name="nrDomu" placeholder="Nr domu" th:if="${adres != null}" th:value="${adres.nrDomu}">
+                <input type="text" name="nrMieszkania" placeholder="Nr mieszkania" th:if="${adres != null}" th:value="${adres.nrMieszkania}">
+                <input type="text" name="kodPocztowy" placeholder="Kod pocztowy" th:if="${adres != null}" th:value="${adres.kodPocztowy}">
+                <input type="text" name="miejscowosc" placeholder="Miejscowość" th:if="${adres != null}" th:value="${adres.miejscowosc}">
+                <input type="text" name="kraj" placeholder="Kraj" th:if="${adres != null}" th:value="${adres.kraj}">
+                <input type="text" placeholder="Telefon" th:value="${klient.telefon}">
+                <input type="text" placeholder="E-mail" th:value="${klient.email}">
             </div>
-            <button type="submit">Zatwierdź</button>
+            <div class="right-section">
+                <p class="text-way">Wybierz sposób płatności:</p>
+                <input type="radio" id="option1" name="option" value="Przelew">
+                <label for="option1">Przelew</label><br>
+                <input type="radio" id="option2" name="option" value="Karta">
+                <label for="option2">Karta</label><br>
+                <input type="radio" id="option3" name="option" value="BLIK">
+                <label for="option3">BLIK</label><br>
+
+                <p class="text-way">Wybierz spoób dostawy:</p>
+
+                <input type="radio" id="option4" name="option2" value="Kurier">
+                <label for="option4">Kurier</label><span class="price">19.99 PLN</span><br>
+
+                <input type="radio" id="option5" name="option2" value="Paczkomat InPost">
+                <label for="option5">Paczkomat InPost</label><span class="price">14.99 PLN</span><br>
+
+                <input type="radio" id="option6" name="option2" value="Odbiór osobisty">
+                <label for="option6">Odbiór osobisty</label><span class="price">0 PLN</span><br>
+
+                <hr>
+
+                <div class="option-block">
+                    <p class="text-way">Suma:</p>
+                    <div class="price">
+                        <p>14.99 PLN</p>
+                    </div>
+                </div>
+                <button type="submit">Zatwierdź</button>
+            </div>
         </div>
-
-
-    </div>
     </form>
 </div>
-
 
 <footer>
     <p>Zawartość tej strony</p>
