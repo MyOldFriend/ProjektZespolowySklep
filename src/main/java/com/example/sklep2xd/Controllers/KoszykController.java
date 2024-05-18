@@ -6,6 +6,7 @@ import com.example.sklep2xd.Repositories.*;
 import com.example.sklep2xd.Service.KoszykService;
 import com.example.sklep2xd.Service.ProduktZamowienieService;
 import com.example.sklep2xd.Service.ZamowienieService;
+import jakarta.servlet.http.HttpSession;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -48,9 +49,9 @@ public class KoszykController {
 //        model.addAttribute("Koszyk", koszyk);
 //        return "Koszyk";
 //    }
-        @GetMapping("/{idKlienta}")
-        public String koszykKlienta(@PathVariable("idKlienta") int idKlienta, Model model){
-            List<KoszykDto> koszyk = koszykService.findKoszykByKlientId(idKlienta);
+        @GetMapping()
+        public String koszykKlienta(HttpSession session, Model model){
+            List<KoszykDto> koszyk = koszykService.findKoszykByKlientId((int) session.getAttribute("userId"));
             double sumaCen = KoszykService.obliczCeneKoszyka(koszyk);
             model.addAttribute("header", "Twój koszyk");
             model.addAttribute("Koszyk", koszyk);
@@ -58,10 +59,11 @@ public class KoszykController {
             return "Koszyk";
         }
 
-    @PostMapping("/dodajDoKoszyka/{idKlienta}/{idProduktu}/{ilosc}") //ma być wywoływane na stronach z produktami
-    public String dodajDoKoszyka(@PathVariable("idKlienta") int idKlienta,
+    @PostMapping("/dodajDoKoszyka/{idProduktu}/{ilosc}") //ma być wywoływane na stronach z produktami
+    public String dodajDoKoszyka(HttpSession session,
                                  @PathVariable("idProduktu") int idProduktu,
                                  @PathVariable("ilosc") int ilosc, Model model){
+        int idKlienta = (int) session.getAttribute("userId");
         KlientEntity klient = klientRep.findByIdKlienta(idKlienta);
         ProduktEntity produkt = produktRep.findByIdProduktu(idProduktu);
         model.addAttribute("Koszyk1",produkt);
@@ -76,7 +78,7 @@ public class KoszykController {
     }
 
     @PostMapping("/dodajDoKoszyka")
-    public String dodajDoKoszyka(@RequestParam("idKlienta") int idKlienta,
+    public String dodajDoKoszyka(HttpSession session,
                                  @RequestParam("idProduktu") int idProduktu,
                                  Model model) {
         // Tutaj dodaj logikę dodawania produktu do koszyka
@@ -84,22 +86,25 @@ public class KoszykController {
     }
 
 
-    @PostMapping("/usun/{idk}/{idp}")
-    public String usunZKoszyka(@PathVariable("idk") int idKlienta, @PathVariable("idp") int idProduktu, RedirectAttributes redirectAttributes) {
+    @PostMapping("/usun/{idp}")
+    public String usunZKoszyka(HttpSession session, @PathVariable("idp") int idProduktu, RedirectAttributes redirectAttributes) {
+        int idKlienta = (int) session.getAttribute("userId");
         koszykService.deleteKoszyk(idKlienta, idProduktu);
         redirectAttributes.addFlashAttribute("successMessage", "Produkt został usunięty z koszyka.");
         return "redirect:/koszyk/" + idKlienta;
     }
 
-    @DeleteMapping("/{idKlienta}")
-    public String wyczyscKosszykKlienta(@PathVariable("idKlienta") int idKlienta){
+    @DeleteMapping("/wyczyscKoszyk")
+    public String wyczyscKosszykKlienta(HttpSession session){
+        int idKlienta = (int) session.getAttribute("userId");
         koszykService.deleteKoszykKlienta(idKlienta);
         return "koszyk";
     }
-    @PostMapping("/{idKlienta}/zlozzamowienie") //dalej trzeba obczaić jak uzyskać Id klienta (może z JWT?)
+    @PostMapping("/zlozzamowienie") //dalej trzeba obczaić jak uzyskać Id klienta (może z JWT?)
     @Transactional
-    public String zlozZamowienie(@PathVariable("idKlienta") int idKlienta){
+    public String zlozZamowienie(HttpSession session){
         //Uzyskaj potrzebne dane klienta
+        int idKlienta = (int) session.getAttribute("userId");
         KlientEntity klient = klientRep.findByIdKlienta(idKlienta);
 //        System.out.println("Dane klienta" + klient.getImie() +" "+ klient.getAdresId().getIdAdresu());
         //utwórz nowe zamówienie dla id klienta
