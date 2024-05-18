@@ -100,13 +100,13 @@ public class KlientController {
                                 @RequestParam("imie") String imie,
                                 @RequestParam("nazwisko") String nazwisko,
                                 @RequestParam("email") String email,
-                                @RequestParam("haslo") String haslo,
+                                @RequestParam(value = "haslo", required = false) String haslo,
                                 @RequestParam("ulica") String ulica,
                                 @RequestParam("nrDomu") String nrDomu,
                                 @RequestParam("nrMieszkania") String nrMieszkania,
                                 @RequestParam("kodPocztowy") String kodPocztowy,
                                 @RequestParam("miejscowosc") String miejscowosc) {
-        Integer klientId = (Integer) session.getAttribute("klientId");
+        Integer klientId = (Integer) session.getAttribute("userId");
         if (klientId == null) {
             return "redirect:/logowanie"; // or some other appropriate action
         }
@@ -117,7 +117,9 @@ public class KlientController {
             klient.setImie(imie);
             klient.setNazwisko(nazwisko);
             klient.setEmail(email);
-            klient.setHaslo(passwordEncoder.encode(haslo));
+            if (haslo != null && !haslo.isEmpty()) {
+                klient.setHaslo(passwordEncoder.encode(haslo));
+            }
             klientRepository.save(klient);
 
             // Pobierz adres klienta z bazy danych lub utwórz nowy
@@ -142,7 +144,4 @@ public class KlientController {
         // Przekieruj użytkownika na odpowiednią stronę po zapisie zmian
         return "StronaGlowna";
     }
-
-
-
 }
