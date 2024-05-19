@@ -49,11 +49,6 @@ public class PracownikServiceimpl implements PracownikService {
         pracownikRep.save(pracownik);
     }
 
-//    @Override
-//    public void updatePracownik(PracownikEntity pracownik) {
-//        pracownikRep.save(pracownik);
-//    }
-
     @Override
     public PracownikDto zalogujPracownika(String login, String haslo) {
         PracownikEntity pracownik = pracownikRep.findByLogin(login);
@@ -90,7 +85,6 @@ public class PracownikServiceimpl implements PracownikService {
                 .roles(pracownik.getRoles())
                 .build();
     }
-
 
     @Override
     public PracownikEntity mapToPracownikEntity(PracownikDto pracownikDto) {

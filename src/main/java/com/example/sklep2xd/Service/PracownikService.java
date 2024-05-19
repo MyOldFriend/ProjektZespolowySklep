@@ -9,7 +9,7 @@ public interface PracownikService {
     List<PracownikDto> findAllPracownicy();
     PracownikDto findPracownikById(int id);
     PracownikEntity savePracownik(PracownikEntity pracownik);
-    void updatePracownik(PracownikEntity pracownikDto);
+    void updatePracownik(PracownikEntity pracownik);
     void removePracownikById(int id);
     PracownikDto zalogujPracownika(String login, String haslo);
     boolean czyAdmin(PracownikDto pracownikDto);

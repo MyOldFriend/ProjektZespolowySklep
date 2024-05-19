@@ -7,20 +7,19 @@
     <link rel="stylesheet" href="/css/lista_pracownikow.css">
     <link rel="icon" th:href="@{/Grafiki/ff.ico}" type="image/png" size="32">
     <title>Lista pracowników</title>
+    <meta name="_csrf" th:content="${_csrf.token}">
+    <meta name="_csrf_header" th:content="${_csrf.headerName}">
 </head>
 <body>
 
 <div class="header">
-    <div class="icon-container-left">
-        <!--        <img src="" th:src="@{/Grafiki/search.png}" alt="Ikona lewa" class="icon">-->
-    </div>
+    <div class="icon-container-left"></div>
     <div class="logo-container">
         <a href="/Pracownik/administrator">
             <img src="" th:src="@{/Grafiki/ff.png}" alt="Logo" class="logo">
         </a>
     </div>
     <div class="icon-container-right">
-        <!--        <img src="" th:src="@{/Grafiki/shopping-bag.png}" alt="Ikona prawa" class="icon">-->
         <img src="" th:src="@{/Grafiki/user.png}" alt="Ikona prawa" class="icon">
     </div>
 </div>
@@ -38,7 +37,7 @@
 <p class="employee-text">Lista pracowników</p>
 
 <div th:each="pracownik : ${pracownikList}">
-    <div class="container">
+    <div class="container" th:id="'pracownik-' + ${pracownik.idPracownika}">
         <div class="employee-info">
             <div class="left-info">
                 <p th:text="${pracownik.imie} + ' ' + ${pracownik.nazwisko}"></p>
@@ -50,10 +49,9 @@
             <div class="right-info">
                 <p class="edit-button">
                     <a th:href="@{edytuj/{pracownikId}(pracownikId=${pracownik.idPracownika})}">Edytuj</a>
-                    <button class="delete-button" th:attr="onclick='deletePracownik(\'' + ${pracownik.idPracownika} + '\')'">&#10006;</button>
+                    <button class="delete-button" th:onclick="'deletePracownik(' + ${pracownik.idPracownika} + ');'">&#10006;</button>
                 </p>
             </div>
-
         </div>
     </div>
 </div>
@@ -79,19 +77,27 @@
             footer.style.width = "100%";
         }
     };
-</script>
-<script>
+
     function deletePracownik(pracownikId) {
         if (confirm("Czy na pewno chcesz usunąć tego pracownika?")) {
+            const csrfToken = document.querySelector('meta[name="_csrf"]').getAttribute('content');
+            const csrfHeader = document.querySelector('meta[name="_csrf_header"]').getAttribute('content');
             fetch('/Pracownik/usun/' + pracownikId, {
-                method: 'DELETE'
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json',
+                    [csrfHeader]: csrfToken
+                }
             })
                 .then(response => {
                     if (response.ok) {
                         alert("Pracownik został usunięty.");
-                        // Przekierowanie na listę pracowników
+                        var elementToRemove = document.getElementById('pracownik-' + pracownikId);
+                        if (elementToRemove) {
+                            elementToRemove.parentNode.removeChild(elementToRemove);
+                        }
                     } else {
-                        window.location.href = 'http://localhost:8081/Pracownik/lista';
+                        alert("Błąd usuwania pracownika.");
                     }
                 })
                 .catch(error => {

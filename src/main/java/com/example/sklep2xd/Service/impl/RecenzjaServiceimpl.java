@@ -1,52 +1,55 @@
 package com.example.sklep2xd.Service.impl;
 
 import com.example.sklep2xd.Dto.RecenzjaDto;
+import com.example.sklep2xd.Models.KlientEntity;
+import com.example.sklep2xd.Models.ProduktEntity;
 import com.example.sklep2xd.Models.RecenzjaEntity;
+import com.example.sklep2xd.Repositories.KlientRep;
+import com.example.sklep2xd.Repositories.ProduktRep;
 import com.example.sklep2xd.Repositories.RecenzjaRep;
 import com.example.sklep2xd.Service.RecenzjaService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Controller
+@Service
 public class RecenzjaServiceimpl implements RecenzjaService {
 
-    private RecenzjaRep recenzjaRep;
+    private final RecenzjaRep recenzjaRep;
+    private final KlientRep klientRep;
+    private final ProduktRep produktRep;
 
     @Autowired
-    public  RecenzjaServiceimpl (RecenzjaRep recenzjaRep){
+    public RecenzjaServiceimpl(RecenzjaRep recenzjaRep, KlientRep klientRep, ProduktRep produktRep) {
         this.recenzjaRep = recenzjaRep;
-
+        this.klientRep = klientRep;
+        this.produktRep = produktRep;
     }
 
-    private RecenzjaDto mapToRecenzjaDto(RecenzjaEntity recenzja){
-        RecenzjaDto recenzjaDto = RecenzjaDto.builder()
+    private RecenzjaDto mapToRecenzjaDto(RecenzjaEntity recenzja) {
+        return RecenzjaDto.builder()
                 .idRecenzji(recenzja.getIdRecenzji())
                 .ocena(recenzja.getOcena())
                 .tresc(recenzja.getTresc())
                 .produkt(recenzja.getProduktByProduktId())
                 .klient(recenzja.getKlientByKlientId())
                 .build();
-        return recenzjaDto;
     }
 
     @Override
     public List<RecenzjaDto> findAllRecenzje() {
-        List<RecenzjaEntity> recenzje = recenzjaRep.findAll();
-        return recenzje.stream().map((recenzja) -> mapToRecenzjaDto(recenzja)).collect(Collectors.toList());
+        return recenzjaRep.findAll().stream()
+                .map(this::mapToRecenzjaDto)
+                .collect(Collectors.toList());
     }
 
     @Override
     public RecenzjaDto findRecenzjaById(int id) {
         RecenzjaEntity recenzja = recenzjaRep.findByIdRecenzji(id);
-        if (recenzja != null) {
-            return mapToRecenzjaDto(recenzja);
-        }
-        return null;
+        return recenzja != null ? mapToRecenzjaDto(recenzja) : null;
     }
-
 
     @Override
     public RecenzjaEntity saveRecenzja(RecenzjaEntity recenzja) {
@@ -55,15 +58,14 @@ public class RecenzjaServiceimpl implements RecenzjaService {
 
     @Override
     public List<RecenzjaDto> findRecenzjeByProductId(int id) {
-        List<RecenzjaEntity> recenzje = recenzjaRep.findByProdukt_IdProduktu(id);
-        return recenzje.stream().map(this::mapToRecenzjaDto).collect(Collectors.toList());
+        return recenzjaRep.findByProdukt_IdProduktu(id).stream()
+                .map(this::mapToRecenzjaDto)
+                .collect(Collectors.toList());
     }
-
 
     @Override
     public void removeRecenzja(int idR) {
-        RecenzjaEntity recenzja = recenzjaRep.findByIdRecenzji(idR);
-        recenzjaRep.delete(recenzja);
+        recenzjaRep.deleteById(idR);
     }
 
     @Override
@@ -72,9 +74,7 @@ public class RecenzjaServiceimpl implements RecenzjaService {
         if (recenzja != null) {
             recenzja.setOcena(recenzjaDto.getOcena());
             recenzja.setTresc(recenzjaDto.getTresc());
-            // Możesz również zaktualizować inne pola recenzji
             recenzjaRep.save(recenzja);
         }
     }
-
 }

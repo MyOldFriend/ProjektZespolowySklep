@@ -6,6 +6,8 @@ import com.example.sklep2xd.Models.Role;
 import com.example.sklep2xd.Service.PracownikService;
 import com.example.sklep2xd.Service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -75,22 +77,6 @@ public class PracownikController {
         return "EdytujDanePracownika";
     }
 
-//    @PostMapping("/edytuj/{pracownikId}")
-//    public String updatePracownik(@PathVariable("pracownikId") int pracownikId, @ModelAttribute("pracownik") PracownikDto pracownikDto, @RequestParam("role") int roleId) {
-//        if (pracownikDto.getHaslo() != null && !pracownikDto.getHaslo().isEmpty()) {
-//            String pass = passwordEncoder.encode(pracownikDto.getHaslo());
-//            pracownikDto.setHaslo(pass);
-//        }
-//
-//        PracownikEntity pracownik = pracownikService.mapToPracownikEntity(pracownikDto);
-//        Role role = roleService.findRoleById(roleId);
-//        pracownik.setRoles(Collections.singletonList(role));
-//
-//        pracownik.setIdPracownika(pracownikId);
-//        pracownikService.updatePracownik(pracownikDto);
-//        return "redirect:/Pracownik/lista";
-//    }
-
     @PostMapping("/edytuj/{pracownikId}")
     public String updatePracownik(@PathVariable("pracownikId") int pracownikId,
                                   @ModelAttribute("pracownikEdit") PracownikDto pracownikDto,
@@ -110,10 +96,15 @@ public class PracownikController {
         return "redirect:/Pracownik/lista";
     }
 
-
     @DeleteMapping("/usun/{pracownikId}")
-    public String deletePracownik(@PathVariable("pracownikId") int pracownikId) {
-        pracownikService.removePracownikById(pracownikId);
-        return "redirect:/Pracownik/lista";
+    @ResponseBody
+    public ResponseEntity<Void> deletePracownik(@PathVariable("pracownikId") int pracownikId) {
+        try {
+            pracownikService.removePracownikById(pracownikId);
+            return ResponseEntity.ok().build();
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
     }
+
 }
