@@ -32,7 +32,7 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
 
         if (authentication.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_ADMIN"))) {
             response.sendRedirect("/Pracownik/administrator");
-        } else if (authentication.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_PRACOWNIK"))) {
+        } else if (authentication.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_EMPLOYEE"))) {
             response.sendRedirect("/Pracownik/dzialzamowien");
         } else if (authentication.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_KLIENT"))) {
             response.sendRedirect("/home");

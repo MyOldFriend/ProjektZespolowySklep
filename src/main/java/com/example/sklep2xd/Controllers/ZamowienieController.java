@@ -65,11 +65,12 @@ public class ZamowienieController {
     @GetMapping("/edytuj/{zamowienieId}")
     public String editZamowienieForm(@PathVariable("zamowienieId") int zamowienieId, Model model) {
         List<ProduktZamowienieDto> produktyZamowienia = produktZamowienieService.findProduktZamowieniaByIdZamowienia(zamowienieId);
-        ZamowienieDto zamowienieDto = new ZamowienieDto(); // Fetch this from your service
+        ZamowienieDto zamowienieDto = zamowienieService.findZamowienieById(zamowienieId); // Fetch this from your service
         model.addAttribute("produktyZamowienia", produktyZamowienia);
         model.addAttribute("zamowienieDto", zamowienieDto);
         return "StatusZamowienia";
     }
+
 
     @PostMapping("/edytuj/{zamowienieId}")
     public String updateZamowienie(@PathVariable("zamowienieId") int zamowienieId, @ModelAttribute("zamowienie") ZamowienieDto zamowienieDto) {

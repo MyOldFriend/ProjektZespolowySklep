@@ -12,13 +12,19 @@
 
 <div class="header">
     <div class="icon-container-left">
-        <img src="" th:src="@{/Grafiki/user.png}" alt="Ikona prawa" class="icon">
+        <a href="/klienci/edytuj">
+            <img src="" th:src="@{/Grafiki/user.png}" alt="Ikona prawa" class="icon">
+        </a>
     </div>
     <div class="logo-container">
-        <img src="" th:src="@{/Grafiki/ff.png}" alt="Logo" class="logo">
+        <a href="/home">
+            <img src="" th:src="@{/Grafiki/ff.png}" alt="Logo" class="logo">
+        </a>
     </div>
     <div class="icon-container-right">
-        <img src="" th:src="@{/Grafiki/shopping-bag.png}" alt="Ikona prawa" class="icon">
+        <a href="/koszyk">
+            <img src="" th:src="@{/Grafiki/shopping-bag.png}" alt="Ikona prawa" class="icon">
+        </a>
     </div>
 </div>
 
@@ -86,6 +92,20 @@
 </footer>
 
 <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const optionElements = document.querySelectorAll('input[name="option2"]');
+        const totalPriceElement = document.getElementById('total-price');
+        let basePrice = parseFloat(totalPriceElement.textContent.replace(' PLN', '').trim());
+
+        optionElements.forEach(function (option) {
+            option.addEventListener('change', function () {
+                const selectedOptionPrice = parseFloat(this.getAttribute('data-price'));
+                const newTotalPrice = basePrice + selectedOptionPrice;
+                totalPriceElement.textContent = newTotalPrice.toFixed(2) + ' PLN';
+            });
+        });
+    });
+
     window.onload = function() {
         var footer = document.querySelector("footer");
         var bodyHeight = document.body.offsetHeight;

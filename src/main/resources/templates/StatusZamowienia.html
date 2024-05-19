@@ -43,7 +43,6 @@
     </div>
     <div class="informacje" th:object="${zamowienieDto}">
         <p>Łączna wartość zamówienia: <span th:text="*{wartoscZamowienia}">0</span> PLN</p>
-        <!-- <p>Numer faktury: <span th:text="*{numerFaktury}">474747</span></p> -->
         <div class="form-group">
             <select id="status" class="form-control" name="status">
                 <option value="" disabled selected>Kategoria</option>
