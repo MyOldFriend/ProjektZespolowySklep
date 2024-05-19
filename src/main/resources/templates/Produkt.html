@@ -13,17 +13,17 @@
 <div class="header">
     <div class="icon-container-left">
         <a href="/klienci/edytuj">
-            <img src="" th:src="@{/Grafiki/user.png}" alt="Ikona prawa" class="icon">
+            <img th:src="@{/Grafiki/user.png}" alt="Ikona prawa" class="icon">
         </a>
     </div>
     <div class="logo-container">
         <a href="/home">
-            <img src="" th:src="@{/Grafiki/ff.png}" alt="Logo" class="logo">
+            <img th:src="@{/Grafiki/ff.png}" alt="Logo" class="logo">
         </a>
     </div>
     <div class="icon-container-right">
         <a href="/koszyk">
-            <img src="" th:src="@{/Grafiki/shopping-bag.png}" alt="Ikona prawa" class="icon">
+            <img th:src="@{/Grafiki/shopping-bag.png}" alt="Ikona prawa" class="icon">
         </a>
     </div>
 </div>
@@ -39,11 +39,7 @@
 
 <div th:object="${produkt}" class="product">
     <div class="product-details">
-        <!--<img src="model-girl2.png" alt="Produkt" class="product-image">-->
-        <!--        <iframe src="https://drive.google.com/file/d/138AhcA2w7-mBhMp0Rdsqp0XtdX-5X19d/preview" alt="Produkt" class="product-image"></iframe>-->
         <img crossorigin="anonymous" th:src="@{${produkt.urlzdjecia}}" alt="Zdjęcie produktu" class="obrazek">
-        <!--<img src="pobierz (1).jpg" alt="Produkt" class="product-image">-->
-
     </div>
     <div class="product-details">
         <div class="product-description">
@@ -52,12 +48,14 @@
         </div>
         <p th:text="'Rozmiar: ' + ${produkt.rozmiar}"></p>
         <p th:text="'Opis: '+${produkt.opis}"></p>
-        <button class="orange-button">
-            <img src="" th:src="@{/Grafiki/shopping-bag.png}" alt="">
-            <p>Dodaj do koszyka</p>
-        </button>
+        <!-- Formularz dodawania do koszyka -->
+        <form th:action="@{/koszyk/dodajDoKoszyka/{idProduktu}/1(idProduktu=${produkt.idProduktu})}" method="post" style="display: inline;">
+            <button type="submit" class="orange-button">
+                <img th:src="@{/Grafiki/shopping-bag.png}" alt="">
+                <p>Dodaj do koszyka</p>
+            </button>
+        </form>
     </div>
-
 </div>
 
 <!-- Formularz dodawania recenzji -->
@@ -91,29 +89,19 @@
 
 
 <div th:each="recenzja : ${recenzjaList}" class="reviews">
-
-<!--    <h2>Recenzje</h2>-->
     <div class="rating">
-        <img th:each="star : ${#numbers.sequence(1, recenzja.ocena)}" src="" th:src="@{/Grafiki/star.png}" alt="Gwiazdka" class="star">
+        <img th:each="star : ${#numbers.sequence(1, recenzja.ocena)}" th:src="@{/Grafiki/star.png}" alt="Gwiazdka" class="star">
     </div>
     <p th:text="${recenzja.tresc}"></p>
 </div>
 
-<!--<div th:each="recenzja : ${recenzjaList}" class="reviews">-->
-<!--    <h2>Recenzje</h2>-->
-<!--    <div class="rating">-->
-<!--        <img th:each="star : ${#numbers.sequence(1, recenzja.ocena)}" src="" th:src="@{/Grafiki/star.png}" alt="Gwiazdka" class="star">-->
-<!--    </div>-->
-<!--    <p th:text="${recenzja.tresc}"></p>-->
-<!--</div>-->
-
-
-
-
 <footer>
     <p>Zawartość tej strony</p>
-    <img src="" th:src="@{/Grafiki/ff.png}" alt="Logo" class="logo-footer">
+    <img th:src="@{/Grafiki/ff.png}" alt="Logo" class="logo-footer">
 </footer>
+
+</body>
+</html>
 
 <script>
     window.onload = function() {
