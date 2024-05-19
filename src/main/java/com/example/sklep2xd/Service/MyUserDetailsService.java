@@ -32,14 +32,14 @@ public class MyUserDetailsService implements UserDetailsService {
             for (Role role : pracownik.getRoles()) {
                 authorities.add(new SimpleGrantedAuthority("ROLE_" + role.getName()));
             }
-            return new CustomUserDetails(pracownik.getLogin(), pracownik.getHaslo(), authorities, pracownik.getIdPracownika());
+            return new CustomUserDetails(pracownik.getLogin(), pracownik.getHaslo(), authorities, pracownik.getIdPracownika(), null);
         }
 
         KlientEntity klient = klientRepository.findByLogin(username);
         if (klient != null) {
             Set<SimpleGrantedAuthority> authorities = new HashSet<>();
             authorities.add(new SimpleGrantedAuthority("ROLE_" + klient.getRole()));
-            return new CustomUserDetails(klient.getLogin(), klient.getHaslo(), authorities, klient.getIdKlienta());
+            return new CustomUserDetails(klient.getLogin(), klient.getHaslo(), authorities, null, klient.getIdKlienta());
         }
 
         throw new UsernameNotFoundException("User not found");

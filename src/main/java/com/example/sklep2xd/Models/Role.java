@@ -1,23 +1,29 @@
 package com.example.sklep2xd.Models;
 
 import jakarta.persistence.*;
-import lombok.Getter;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-import java.util.Set;
+import java.util.List;
 
 @Entity
-@Getter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@Data
+@Table(name = "role", schema = "public", catalog = "Sklep")
 public class Role {
-
-    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @Id
+    @Column(name = "id", nullable = false)
+    private int id;
 
-    @Column(unique = true)
+    @Basic
+    @Column(name = "name", nullable = false, length = 50)
     private String name;
 
     @ManyToMany(mappedBy = "roles")
-    private Set<PracownikEntity> pracownicy;
-
-    // Getters and setters
+    private List<PracownikEntity> pracownicy;
 }

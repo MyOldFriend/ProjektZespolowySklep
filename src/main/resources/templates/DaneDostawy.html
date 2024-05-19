@@ -58,21 +58,20 @@
 
                 <p class="text-way">Wybierz spoób dostawy:</p>
 
-                <input type="radio" id="option4" name="option2" value="Kurier">
-                <label for="option4">Kurier</label><span class="price">19.99 PLN</span><br>
+                <input type="radio" id="option4" name="option2" value="option4" data-price="0">
+                <label for="option4">Odbiór osobisty</label><span class="price">0 PLN</span><br>
 
-                <input type="radio" id="option5" name="option2" value="Paczkomat InPost">
-                <label for="option5">Paczkomat InPost</label><span class="price">14.99 PLN</span><br>
+                <input type="radio" id="option5" name="option2" value="option5" data-price="19.99">
+                <label for="option5">Paczkomaty InPost</label><span class="price">19.99 PLN</span><br>
 
-                <input type="radio" id="option6" name="option2" value="Odbiór osobisty">
-                <label for="option6">Odbiór osobisty</label><span class="price">0 PLN</span><br>
-
+                <input type="radio" id="option6" name="option2" value="option6" data-price="24.99">
+                <label for="option6">Kurier DPD</label><span class="price">24.99 PLN</span><br>
                 <hr>
 
                 <div class="option-block">
                     <p class="text-way">Suma:</p>
                     <div class="price">
-                        <p>14.99 PLN</p>
+                        <p id="total-price" th:text="'' + ${sumaCen} + ' PLN'">0.00 PLN</p>
                     </div>
                 </div>
                 <button type="submit">Zatwierdź</button>

@@ -42,22 +42,22 @@ public class KoszykController {
     }
     //odnieść się do *komentarza* pod konstruktorem ProduktZamowienieController
 
-//    @GetMapping("/{idKlienta}")
+    //    @GetMapping("/{idKlienta}")
 //    public String koszykKlienta(@PathVariable("idKlienta") int idKlienta, Model model){
 //        List<KoszykDto> koszyk = koszykService.findKoszykByKlientId(idKlienta);
 //        model.addAttribute("header", "Twój koszyk");
 //        model.addAttribute("Koszyk", koszyk);
 //        return "Koszyk";
 //    }
-        @GetMapping()
-        public String koszykKlienta(HttpSession session, Model model){
-            List<KoszykDto> koszyk = koszykService.findKoszykByKlientId((int) session.getAttribute("klientId"));
-            double sumaCen = KoszykService.obliczCeneKoszyka(koszyk);
-            model.addAttribute("header", "Twój koszyk");
-            model.addAttribute("Koszyk", koszyk);
-            model.addAttribute("sumaCen", sumaCen);
-            return "Koszyk";
-        }
+    @GetMapping()
+    public String koszykKlienta(HttpSession session, Model model){
+        List<KoszykDto> koszyk = koszykService.findKoszykByKlientId((int) session.getAttribute("klientId"));
+        double sumaCen = KoszykService.obliczCeneKoszyka(koszyk);
+        model.addAttribute("header", "Twój koszyk");
+        model.addAttribute("Koszyk", koszyk);
+        model.addAttribute("sumaCen", sumaCen);
+        return "Koszyk";
+    }
 
     @PostMapping("/dodajDoKoszyka/{idProduktu}/{ilosc}")
     public String dodajDoKoszyka(HttpSession session,
@@ -144,6 +144,7 @@ public class KoszykController {
 
         // Fill ProduktZamowienie with cart records for the client
         List<KoszykDto> koszyk = koszykService.findKoszykByKlientId(klientId);
+        double sumaCen = koszyk.stream().mapToDouble(k -> k.getProdukt().getCena() * k.getIlosc()).sum();
         for (KoszykDto koszykDto : koszyk) {
             ProduktZamowienieEntity produktZamowienie = new ProduktZamowienieEntity();
             ProduktZamowieniePK id = new ProduktZamowieniePK(zamowienie.getIdZamowienia(), koszykDto.getProdukt().getIdProduktu());
@@ -157,6 +158,7 @@ public class KoszykController {
         model.addAttribute("klient", klient);
         model.addAttribute("adres", adresZamowienia);
         koszykService.deleteKoszykKlienta(klientId);
-        return "DaneDostawy"; // Return to the appropriate view
+//        return "DaneDostawy"; // Return to the appropriate view
+        return "redirect:/DaneDostawy?sumaCen=" + sumaCen;
     }
 }

@@ -2,22 +2,24 @@ package com.example.sklep2xd.Config;
 
 import com.example.sklep2xd.Service.MyUserDetailsService;
 import jakarta.servlet.http.HttpSessionListener;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
-import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig {
+
+    @Autowired
+    private CustomAuthenticationSuccessHandler customAuthenticationSuccessHandler;
 
     @Bean
     public UserDetailsService userDetailsService() {
@@ -52,17 +54,17 @@ public class WebSecurityConfig {
                         .loginProcessingUrl("/logowanie")
                         .usernameParameter("login")
                         .passwordParameter("haslo")
-                        .defaultSuccessUrl("/home", true)
+                        .successHandler(customAuthenticationSuccessHandler)
                         .failureUrl("/logowanie?error=true")
                 )
                 .logout((logout) -> logout
                         .permitAll()
                 )
-                .csrf(httpSecurityCsrfConfigurer -> httpSecurityCsrfConfigurer.csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())); // Ensures CSRF token is included in the form
-
+                .csrf(httpSecurityCsrfConfigurer -> httpSecurityCsrfConfigurer.csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()));
 
         return http.build();
     }
+
     @Bean
     public HttpSessionListener httpSessionListener(){
         return new SessionListener();

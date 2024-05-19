@@ -30,16 +30,39 @@
 <p class="account-text">Edytuj dane pracownika</p>
 
 <div class="container">
+<!--    <form action="#" th:object="${pracownikEdit}" method="post">-->
+<!--        <div class="column">-->
+<!--            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>-->
+<!--            <input type="text" placeholder="Imię" th:field="*{imie}">-->
+<!--            <input type="text" placeholder="Nazwisko" th:field="*{nazwisko}">-->
+<!--            <input type="text" placeholder="Login" th:field="*{login}">-->
+<!--            <input type="password" placeholder="Hasło" th:field="*{haslo}" id="haslo">-->
+<!--            <input type="password" placeholder="Potwierdź hasło" id="potwierdzHaslo">-->
+<!--&lt;!&ndash;            <select name="role" id="role" th:field="*{dzial}">&ndash;&gt;-->
+<!--&lt;!&ndash;                <option value="admin">Administrator</option>&ndash;&gt;-->
+<!--&lt;!&ndash;                <option value="employee">Pracownik Działu zamówień</option>&ndash;&gt;-->
+<!--&lt;!&ndash;            </select>&ndash;&gt;-->
+<!--            <select name="role" id="role" required>-->
+<!--                <option th:each="role : ${roles}" th:value="${role.id}" th:text="${role.name}"></option>-->
+<!--            </select>-->
+<!--            <div class="buttons">-->
+<!--                <button type="submit" id="save-button" onclick="return sprawdzHasla()">Zapisz zmiany</button>-->
+<!--                <a th:href="@{/Pracownik/lista}"><button type="button" id="cancel-button">Anuluj</button></a>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </form>-->
+
     <form action="#" th:object="${pracownikEdit}" method="post">
         <div class="column">
-            <input type="text" placeholder="Imię" th:field="*{imie}">
-            <input type="text" placeholder="Nazwisko" th:field="*{nazwisko}">
-            <input type="text" placeholder="Login" th:field="*{login}">
-            <input type="password" placeholder="Hasło" th:field="*{haslo}" id="haslo">
-            <input type="password" placeholder="Potwierdź hasło" id="potwierdzHaslo">
-            <select name="role" id="role" th:field="*{dzial}">
-                <option value="admin">Administrator</option>
-                <option value="employee">Pracownik Działu zamówień</option>
+            <input type="hidden" th:field="*{idPracownika}" />
+            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+            <input type="text" placeholder="Imię" th:field="*{imie}" required>
+            <input type="text" placeholder="Nazwisko" th:field="*{nazwisko}" required>
+            <input type="text" placeholder="Login" th:field="*{login}" required>
+            <input type="password" placeholder="Hasło" th:field="*{haslo}" id="haslo" required>
+            <input type="password" placeholder="Potwierdź hasło" id="potwierdzHaslo" required>
+            <select name="role" id="role" required>
+                <option th:each="role : ${roles}" th:value="${role.id}" th:text="${role.name}"></option>
             </select>
             <div class="buttons">
                 <button type="submit" id="save-button" onclick="return sprawdzHasla()">Zapisz zmiany</button>
@@ -47,16 +70,25 @@
             </div>
         </div>
     </form>
+
 </div>
 
 <script>
     function sprawdzHasla() {
         var haslo = document.getElementById("haslo").value;
         var potwierdzHaslo = document.getElementById("potwierdzHaslo").value;
+        var errorDiv = document.querySelector(".error-message");
+        var errorMessage = "";
+
         if (haslo !== potwierdzHaslo) {
-            alert("Hasło i potwierdzenie hasła są różne!");
+            errorMessage = "Hasło i potwierdzenie hasła są różne!";
+            errorDiv.innerHTML = "<p>" + errorMessage + "</p>";
+            errorDiv.style.display = "block";
             return false; // Przerwij wysyłanie formularza
         }
+
+        // Ukrycie komunikatu o błędzie, jeśli wszystko jest w porządku
+        errorDiv.style.display = "none";
         return true; // Kontynuuj wysyłanie formularza
     }
 </script>
