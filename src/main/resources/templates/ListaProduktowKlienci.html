@@ -23,7 +23,7 @@
         </a>
     </div>
     <div class="icon-container-right">
-        <a href="/koszyk/1">
+        <a href="/koszyk">
             <img src="" th:src="@{/Grafiki/shopping-bag.png}" alt="Ikona prawa" class="icon">
         </a>
     </div>
@@ -102,7 +102,10 @@
             </div>
             <div class="right-info">
                 <p class="add-button">
-                    <a th:href="@{/dodajDoKoszyka/{idKlienta}/{idProduktu}/1(idKlienta=${session.userId}, idProduktu=${produkt.idProduktu})}" class="add-to-cart-button">Dodaj do koszyka</a>
+                    <!-- form żeby wysłać POST request -->
+                <form th:action="@{/koszyk/dodajDoKoszyka/{idProduktu}/1(idProduktu=${produkt.idProduktu})}" method="post" style="display: inline;">
+                    <button type="submit" class="add-to-cart-button">Dodaj do koszyka</button>
+                </form>
                 </p>
             </div>
         </div>

@@ -44,7 +44,7 @@
                 <p th:text="${pracownik.imie} + ' ' + ${pracownik.nazwisko}"></p>
                 <p th:text="'Login: ' + ${pracownik.login}"></p>
                 <p th:text="'Hasło: ' + ${pracownik.haslo}"></p>
-                <p th:text="'Rola: ' + ${pracownik.dzial}"></p>
+                <p th:text="'Rola: ' + ${pracownik.getRoleName()}"></p>
             </div>
 
             <div class="right-info">
@@ -61,7 +61,6 @@
 <div class="add-employee-container">
     <a class="add-employee-button" href="/Pracownik/dodajform">Dodaj pracownika</a>
 </div>
-
 
 <footer>
     <p>Zawartość tej strony</p>
@@ -90,7 +89,7 @@
                 .then(response => {
                     if (response.ok) {
                         alert("Pracownik został usunięty.");
-                         // Przekierowanie na listę pracowników
+                        // Przekierowanie na listę pracowników
                     } else {
                         window.location.href = 'http://localhost:8081/Pracownik/lista';
                     }
@@ -101,7 +100,6 @@
         }
     }
 </script>
-
 
 </body>
 </html>

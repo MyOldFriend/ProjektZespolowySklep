@@ -12,18 +12,17 @@
 
 <div class="header">
     <div class="icon-container-left">
-            <!-- <img src="" th:src="@{/Grafiki/search.png}" alt="Ikona lewa" class="icon"> -->
-        <a href="/klienci/edytuj/1">
+        <a href="/klienci/edytuj">
             <img src="" th:src="@{/Grafiki/user.png}" alt="Ikona prawa" class="icon">
         </a>
     </div>
     <div class="logo-container">
         <a href="/home">
-        <img src="" th:src="@{/Grafiki/ff.png}" alt="Logo" class="logo">
+            <img src="" th:src="@{/Grafiki/ff.png}" alt="Logo" class="logo">
         </a>
     </div>
     <div class="icon-container-right">
-        <a href="/koszyk/1">
+        <a href="/koszyk">
             <img src="" th:src="@{/Grafiki/shopping-bag.png}" alt="Ikona prawa" class="icon">
         </a>
     </div>
@@ -42,7 +41,6 @@
     <div class="caption-big">
         <p>FASION</p>
         <p>FORWARD</p>
-
     </div>
     <div class="caption-small">
         Sprawdź nasze wszystkie produkty
@@ -54,38 +52,70 @@
     <div class="large-caption">
         Nasze Produkty
     </div>
-<!--    -->
-    <div class="small-caption">
-        Koszulki
+
+    <div class="product-section">
+        <div class="small-caption">Koszulki</div>
+        <div class="more-info">
+            <a href="/Produkt/lista2/1">Zobacz więcej</a>
+        </div>
+        <div class="images-container">
+            <div class="image" th:each="produkt : ${koszulki}">
+                <img crossorigin="anonymous" th:src="@{${produkt.urlzdjecia}}" alt="Zdjęcie 1">
+                <div class="image-caption">
+                    <a th:text="${produkt.nazwa}"></a><br>
+                    <a th:text="${produkt.cena}"></a>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="more-info">
-        <a href="/Produkt/lista2/1">Zobacz więcej</a>
+
+    <div class="product-section">
+        <div class="small-caption">Spodnie</div>
+        <div class="more-info">
+            <a href="/Produkt/lista2/2">Zobacz więcej</a>
+        </div>
+        <div class="images-container">
+            <div class="image" th:each="produkt : ${spodnie}">
+                <img crossorigin="anonymous" th:src="@{${produkt.urlzdjecia}}" alt="Zdjęcie 1">
+                <div class="image-caption">
+                    <a th:text="${produkt.nazwa}"></a><br>
+                    <a th:text="${produkt.cena}"></a>
+                </div>
+            </div>
+        </div>
     </div>
-    <iframe src="/home/1" scrolling="no"></iframe>
-<!--    -->
-    <div class="small-caption">
-        Spodnie
+
+    <div class="product-section">
+        <div class="small-caption">Bluzy</div>
+        <div class="more-info">
+            <a href="/Produkt/lista2/4">Zobacz więcej</a>
+        </div>
+        <div class="images-container">
+            <div class="image" th:each="produkt : ${bluzy}">
+                <img crossorigin="anonymous" th:src="@{${produkt.urlzdjecia}}" alt="Zdjęcie 1">
+                <div class="image-caption">
+                    <a th:text="${produkt.nazwa}"></a><br>
+                    <a th:text="${produkt.cena}"></a>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="more-info">
-        <a href="/Produkt/lista2/2">Zobacz więcej</a>
+
+    <div class="product-section">
+        <div class="small-caption">Kurtki</div>
+        <div class="more-info">
+            <a href="/Produkt/lista2/3">Zobacz więcej</a>
+        </div>
+        <div class="images-container">
+            <div class="image" th:each="produkt : ${kurtki}">
+                <img crossorigin="anonymous" th:src="@{${produkt.urlzdjecia}}" alt="Zdjęcie 1">
+                <div class="image-caption">
+                    <a th:text="${produkt.nazwa}"></a><br>
+                    <a th:text="${produkt.cena}"></a>
+                </div>
+            </div>
+        </div>
     </div>
-    <iframe src="/home/2" scrolling="no"></iframe>
-<!--    -->
-    <div class="small-caption">
-        Bluzy
-    </div>
-    <div class="more-info">
-        <a href="/Produkt/lista2/4">Zobacz więcej</a>
-    </div>
-    <iframe src="/home/4" scrolling="no"></iframe>
-<!--    -->
-    <div class="small-caption">
-        Kurtki
-    </div>
-    <div class="more-info">
-        <a href="/Produkt/lista2/3">Zobacz więcej</a>
-    </div>
-    <iframe src="/home/3" scrolling="no"></iframe>
 </div>
 
 <footer>

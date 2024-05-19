@@ -27,10 +27,17 @@
                 <option value="pracownik">Pracownik</option>
             </select>
             <button type="submit">Zaloguj się</button>
+            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
         </form>
 
         <div th:if="${errorMessage}" class="error-message">
             <p th:text="${errorMessage}"></p>
+        </div>
+        <div th:if="${param.error}">
+            <p>Invalid username or password.</p>
+        </div>
+        <div th:if="${param.logout}">
+            <p>You have been logged out.</p>
         </div>
     </div>
 </div>

@@ -1,9 +1,11 @@
 package com.example.sklep2xd.Controllers;
 
 import com.example.sklep2xd.Dto.KlientDto;
+import com.example.sklep2xd.Dto.ProduktZamowienieDto;
 import com.example.sklep2xd.Dto.ZamowienieDto;
 import com.example.sklep2xd.Models.ZamowienieEntity;
 import com.example.sklep2xd.Service.KlientService;
+import com.example.sklep2xd.Service.ProduktZamowienieService;
 import com.example.sklep2xd.Service.ZamowienieService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,12 +18,13 @@ import java.util.List;
 public class ZamowienieController {
 
     private final ZamowienieService zamowienieService;
+    private final ProduktZamowienieService produktZamowienieService;
 
     @Autowired
-    public ZamowienieController(ZamowienieService zamowienieService) {
+    public ZamowienieController(ZamowienieService zamowienieService, ProduktZamowienieService produktZamowienieService) {
         this.zamowienieService = zamowienieService;
+        this.produktZamowienieService = produktZamowienieService;
     }
-
     @GetMapping("/lista")
     public String listZamowienia(Model model) {
         List<ZamowienieDto> zamowienia = zamowienieService.findAllZamowienia();
@@ -44,18 +47,39 @@ public class ZamowienieController {
         return "redirect:/Zamowienie/lista";
     }
 
+//    @GetMapping("/edytuj/{zamowienieId}")
+//    public String editZamowienieForm(@PathVariable("zamowienieId") int zamowienieId, Model model) {
+//        ZamowienieDto zamowienieDto = zamowienieService.findZamowienieById(zamowienieId);
+//        model.addAttribute("zamowienieDto", zamowienieDto);
+//        return "StatusZamowienia";
+//    }
+//
+//
+//    @PostMapping("/edytuj/{zamowienieId}")
+//    public String updateZamowienie(@PathVariable("zamowienieId") int zamowienieId, @ModelAttribute("zamowienie") ZamowienieDto zamowienieDto) {
+//        zamowienieDto.setIdZamowienia(zamowienieId);
+//        zamowienieService.updateZamowienie(zamowienieDto);
+//        return "redirect:/Zamowienie/lista";
+//    }
+
     @GetMapping("/edytuj/{zamowienieId}")
     public String editZamowienieForm(@PathVariable("zamowienieId") int zamowienieId, Model model) {
-        ZamowienieDto zamowienieDto = zamowienieService.findZamowienieById(zamowienieId);
+        List<ProduktZamowienieDto> produktyZamowienia = produktZamowienieService.findProduktZamowieniaByIdZamowienia(zamowienieId);
+        ZamowienieDto zamowienieDto = new ZamowienieDto(); // Fetch this from your service
+        model.addAttribute("produktyZamowienia", produktyZamowienia);
         model.addAttribute("zamowienieDto", zamowienieDto);
         return "StatusZamowienia";
     }
-
 
     @PostMapping("/edytuj/{zamowienieId}")
     public String updateZamowienie(@PathVariable("zamowienieId") int zamowienieId, @ModelAttribute("zamowienie") ZamowienieDto zamowienieDto) {
         zamowienieDto.setIdZamowienia(zamowienieId);
         zamowienieService.updateZamowienie(zamowienieDto);
         return "redirect:/Zamowienie/lista";
+    }
+
+    @GetMapping("/ZamowienieZlozone")
+    public String zamowienieZlozone() {
+        return "ZamowienieZlozone"; // Nazwa widoku (HTML) do wyświetlenia
     }
 }
