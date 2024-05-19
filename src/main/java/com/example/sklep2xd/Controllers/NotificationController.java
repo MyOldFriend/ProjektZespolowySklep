@@ -24,7 +24,7 @@ public class NotificationController {
             String message = "Dziękujemy za zapisanie się do NEWSLETTERA";
 
             emailService.sendSimpleMessage(email, subject, message);
-            return "Powiadomienie wysłane pomyślnie";
+            return "Dziekujemy za zapisanie się do NEWSLETTERA";
         } catch (Exception e) {
             e.printStackTrace(); // Wyświetlenie błędu w konsoli
             return "Błąd podczas wysyłania powiadomienia: " + e.getMessage();

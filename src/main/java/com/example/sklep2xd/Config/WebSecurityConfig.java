@@ -47,7 +47,8 @@ public class WebSecurityConfig {
                         .requestMatchers("/klient/**").hasRole("KLIENT")
                         .requestMatchers("/sendNewsletter").hasRole("KLIENT")
                         .requestMatchers("/Recenzja/usun/**").hasRole("ADMIN")
-                        .requestMatchers("/Produkt/**").hasAnyRole("ADMIN", "EMPLOYEE")
+//                        .requestMatchers("/Produkt/**").hasAnyRole("ADMIN", "EMPLOYEE", "KLIENT")
+                        .requestMatchers("/Produkt/**").permitAll()
                         .anyRequest().permitAll()
                 )
                 .formLogin((form) -> form
