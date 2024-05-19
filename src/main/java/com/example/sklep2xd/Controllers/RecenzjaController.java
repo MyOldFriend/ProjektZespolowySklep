@@ -9,55 +9,47 @@ import com.example.sklep2xd.Repositories.ProduktRep;
 import com.example.sklep2xd.Service.RecenzjaService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+
 @Controller
 @RequestMapping("/Recenzja")
 public class RecenzjaController {
 
-        private final RecenzjaService recenzjaService;
-        @Autowired
-        private KlientRep klientRep; // Inject KlientRep repository
+    private final RecenzjaService recenzjaService;
 
-        @Autowired
-        private ProduktRep produktRep; // Inject ProduktRep repository
+    @Autowired
+    private KlientRep klientRep;
 
-        @Autowired
-        public RecenzjaController(RecenzjaService recenzjaService) {
-            this.recenzjaService = recenzjaService;
-        }
+    @Autowired
+    private ProduktRep produktRep;
 
-        @GetMapping("/lista")
-        public String listRecenzje(Model model) {
-            List<RecenzjaDto> recenzje = recenzjaService.findAllRecenzje();
-            model.addAttribute("header", "Lista wszystkich Recenzji");
-            model.addAttribute("recenzjaList", recenzje);
-//            return "ZarzadzenieRecenzjami";
-            return "ZarzadzanieRecenzjami";
-        }
+    @Autowired
+    public RecenzjaController(RecenzjaService recenzjaService) {
+        this.recenzjaService = recenzjaService;
+    }
 
-        @GetMapping("/dodajform")
-        public String createRecenzjaForm(Model model) {
-            RecenzjaEntity recenzja = new RecenzjaEntity();
-            model.addAttribute("recenzja", recenzja);
-            return "NowaRecenzja";
-        }
+    @GetMapping("/lista")
+    public String listRecenzje(Model model) {
+        List<RecenzjaDto> recenzje = recenzjaService.findAllRecenzje();
+        model.addAttribute("header", "Lista wszystkich Recenzji");
+        model.addAttribute("recenzjaList", recenzje);
+        return "ZarzadzanieRecenzjami";
+    }
 
-//        @PostMapping("/dodajform")
-//        public String saveRecenzja(@ModelAttribute("recenzja") RecenzjaEntity recenzja, int idKlienta, int idProd) {
-//            KlientEntity klient = klientRep.findByIdKlienta(idKlienta);
-//            ProduktEntity produkt = produktRep.findByIdProduktu(idProd);
-//            recenzja.setKlientByKlientId(klient);
-//            recenzja.setProduktByProduktId(produkt);
-//            recenzjaService.saveRecenzja(recenzja);
-//            return "redirect:/Recenzja/lista";
-//        }
+    @GetMapping("/dodajform")
+    public String createRecenzjaForm(Model model) {
+        RecenzjaDto recenzja = new RecenzjaDto();
+        model.addAttribute("recenzja", recenzja);
+        return "NowaRecenzja";
+    }
 
     @PostMapping("/dodajform")
-    public String saveRecenzja(@ModelAttribute("recenzja") RecenzjaEntity recenzja,
+    public String saveRecenzja(@ModelAttribute("recenzja") RecenzjaDto recenzjaDto,
                                @RequestParam("review") String review,
                                @RequestParam("rating") int rating,
                                HttpSession session,
@@ -65,23 +57,22 @@ public class RecenzjaController {
         KlientEntity klient = klientRep.findByIdKlienta((int) session.getAttribute("klientId"));
         ProduktEntity produkt = produktRep.findByIdProduktu(idProd);
 
+        RecenzjaEntity recenzja = new RecenzjaEntity();
         recenzja.setTresc(review);
         recenzja.setOcena(rating);
         recenzja.setKlientByKlientId(klient);
         recenzja.setProduktByProduktId(produkt);
         recenzjaService.saveRecenzja(recenzja);
 
-        // Przekierowanie z powrotem na stronę produktu
         return "redirect:/Produkt/" + idProd;
     }
 
-
     @GetMapping("/edytuj/{recenzjaId}")
-        public String editRecenzjaForm(@PathVariable("recenzjaId") int recenzjaId, Model model) {
-            RecenzjaDto recenzja = recenzjaService.findRecenzjaById(recenzjaId);
-            model.addAttribute("recenzja", recenzja);
-            return "EdytujRecenzje";
-        }
+    public String editRecenzjaForm(@PathVariable("recenzjaId") int recenzjaId, Model model) {
+        RecenzjaDto recenzja = recenzjaService.findRecenzjaById(recenzjaId);
+        model.addAttribute("recenzja", recenzja);
+        return "EdytujRecenzje";
+    }
 
     @GetMapping("/lista/{idProduktu}")
     public String listRecenzjeForProduct(@PathVariable("idProduktu") int idProduktu, Model model) {
@@ -91,24 +82,18 @@ public class RecenzjaController {
         return "Recenzje";
     }
 
-
     @PostMapping("/edytuj/{recenzjaId}")
-        public String updateRecenzja(@PathVariable("recenzjaId") int recenzjaId, @ModelAttribute("recenzja") RecenzjaDto recenzjaDto) {
-            recenzjaDto.setIdRecenzji(recenzjaId);
-            recenzjaService.updateRecenzja(recenzjaDto);
-            return "redirect:/Recenzja/lista";
-        }
-//        @DeleteMapping("/usun/{recenzjaId}")
-//        public String deleteRecenzja(@PathVariable("recenzjaId") int recenzjaId) {
-//            recenzjaService.removeRecenzja(recenzjaId);
-//            return "redirect:/Recenzja/lista";
-//        }
-
-    @DeleteMapping("/usun/{recenzjaId}")
-    @ResponseBody
-    public void deleteRecenzja(@PathVariable("recenzjaId") int recenzjaId) {
-        recenzjaService.removeRecenzja(recenzjaId);
+    public String updateRecenzja(@PathVariable("recenzjaId") int recenzjaId, @ModelAttribute("recenzja") RecenzjaDto recenzjaDto) {
+        recenzjaDto.setIdRecenzji(recenzjaId);
+        recenzjaService.updateRecenzja(recenzjaDto);
+        return "redirect:/Recenzja/lista";
     }
 
-
+    @PreAuthorize("hasRole('ADMIN')")
+    @DeleteMapping("/usun/{recenzjaId}")
+    @ResponseBody
+    public String deleteRecenzja(@PathVariable("recenzjaId") int recenzjaId) {
+        recenzjaService.removeRecenzja(recenzjaId);
+        return "Recenzja usunięta";
+    }
 }

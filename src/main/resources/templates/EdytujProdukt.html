@@ -35,7 +35,10 @@
 
     <div class="daneproduktu">
 
-        <form method="post" action="/Produkt/edytuj" th:object="${produkt}">
+<!--        <form method="post" action="/Produkt/edytuj" th:object="${produkt}">-->
+        <form action="#" th:action="@{/Produkt/edytuj}" th:object="${produkt}" method="post">
+            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+
             <input type="hidden" name="produktId" th:value="${produkt.idProduktu}">
             <div class="produkttekst">
 

@@ -43,6 +43,7 @@
             <div class="produkttekst">
                 <div class="form-group">
                     <input type="hidden" name="kategoriaId" id="kategoriaIdInput">
+                    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
                     <select id="categorySelect" class="form-control custom-select" required>
                         <option value="">Wybierz kategorię</option>
                         <option th:each="kategoria : ${kategorie}"

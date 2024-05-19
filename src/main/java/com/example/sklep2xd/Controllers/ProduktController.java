@@ -8,6 +8,8 @@ import com.example.sklep2xd.Repositories.KlientRep;
 import com.example.sklep2xd.Repositories.ProduktRep;
 import com.example.sklep2xd.Service.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.web.csrf.CsrfToken;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -88,8 +90,9 @@ public class ProduktController {
 //    }
 
     @GetMapping("/dodajprodukt")
-    public String dodajProduktForm(Model model) {
+    public String dodajProduktForm(Model model, CsrfToken csrfToken) {
         ProduktEntity produkt = new ProduktEntity();
+        model.addAttribute("_csrf", csrfToken);
 //        model.addAttribute("produkt", produkt);
         List<KategoriaDto> kategorie = kategoriaService.findAllKategories();
         model.addAttribute("kategorie", kategorie);
@@ -135,9 +138,10 @@ public class ProduktController {
     }
 
 
-    @GetMapping("/edytuj/{produktId}")
-    public String editProduktForm(@PathVariable("produktId") int produktId, Model model) {
-        ProduktDto produkt = produktService.findProduktById(produktId);
+    @GetMapping("/edytuj/{id}")
+    public String edytujProdukt(@PathVariable int id, Model model, CsrfToken csrfToken) {
+        model.addAttribute("_csrf", csrfToken);
+        ProduktDto produkt = produktService.findProduktById(id);
         List<KategoriaDto> kategorie = kategoriaService.findAllKategories();
         model.addAttribute("kategorie", kategorie);
         model.addAttribute("produkt", produkt);
@@ -181,7 +185,7 @@ public class ProduktController {
         return "Koszyk";
     }
 
-
+    @PreAuthorize("hasRole('EMPLOYEE')")
     @DeleteMapping("/usun/{produktId}")
     @ResponseBody
     public void deleteProdukt(@PathVariable("produktId") int produktId) {
