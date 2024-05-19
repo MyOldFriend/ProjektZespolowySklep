@@ -62,7 +62,7 @@ public class RecenzjaController {
                                @RequestParam("rating") int rating,
                                HttpSession session,
                                @RequestParam("idProd") int idProd) {
-        KlientEntity klient = klientRep.findByIdKlienta((int) session.getAttribute("userId"));
+        KlientEntity klient = klientRep.findByIdKlienta((int) session.getAttribute("klientId"));
         ProduktEntity produkt = produktRep.findByIdProduktu(idProd);
 
         recenzja.setTresc(review);

@@ -62,7 +62,7 @@
                 <input type="radio" id="option3" name="option" value="BLIK">
                 <label for="option3">BLIK</label><br>
 
-                <p class="text-way">Wybierz spoób dostawy:</p>
+                <p class="text-way">Wybierz sposób dostawy:</p>
 
                 <input type="radio" id="option4" name="option2" value="option4" data-price="0">
                 <label for="option4">Odbiór osobisty</label><span class="price">0 PLN</span><br>
@@ -80,6 +80,7 @@
                         <p id="total-price" th:text="'' + ${sumaCen} + ' PLN'">0.00 PLN</p>
                     </div>
                 </div>
+                <div id="error-message" style="color: red;"></div>
                 <button type="submit">Zatwierdź</button>
             </div>
         </div>
@@ -103,6 +104,39 @@
                 const newTotalPrice = basePrice + selectedOptionPrice;
                 totalPriceElement.textContent = newTotalPrice.toFixed(2) + ' PLN';
             });
+        });
+
+        document.querySelector('form').addEventListener('submit', function(event) {
+            let errorMessage = '';
+            const paymentOptions = document.querySelectorAll('input[name="option"]');
+            const deliveryOptions = document.querySelectorAll('input[name="option2"]');
+            let paymentSelected = false;
+            let deliverySelected = false;
+
+            paymentOptions.forEach(function(option) {
+                if (option.checked) {
+                    paymentSelected = true;
+                }
+            });
+
+            deliveryOptions.forEach(function(option) {
+                if (option.checked) {
+                    deliverySelected = true;
+                }
+            });
+
+            if (!paymentSelected) {
+                errorMessage += 'Proszę wybrać sposób płatności. ';
+            }
+
+            if (!deliverySelected) {
+                errorMessage += 'Proszę wybrać sposób dostawy. ';
+            }
+
+            if (errorMessage !== '') {
+                event.preventDefault();
+                document.getElementById('error-message').textContent = errorMessage;
+            }
         });
     });
 
