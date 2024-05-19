@@ -6,6 +6,8 @@
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/css/strona_glowna.css">
     <link rel="icon" th:href="@{/Grafiki/ff.ico}" type="image/png" size="32">
+    <meta name="_csrf" th:content="${_csrf.token}"/>
+    <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
     <title>Strona główna</title>
 </head>
 <body>
@@ -43,9 +45,9 @@
         <p>FORWARD</p>
     </div>
     <div class="caption-small">
-        Sprawdź nasze wszystkie produkty
+        Zapisz się do NEWSLETTERA
     </div>
-    <button class="button">Przycisk</button>
+    <button class="button" id="newsletter-button">Przycisk</button>
 </div>
 
 <div class="our-products">
@@ -124,17 +126,30 @@
 </footer>
 
 <script>
-    window.onload = function() {
-        var footer = document.querySelector("footer");
-        var bodyHeight = document.body.offsetHeight;
-        var windowHeight = window.innerHeight;
+    document.getElementById("newsletter-button").addEventListener("click", function() {
+        var csrfToken = document.querySelector('meta[name="_csrf"]').getAttribute("content");
+        var csrfHeader = document.querySelector('meta[name="_csrf_header"]').getAttribute("content");
 
-        if (bodyHeight < windowHeight) {
-            footer.style.position = "fixed";
-            footer.style.bottom = "0";
-            footer.style.width = "100%";
-        }
-    };
+        fetch('/sendNewsletter', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                [csrfHeader]: csrfToken
+            },
+            body: JSON.stringify({
+                email: "fashion.forward2137@gmail.com",
+                subject: "Newsletter Subscription",
+                message: "Dziękujemy za zapisanie się do NEWSLETTERA"
+            })
+        }).then(response => {
+            return response.text();
+        }).then(text => {
+            alert(text);
+        }).catch(error => {
+            console.error('Błąd:', error);
+            alert("Błąd podczas wysyłania powiadomienia: " + error.message);
+        });
+    });
 </script>
 
 </body>

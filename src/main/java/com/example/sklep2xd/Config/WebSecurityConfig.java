@@ -108,6 +108,7 @@ public class WebSecurityConfig {
                         .requestMatchers("/admin/**").hasRole("ADMIN")
                         .requestMatchers("/pracownik/**").hasRole("PRACOWNIK")
                         .requestMatchers("/klient/**").hasRole("KLIENT")
+                        .requestMatchers("/sendNewsletter").hasRole("KLIENT")
                         .anyRequest().permitAll()
                 )
                 .formLogin((form) -> form
