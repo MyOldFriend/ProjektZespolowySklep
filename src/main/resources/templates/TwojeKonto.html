@@ -12,21 +12,25 @@
 
 <div class="header">
     <div class="icon-container-left">
-        <img src="/Grafiki/user.png" alt="Ikona prawa" class="icon">
+        <a href="/klienci/edytuj">
+            <img src="" th:src="@{/Grafiki/user.png}" alt="Ikona prawa" class="icon">
+        </a>
     </div>
     <div class="logo-container">
         <a href="/home">
-            <img src="/Grafiki/ff.png" alt="Logo" class="logo">
+            <img src="" th:src="@{/Grafiki/ff.png}" alt="Logo" class="logo">
         </a>
     </div>
     <div class="icon-container-right">
-        <img src="/Grafiki/shopping-bag.png" alt="Ikona prawa" class="icon">
+        <a href="/koszyk">
+            <img src="" th:src="@{/Grafiki/shopping-bag.png}" alt="Ikona prawa" class="icon">
+        </a>
     </div>
 </div>
 
 <div class="navbar">
     <div class="navbar-line"></div>
-    <a href="/Produkt/lista2/5">Bluzy</a>
+    <a href="/Produkt/lista2/4">Bluzy</a>
     <a href="/Produkt/lista2/3">Kurtki</a>
     <a href="/Produkt/lista2/1">Koszulki</a>
     <a href="/Produkt/lista2/2">Spodnie</a>
@@ -41,16 +45,17 @@
             <!-- Dane klienta -->
             <input type="text" name="imie" placeholder="Imię" th:value="${klient.imie}" required>
             <input type="text" name="nazwisko" placeholder="Nazwisko" th:value="${klient.nazwisko}" required>
-            <input type="email" name="email" placeholder="E-mail" th:value="${klient.email}" required>
-            <input type="password" name="haslo" placeholder="Hasło" value="" required>
-            <input type="password" id="change-password" placeholder="Zmień hasło" required>
+            <input type="email" id="email" name="email" placeholder="E-mail" th:value="${klient.email}" required>
+            <input type="password" id="password" name="haslo" placeholder="Hasło" value="" required>
+            <input type="password" id="confirm-password" placeholder="Powtórz hasło" required>
+            <div id="error-message" style="color: red;"></div>
         </div>
         <div class="column">
             <!-- Dane adresowe -->
             <input type="text" name="ulica" placeholder="Ulica" th:value="${klient.adresId != null ? klient.adresId.ulica : ''}">
             <input type="text" name="nrDomu" placeholder="Nr domu" th:value="${klient.adresId != null ? klient.adresId.nrDomu : ''}">
             <input type="text" name="nrMieszkania" placeholder="Nr mieszkania" th:value="${klient.adresId != null ? klient.adresId.nrMieszkania : ''}">
-            <input type="text" name="kodPocztowy" placeholder="Kod pocztowy" th:value="${klient.adresId != null ? klient.adresId.kodPocztowy : ''}">
+            <input type="text" id="kod-pocztowy" name="kodPocztowy" placeholder="Kod pocztowy" th:value="${klient.adresId != null ? klient.adresId.kodPocztowy : ''}">
             <input type="text" name="miejscowosc" placeholder="Miejscowość" th:value="${klient.adresId != null ? klient.adresId.miejscowosc : ''}">
             <input type="text" name="kraj" placeholder="Kraj" th:value="${klient.adresId != null ? klient.adresId.kraj : ''}">
         </div>
@@ -64,12 +69,41 @@
 </div>
 
 <script>
-    document.getElementById("save-button").addEventListener("click", function() {
-        document.getElementById("account-form").submit();
+    document.getElementById("save-button").addEventListener("click", function(event) {
+        event.preventDefault();
+        var errorMessage = document.getElementById("error-message");
+        var email = document.getElementById("email").value;
+        var password = document.getElementById("password").value;
+        var confirmPassword = document.getElementById("confirm-password").value;
+        var kodPocztowy = document.getElementById("kod-pocztowy").value;
+
+        // Reset error message
+        errorMessage.textContent = '';
+
+        // Validate email
+        if (!email.includes("@")) {
+            errorMessage.textContent += "Email musi zawierać '@'. ";
+        }
+
+        // Validate password match
+        if (password !== confirmPassword) {
+            errorMessage.textContent += "Hasła muszą być takie same. ";
+        }
+
+        // Validate postal code format
+        var postalCodePattern = /^\d{2}-\d{3}$/;
+        if (!postalCodePattern.test(kodPocztowy)) {
+            errorMessage.textContent += "Kod pocztowy musi być w formacie XX-XXX. ";
+        }
+
+        // If no errors, submit the form
+        if (errorMessage.textContent === '') {
+            document.getElementById("account-form").submit();
+        }
     });
 
     document.getElementById("cancel-button").addEventListener("click", function() {
-        window.location.href = "@{/klienci/lista}";
+        window.location.href = "/home";
     });
 </script>
 
